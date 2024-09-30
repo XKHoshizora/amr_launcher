@@ -1,9 +1,9 @@
 <launch>
     <!-- om_modbusRTU_node & om_ros_node -->
-    <include file="$(find om_modbus_master)/launch/amr_mobi_con.launch"/>
+    <include file="$(find om_modbus_master)/launch/mobi_con.launch"/>
 
     <!-- RPLiDAR -->
-    <include file="$(find rplidar_ros)/launch/amr_rplidar_s2.launch"/>
+    <include file="$(find rplidar_ros)/launch/rplidar_s2.launch"/>
 
     <!-- Controller -->
     <include file="$(find amr_controller)/launch/amr_controller.launch"/>
