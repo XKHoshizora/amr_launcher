@@ -1,5 +1,30 @@
 <launch>
-    <!-- 载入 机器人 和 SLAM 的仿真场景 -->
-    <include file="$(find wpr_simulation)/launch/wpb_stage_robocup.launch"/>
+    <!-- om_modbusRTU_node & om_ros_node -->
+    <include file="$(find om_modbus_master)/launch/amr_mobi_con.launch"/>
 
+    <!-- RPLiDAR -->
+    <include file="$(find rplidar_ros)/launch/amr_rplidar_s2.launch"/>
+
+    <!-- Controller -->
+    <include file="$(find amr_controller)/launch/amr_controller.launch"/>
+
+    <!-- IMU -->
+    <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
+
+    <!-- RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_navi)/config/rviz/amr_map.rviz" />
+
+    <!-- Gazebo -->
+
+    <!-- 载入机器人模型 -->
+    <include file="$(find amr_description)/launch/amr_description.launch"/>
+
+    <!-- SLAM -->
+    <include file="$(find amr_slam)/launch/amr_gmapping.launch"/>
+
+    <!-- Map server -->
+    <include file="$(find amr_map)/launch/amr_map.launch"/>
+
+    <!-- Navigation -->
+    <include file="$(find amr_navi)/launch/amr_navi.launch"/>
 </launch>
