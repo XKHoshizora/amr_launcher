@@ -23,7 +23,7 @@
     <include file="$(find amr_launcher)/launch/amr_slam.launch"/>
 
     <!-- Map server -->
-    <include file="$(find amr_launcher)/launch/amr_map.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
 
     <!-- Navigation -->
     <include file="$(find amr_launcher)/launch/amr_navi.launch"/>
