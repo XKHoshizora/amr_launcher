@@ -1,0 +1,38 @@
+<launch>
+    <!-- move_base -->
+    <node name="move_base" pkg="move_base" type="move_base">
+        <rosparam file="$(find amr_navi)/config/navi/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find amr_navi)/config/navi/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find amr_navi)/config/navi/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find amr_navi)/config/navi/local_costmap_params.yaml" command="load" />
+        <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+        
+        <!-- 以下为 3 种局部规划器 -->
+        
+        <!-- WpbhLocalPlanner -->
+        <!-- <param name="base_local_planner" value="wpbh_local_planner/WpbhLocalPlanner" /> -->
+
+        <!-- DWA Planner -->
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+        <rosparam file="$(find amr_navi)/config/navi/dwa_local_planner_params.yaml" command="load" />
+
+        <!-- TEB Planner -->
+        <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+        <rosparam file="$(find amr_navi)/config/navi/teb_local_planner_params.yaml" command="load" /> -->
+
+        <param name="controller_frequency" value="10" type="double" />
+    </node>
+
+    <!-- map_sever -->
+    <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find amr_slam)/map/amr_map.yaml" /> -->
+
+    <!-- amcl -->
+    <node name="amcl" pkg="amcl" type="amcl" />
+
+    <!-- wp_navi_server -->
+    <!-- <node name="wp_navi_server" pkg="waterplus_map_tools" type="wp_navi_server" output="screen" /> -->
+
+    <!-- wp_manager -->
+    <!-- <node name="wp_manager" pkg="waterplus_map_tools" type="wp_manager" output="screen" /> -->
+
+</launch>

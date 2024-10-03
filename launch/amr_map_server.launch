@@ -1,0 +1,4 @@
+<launch>
+    <!-- map_server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find amr_slam)/map/amr_map.yaml" />
+</launch>
