@@ -1,12 +1,12 @@
 <launch>
     <!-- om_modbusRTU_node & om_ros_node -->
-    <include file="$(find om_modbus_master)/launch/mobi_con.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
 
     <!-- RPLiDAR -->
-    <include file="$(find rplidar_ros)/launch/rplidar_s2.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
 
     <!-- Controller -->
-    <include file="$(find amr_controller)/launch/amr_controller.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
 
     <!-- IMU -->
     <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
@@ -17,14 +17,14 @@
     <!-- Gazebo -->
 
     <!-- 载入机器人模型 -->
-    <include file="$(find amr_description)/launch/amr_description.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_description.launch"/>
 
     <!-- SLAM -->
-    <include file="$(find amr_slam)/launch/amr_gmapping.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_gmapping.launch"/>
 
     <!-- Map server -->
-    <include file="$(find amr_map)/launch/amr_map.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_map.launch"/>
 
     <!-- Navigation -->
-    <include file="$(find amr_navi)/launch/amr_navi.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_navi.launch"/>
 </launch>
