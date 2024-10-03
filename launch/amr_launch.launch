@@ -20,7 +20,7 @@
     <include file="$(find amr_launcher)/launch/amr_description.launch"/>
 
     <!-- SLAM -->
-    <include file="$(find amr_launcher)/launch/amr_gmapping.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_slam.launch"/>
 
     <!-- Map server -->
     <include file="$(find amr_launcher)/launch/amr_map.launch"/>
