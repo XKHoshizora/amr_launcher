@@ -11,7 +11,7 @@
     <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
 
         <!-- 使用 RPLiDAR S2 的 scan 数据，确保雷达话题名正确 -->
-        <!-- <remap from="scan" to="/rplidar/scan"/> -->
+        <remap from="scan" to="/rplidar/scan"/>
 
         <!-- 设置 base_frame 为 base_footprint，表示机器人的底盘坐标系 -->
         <param name="base_frame" value="base_footprint"/> <!-- 机器人底盘的坐标系，通常接近地面 -->
