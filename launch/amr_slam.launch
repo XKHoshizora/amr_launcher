@@ -13,8 +13,8 @@
         <!-- 使用 RPLiDAR S2 的 scan 数据，确保雷达话题名正确 -->
         <remap from="/scan" to="/scan"/>
 
-        <!-- 设置 base_frame 为 base_footprint，表示机器人的底盘坐标系 -->
-        <param name="base_frame" value="base_footprint"/> <!-- 机器人底盘的坐标系，通常接近地面 -->
+        <!-- 设置 base_frame 为 base_link，表示机器人的底盘坐标系 -->
+        <param name="base_frame" value="base_link"/> <!-- 机器人底盘的坐标系，通常接近地面 -->
         
         <!-- 设置 odom_frame 为 odom，表示里程计坐标系 -->
         <param name="odom_frame" value="odom"/> <!-- 里程计坐标系，用于跟踪机器人的位姿 -->
