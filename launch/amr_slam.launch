@@ -13,17 +13,23 @@
         <!-- 使用 RPLiDAR S2 的 scan 数据，确保雷达话题名正确 -->
         <remap from="/scan" to="/scan"/>
 
-        <!-- 设置 base_frame 为 base_footprint，表示机器人的底盘坐标系 -->
-        <param name="base_frame" value="base_footprint"/> <!-- 机器人底盘的坐标系，通常接近地面 -->
-        
+        <!-- 设置 map_frame 为 map，表示地图坐标系 -->
+        <param name="map_frame" value="map"/>
+
         <!-- 设置 odom_frame 为 odom，表示里程计坐标系 -->
         <param name="odom_frame" value="odom"/> <!-- 里程计坐标系，用于跟踪机器人的位姿 -->
+
+        <!-- 设置 base_frame 为 base_footprint，表示机器人的底盘坐标系 -->
+        <param name="base_frame" value="base_footprint"/> <!-- 机器人底盘的坐标系，通常接近地面 -->
 
         <!-- 地图更新间隔时间，设置为 0.2 秒以加快更新频率 -->
         <param name="map_update_interval" value="0.2"/>
 
         <!-- 激光雷达的最大探测范围，RPLiDAR S2 的有效探测范围为 30 米，根据需求调整到 12 米 -->
         <param name="maxUrange" value="12.0"/>
+
+        <!-- 激光雷达扫描频率最大值 -->
+        <!-- <param name="maxRange" value=""/> -->
 
         <!-- 激光测距的噪声标准差，适当增加值以考虑 RPLiDAR 的实际性能 -->
         <param name="sigma" value="0.1"/>
