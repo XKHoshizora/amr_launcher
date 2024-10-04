@@ -62,7 +62,7 @@
         <param name="resampleThreshold" value="0.5"/>
 
         <!-- 粒子数量，适当增加粒子数以提升精度 -->
-        <param name="particles" value="80"/>
+        <param name="particles" value="300"/>
 
         <!-- 地图的尺寸，增大地图范围以覆盖更大的工作区域 -->
         <param name="xmin" value="-100.0"/>
@@ -80,12 +80,5 @@
         <param name="lasamplestep" value="0.005"/>
 
     </node>
-
-
-    <!-- RViz 显示 -->
-    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_slam)/config/rviz/slam.rviz"/> -->
-
-    <!-- 运动控制 -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_controller.launch" /> -->
 
 </launch>
