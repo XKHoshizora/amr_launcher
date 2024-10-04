@@ -1,0 +1,11 @@
+<launch>
+    <!-- 载入机器人模型 -->
+    <include file="$(find amr_launcher)/launch/amr_description.launch"/>
+
+    <!-- RPLiDAR -->
+    <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
+
+    <!-- RViz -->
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_navi)/config/rviz/amr_map.rviz" /> -->
+
+</launch>
