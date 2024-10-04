@@ -11,7 +11,7 @@
     <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
 
         <!-- 使用 RPLiDAR S2 的 scan 数据，确保雷达话题名正确 -->
-        <remap from="/scan" to="/scan"/>
+        <remap from="scan" to="scan"/>
 
         <!-- 设置 map_frame 为 map，表示地图坐标系 -->
         <param name="map_frame" value="map"/>
