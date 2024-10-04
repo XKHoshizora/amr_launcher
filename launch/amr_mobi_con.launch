@@ -19,5 +19,5 @@
         <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
     
-    <node name="om_ros_node" pkg="om_modbus_master" type="om_ros_node" />
+    <node name="amr_ros_node" pkg="om_modbus_master" type="amr_ros_node" />
 </launch>
