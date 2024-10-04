@@ -5,4 +5,9 @@
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
     <!-- 添加机器人状态发布节点 -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <!-- 发布 laser 到 base_link 的静态 TF -->
+    <node pkg="tf" type="static_transform_publisher" name="laser_to_base_link" args="0.2815 0 0.15223265 0 0 0 base_link laser 100" />
+    <!-- 0.2815 0 0.15223265 表示 laser 框架在 base_link 框架中的 x, y, z 平移位置。 -->
+    <!-- 0 0 0 表示 laser 框架在 base_link 框架中的 roll, pitch, yaw 旋转角度。 -->
+    <!-- base_link laser 100 表示将 laser 框架固定到 base_link 框架上，以 100Hz 的频率广播。 -->
 </launch>
