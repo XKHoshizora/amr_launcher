@@ -14,15 +14,16 @@
     <!-- IMU -->
     <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
 
-    <!-- Map server -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_map_server.launch"/> -->
-
     <!-- SLAM -->
     <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
 
     <!-- Navigation -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_navi.launch"/> -->
+    <include file="$(find amr_launcher)/launch/amr_move_base.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_amcl_diff.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_navi_server.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_navi_aids.launch"/> -->
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/amr_controller.launch"/>

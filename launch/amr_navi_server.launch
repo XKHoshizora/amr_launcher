@@ -1,0 +1,6 @@
+<launch>
+
+    <!-- wp_navi_server -->
+    <node name="wp_navi_server" pkg="waterplus_map_tools" type="wp_navi_server" output="screen" />
+
+</launch>
