@@ -1,11 +1,24 @@
 <launch>
+    <!-- 启动 RPLiDAR S2 节点 -->
     <node name="rplidar_node" pkg="rplidar_ros" type="rplidarNode" output="screen">
-        <param name="serial_port" type="string" value="/dev/rplidar"/>
-        <param name="serial_baudrate" type="int" value="1000000"/>
-        <param name="frame_id" type="string" value="laser"/>  <!-- Gmapping 需要 -->
-        <param name="inverted" type="bool" value="false"/>
-        <param name="angle_compensate" type="bool" value="false"/>
-        <param name="scan_frequency" type="double" value="10.0"/>
-        <param name="scan_mode" type="string" value="Standard" />
+        <!-- RPLiDAR 的串口配置 -->
+        <param name="serial_port" type="string" value="/dev/rplidar"/>  <!-- 修改为你实际的设备端口 -->
+        <param name="serial_baudrate" type="int" value="1000000"/>  <!-- 默认波特率，1M bps -->
+
+        <!-- 坐标系设置 -->
+        <param name="frame_id" type="string" value="laser"/>  <!-- 激光雷达的坐标系 -->
+
+        <!-- 扫描模式设置 -->
+        <param name="scan_mode" type="string" value="Standard"/>  <!-- 使用标准扫描模式，适合 SLAM -->
+
+        <!-- 角度补偿设置 -->
+        <param name="angle_compensate" type="bool" value="true"/>  <!-- 打开角度补偿，确保扫描点均匀分布 -->
+
+        <!-- 扫描频率设置 -->
+        <param name="scan_frequency" type="double" value="10.0"/>  <!-- 扫描频率为 10 Hz，适中频率适合 SLAM -->
+
+        <!-- 其他参数 -->
+        <param name="inverted" type="bool" value="false"/>  <!-- 雷达是否倒置安装 -->
     </node>
+
 </launch>

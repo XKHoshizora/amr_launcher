@@ -21,12 +21,12 @@
     <include file="$(find amr_launcher)/launch/amr_slam.launch"/>
 
     <!-- Navigation -->
-    <include file="$(find amr_launcher)/launch/amr_navi.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_navi.launch"/> -->
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
 
     <!-- RViz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_navi)/config/rviz/amr_map.rviz" />
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_navi)/config/rviz/amr_map.rviz" /> -->
 
 </launch>
