@@ -1,9 +1,30 @@
 <launch>
+
     <!-- 载入机器人模型 -->
     <include file="$(find amr_launcher)/launch/amr_description.launch"/>
 
+    <!-- Gazebo -->
+
     <!-- RPLiDAR -->
     <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
+
+    <!-- om_modbusRTU_node & om_ros_node -->
+    <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
+
+    <!-- IMU -->
+    <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
+
+    <!-- Map server -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_map_server.launch"/> -->
+
+    <!-- SLAM -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam.launch"/> -->
+
+    <!-- Navigation -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_navi.launch"/> -->
+
+    <!-- Controller -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_controller.launch"/> -->
 
     <!-- RViz -->
     <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_navi)/config/rviz/amr_map.rviz" /> -->
