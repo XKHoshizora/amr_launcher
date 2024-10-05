@@ -65,5 +65,7 @@
 
     <!-- 激光雷达和底盘的TF变换，确保正确的旋转中心 -->
     <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0.1 0 0 0 base_link laser 100"/>
+    <!-- 激光雷达和底盘的TF变换，确保LiDAR的方向正确 -->
+    <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0 0 0 3.14159 base_link laser 100"/>
 
 </launch>
