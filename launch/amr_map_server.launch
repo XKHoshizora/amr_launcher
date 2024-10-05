@@ -1,5 +1,5 @@
 <launch>
     <!-- 发布地图 -->
     <arg name="filename" value="$(find amr_launcher)/map/amr_map.yaml" />
-    <node name="map_server" pkg="map_server" type="map_server" args="-f $(arg filename)" />
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg filename)" />
 </launch>

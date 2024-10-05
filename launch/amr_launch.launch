@@ -15,7 +15,7 @@
     <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
 
     <!-- SLAM -->
-    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/> -->
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
 
