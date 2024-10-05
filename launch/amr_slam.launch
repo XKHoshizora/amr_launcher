@@ -68,7 +68,7 @@
         <param name="resampleThreshold" value="0.5"/>
 
         <!-- 粒子数量，适当增加粒子数以提升精度 -->
-        <param name="particles" value="300"/>
+        <param name="particles" value="100"/>
 
         <!-- 地图的尺寸，增大地图范围以覆盖更大的工作区域 -->
         <param name="xmin" value="-100.0"/>
