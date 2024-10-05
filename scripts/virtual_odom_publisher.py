@@ -2,6 +2,7 @@
 
 import rospy
 import tf
+import math
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
@@ -27,8 +28,8 @@ def virtual_odom_publisher():
 
         # Compute odometry in a typical way given the velocities of the robot
         dt = (current_time - last_time).to_sec()
-        delta_x = (vx * tf.cos(th) - vy * tf.sin(th)) * dt
-        delta_y = (vx * tf.sin(th) + vy * tf.cos(th)) * dt
+        delta_x = (vx * math.cos(th) - vy * math.sin(th)) * dt
+        delta_y = (vx * math.sin(th) + vy * math.cos(th)) * dt
         delta_th = vth * dt
 
         x += delta_x
