@@ -63,6 +63,9 @@ def virtual_odom_publisher():
         # Publish the message
         odom_pub.publish(odom)
 
+        # Debug output
+        rospy.loginfo("Published odom: x=%f, y=%f, th=%f", x, y, th)
+
         last_time = current_time
         rate.sleep()
 
