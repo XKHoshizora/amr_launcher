@@ -12,18 +12,54 @@
 
         <!-- 激光雷达参数 -->
         <remap from="scan" to="scan"/>   <!-- 确保雷达话题名正确 -->
-        <param name="lskip" value="2"/>         <!-- 跳过部分激光点，每隔 2 个点采集一个数据 -->
+        <param name="maxUrange" value="30.0"/>  <!-- RPLiDAR S2 的最大探测范围 30 米 -->
+        <param name="sigma" value="0.05"/>      <!-- 激光测距噪声标准差，适应 RPLiDAR S2 的实际性能 -->
+        <param name="lskip" value="2"/>         <!-- 跳过部分激光点，每隔 2 个点采集一个数据，减少计算负担 -->
 
         <!-- 坐标系设置 -->
         <param name="map_frame" value="map"/>           <!-- 地图坐标系 -->
         <param name="odom_frame" value="odom"/>         <!-- 里程计坐标系 -->
         <param name="base_frame" value="base_link"/>    <!-- 机器人底盘的坐标系，通常接近地面 -->
 
-        <param name="map_update_interval" value="0.5"/>  <!-- 地图更新间隔时间，0.5 秒更新一次 -->
+        <!-- 地图更新和分辨率设置，增大地图范围以覆盖更大的工作区域 -->
+        <param name="map_update_interval" value="2.0"/>  <!-- 地图更新间隔时间，2.0 秒更新一次 -->
+        <param name="xmin" value="-30.0"/>  <!-- 地图最小范围 X 轴 -->
+        <param name="ymin" value="-30.0"/>  <!-- 地图最小范围 Y 轴 -->
+        <param name="xmax" value="30.0"/>   <!-- 地图最大范围 X 轴 -->
+        <param name="ymax" value="30.0"/>   <!-- 地图最大范围 Y 轴 -->
+        <param name="delta" value="0.05"/>  <!-- 地图分辨率，5 cm 栅格大小，减少计算负荷 -->
+
+        <!-- 粒子滤波器设置 -->
+        <param name="particles" value="40"/>           <!-- 粒子数量，减少为 40，减轻 Jetson Orin Nano 的负担 -->
+        <param name="resampleThreshold" value="0.5"/>  <!-- 重新采样阈值 0.5，决定粒子滤波器的重新采样频率 -->
+
+        <!-- 扫描匹配参数，适当调整以匹配实际硬件移动的精度和速度 -->
+        <param name="lstep" value="0.05"/>    <!-- 线性步长，5 cm -->
+        <param name="astep" value="0.05"/>    <!-- 角度步长，0.05 rad -->
+        <param name="iterations" value="10"/>  <!-- 最大迭代次数 10 次，可适当增大迭代次数 -->
+        <param name="kernelSize" value="1"/>  <!-- 内核大小，1 表示精细匹配 -->
+
+        <!-- 机器人运动噪声设置，根据 RPLiDAR S2 和里程计性能适当调整 -->
+        <param name="srr" value="0.01"/>   <!-- 平移运动对平移的影响噪声 -->
+        <param name="srt" value="0.02"/>   <!-- 平移运动对旋转的影响噪声 -->
+        <param name="str" value="0.01"/>   <!-- 旋转运动对平移的影响噪声 -->
+        <param name="stt" value="0.02"/>   <!-- 旋转运动对旋转的影响噪声 -->
+
+        <!-- 平移和旋转更新噪声参数，稍微增大以应对低噪声激光雷达 -->
+        <param name="lsigma" value="0.075"/> <!-- 平移噪声 -->
+        <param name="ogain" value="3.0"/>    <!-- 匹配权重增益保持为 3.0 -->
+        <param name="minimumScore" value="50"/> <!-- 最小得分要求，过滤低质量匹配 -->
 
         <!-- 机器人移动更新条件 -->
-        <param name="linearUpdate" value="0.1"/>   <!-- 机器人移动 10 cm 触发地图更新 -->
-        <param name="angularUpdate" value="0.436"/>  <!-- 机器人旋转 0.436 rad (25°) 触发地图更新 -->
+        <param name="linearUpdate" value="0.5"/>   <!-- 机器人移动 50 cm 触发地图更新 -->
+        <param name="angularUpdate" value="0.2"/>  <!-- 机器人旋转 0.2 rad (约 11.5°) 触发地图更新 -->
+        <param name="temporalUpdate" value="-1.0"/>  <!-- 时间更新间隔设置为 -1 表示不强制时间更新 -->
+
+        <!-- 粒子滤波器采样范围和步长设置，调优以提高效果 -->
+        <param name="llsamplerange" value="0.01"/>  <!-- 平移采样范围 -->
+        <param name="llsamplestep" value="0.01"/>   <!-- 平移采样步长 -->
+        <param name="lasamplerange" value="0.005"/> <!-- 旋转采样范围 -->
+        <param name="lasamplestep" value="0.005"/>  <!-- 旋转采样步长 -->
 
     </node>
 

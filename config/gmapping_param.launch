@@ -7,7 +7,7 @@
         3. 订阅 /scan 话题
     -->
 
-    <!-- Gmapping SLAM 节点 -->
+    <!-- Gmapping SLAM -->
     <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
 
         <!-- 激光雷达参数 -->
