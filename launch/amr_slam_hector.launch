@@ -1,0 +1,6 @@
+<launch>
+
+    <!-- Hector SLAM -->
+    <node name="hector_mapping" pkg="hector_mapping" type="hector_mapping" output="screen"/>
+
+</launch>

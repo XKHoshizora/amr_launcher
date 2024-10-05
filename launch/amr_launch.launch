@@ -18,7 +18,8 @@
     <!-- <include file="$(find amr_launcher)/launch/amr_map_server.launch"/> -->
 
     <!-- SLAM -->
-    <include file="$(find amr_launcher)/launch/amr_slam.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
 
     <!-- Navigation -->
     <!-- <include file="$(find amr_launcher)/launch/amr_navi.launch"/> -->
