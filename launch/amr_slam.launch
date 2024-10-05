@@ -27,10 +27,10 @@
         <param name="ymin" value="-100.0"/>  <!-- 地图最小范围 Y 轴 -->
         <param name="xmax" value="100.0"/>   <!-- 地图最大范围 X 轴 -->
         <param name="ymax" value="100.0"/>   <!-- 地图最大范围 Y 轴 -->
-        <param name="delta" value="0.05"/>  <!-- 地图分辨率，5 cm 栅格大小 -->
+        <param name="delta" value="0.1"/>  <!-- 地图分辨率，5 cm 栅格大小 -->
 
         <!-- 粒子滤波器设置 -->
-        <param name="particles" value="100"/>           <!-- 粒子数量，设置为 100，增加粒子数量可以适应更大的环境 -->
+        <param name="particles" value="80"/>           <!-- 粒子数量，设置为 80，增加粒子数量可以适应更大的环境 -->
         <param name="resampleThreshold" value="0.5"/>  <!-- 重新采样阈值 0.5，决定粒子滤波器的重新采样频率-->
 
         <!-- 扫描匹配参数，适当调整以匹配实际硬件移动的精度和速度 -->
