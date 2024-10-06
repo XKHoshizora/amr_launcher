@@ -12,7 +12,7 @@
     
     <!-- 通过 laser_filters 过滤激光的角度范围，需要 laser-filters 功能包 -->
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" output="screen">
-        <param name="scan_filter_chain" value="$(find amr_launcher)/config/laser/laser_filter.yaml"/>
+        <rosparam file="$(find amr_launcher)/config/laser/laser_filter.yaml" />
         <remap from="scan" to="/scan"/> <!-- 原始激光雷达数据话题 -->
         <remap from="scan_filtered" to="/filtered_scan"/> <!-- 过滤后的激光雷达数据 -->
     </node>
