@@ -55,13 +55,13 @@ scan_filter_chain:
   # 新增滤波器 7: 抖动滤波器
   # 该滤波器用于去除由于激光雷达检测点的不连续性导致的抖动噪声。
   # 通过比较相邻激光束的范围差异，过滤掉小范围的抖动点。
-  - name: speckle_filter
-    type: laser_filters/LaserScanSpeckleFilter
-    params:
-      filter_type: 0             # 滤波类型，0 表示基于范围差异的抖动滤波
-      max_range: 5.0             # 最大过滤范围，超过此距离的点将被忽略
-      max_range_difference: 0.1  # 相邻激光束之间的最大范围差，超过该差值的点将被视为抖动点
-      filter_window: 2           # 滤波窗口大小，表示用于检测抖动点的相邻激光束数量
+  # - name: speckle_filter
+  #   type: laser_filters/LaserScanSpeckleFilter
+  #   params:
+  #     filter_type: 0             # 滤波类型，0 表示基于范围差异的抖动滤波
+  #     max_range: 5.0             # 最大过滤范围，超过此距离的点将被忽略
+  #     max_range_difference: 0.1  # 相邻激光束之间的最大范围差，超过该差值的点将被视为抖动点
+  #     filter_window: 2           # 滤波窗口大小，表示用于检测抖动点的相邻激光束数量
 
   # 新增滤波器 8: 体素网格滤波器
   # 体素网格滤波器用于将激光数据按指定的体素网格大小进行降采样，减少数据点的数量。
@@ -78,6 +78,6 @@ scan_filter_chain:
   # 新增滤波器 9: 插值滤波器
   # 该滤波器用于通过插值算法平滑激光雷达数据。
   # 在低分辨率或存在数据缺失的情况下，插值滤波器能够生成更加平滑的激光数据。
-  - name: interpolation_filter
-    type: laser_filters/InterpolationFilter
-    # 该滤波器不需要额外的参数，直接进行插值处理。
+  # - name: interpolation_filter
+  #   type: laser_filters/InterpolationFilter
+  #   # 该滤波器不需要额外的参数，直接进行插值处理。
