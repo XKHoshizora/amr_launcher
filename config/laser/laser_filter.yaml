@@ -49,10 +49,10 @@ scan_filter_chain:
 
   # 滤波器 6: 时间滤波器（可选）
   # 用于过滤过期的激光扫描数据，确保处理的是最新数据。
-  - name: time_filter
-    type: laser_filters/LaserScanTimeFilter
-    params:
-      max_time: 0.3  # 最大允许的时间差，单位为秒
+  # - name: time_filter
+  #   type: laser_filters/LaserScanTimeFilter
+  #   params:
+  #     max_time: 0.3  # 最大允许的时间差，单位为秒
 
   # 滤波器 7: 中值滤波器（可选）
   # 通过中值滤波减少激光数据中的噪声，适用于噪声较大的环境。
