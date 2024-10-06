@@ -75,14 +75,14 @@ scan_filter_chain:
   # 新增滤波器 9: 体素网格滤波器
   # 体素网格滤波器用于将激光数据按指定的体素网格大小进行降采样，减少数据点的数量。
   # 该滤波器有助于在保持整体形状和结构的同时，减少数据处理量。
-  - name: voxel_grid_filter
-    type: laser_filters/VoxelGridFilter
-    params:
-      filter_field_name: z       # 按照 z 轴（高度）来滤波
-      filter_limit_min: -1.0     # 体素网格的最小限制（米）
-      filter_limit_max: 1.0      # 体素网格的最大限制（米）
-      filter_limit_negative: false # 是否反转限制范围
-      leaf_size: 0.05            # 体素网格的大小，0.05 米表示将数据按 5 厘米的间隔降采样
+  # - name: voxel_grid_filter
+  #   type: laser_filters/VoxelGridFilter
+  #   params:
+  #     filter_field_name: z       # 按照 z 轴（高度）来滤波
+  #     filter_limit_min: -1.0     # 体素网格的最小限制（米）
+  #     filter_limit_max: 1.0      # 体素网格的最大限制（米）
+  #     filter_limit_negative: false # 是否反转限制范围
+  #     leaf_size: 0.05            # 体素网格的大小，0.05 米表示将数据按 5 厘米的间隔降采样
 
   # 新增滤波器 10: 插值滤波器
   # 该滤波器用于通过插值算法平滑激光雷达数据。
