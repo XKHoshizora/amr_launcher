@@ -7,8 +7,8 @@ scan_filter_chain:
   - name: angle_range_filter
     type: laser_filters/LaserScanAngularBoundsFilter
     params:
-      lower_angle: -1.1345     # +65 度，左侧
-      upper_angle: 1.1345    # -65 度，右侧
+      lower_angle: 1.1345     # +65 度，左侧
+      upper_angle: -1.1345    # -65 度，右侧
 
   # 滤波器 2: 距离滤波器
   # 根据测量的距离来过滤激光扫描数据。
