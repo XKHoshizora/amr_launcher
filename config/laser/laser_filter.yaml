@@ -31,12 +31,12 @@ scan_filter_chain:
 
   # 滤波器 4: 阴影滤波器
   # 识别障碍物后的激光阴影，过滤掉可能不准确的激光点。
-  - name: shadow_filter
-    type: laser_filters/LaserScanShadowFilter
-    params:
-      min_angle: 0.02   # 相邻激光束之间的最小角度差
-      max_angle: 0.2    # 识别阴影的最大角度差
-      window: 2         # 检测阴影时使用的窗口大小
+  # - name: shadow_filter
+  #   type: laser_filters/LaserScanShadowFilter
+  #   params:
+  #     min_angle: 0.02   # 相邻激光束之间的最小角度差
+  #     max_angle: 0.2    # 识别阴影的最大角度差
+  #     window: 2         # 检测阴影时使用的窗口大小
 
   # 滤波器 5: 机器人足迹过滤器
   # 去除机器人自身占地范围内的激光点。
@@ -60,3 +60,33 @@ scan_filter_chain:
     type: laser_filters/MedianFilter
     params:
       window_size: 3  # 滤波窗口大小
+
+  # 新增滤波器 8: 抖动滤波器
+  # 该滤波器用于去除由于激光雷达检测点的不连续性导致的抖动噪声。
+  # 通过比较相邻激光束的范围差异，过滤掉小范围的抖动点。
+  - name: speckle_filter
+    type: laser_filters/LaserScanSpeckleFilter
+    params:
+      filter_type: 0             # 滤波类型，0 表示基于范围差异的抖动滤波
+      max_range: 5.0             # 最大过滤范围，超过此距离的点将被忽略
+      max_range_difference: 0.1  # 相邻激光束之间的最大范围差，超过该差值的点将被视为抖动点
+      filter_window: 2           # 滤波窗口大小，表示用于检测抖动点的相邻激光束数量
+
+  # 新增滤波器 9: 体素网格滤波器
+  # 体素网格滤波器用于将激光数据按指定的体素网格大小进行降采样，减少数据点的数量。
+  # 该滤波器有助于在保持整体形状和结构的同时，减少数据处理量。
+  - name: voxel_grid_filter
+    type: laser_filters/VoxelGridFilter
+    params:
+      filter_field_name: z       # 按照 z 轴（高度）来滤波
+      filter_limit_min: -1.0     # 体素网格的最小限制（米）
+      filter_limit_max: 1.0      # 体素网格的最大限制（米）
+      filter_limit_negative: false # 是否反转限制范围
+      leaf_size: 0.05            # 体素网格的大小，0.05 米表示将数据按 5 厘米的间隔降采样
+
+  # 新增滤波器 10: 插值滤波器
+  # 该滤波器用于通过插值算法平滑激光雷达数据。
+  # 在低分辨率或存在数据缺失的情况下，插值滤波器能够生成更加平滑的激光数据。
+  - name: interpolation_filter
+    type: laser_filters/InterpolationFilter
+    # 该滤波器不需要额外的参数，直接进行插值处理。
