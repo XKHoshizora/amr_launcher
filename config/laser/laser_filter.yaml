@@ -56,10 +56,10 @@ scan_filter_chain:
 
   # 滤波器 7: 中值滤波器（可选）
   # 通过中值滤波减少激光数据中的噪声，适用于噪声较大的环境。
-  - name: median_filter
-    type: laser_filters/MedianFilter
-    params:
-      window_size: 3  # 滤波窗口大小
+  # - name: median_filter
+  #   type: laser_filters/MedianFilter
+  #   params:
+  #     window_size: 3  # 滤波窗口大小
 
   # 新增滤波器 8: 抖动滤波器
   # 该滤波器用于去除由于激光雷达检测点的不连续性导致的抖动噪声。
