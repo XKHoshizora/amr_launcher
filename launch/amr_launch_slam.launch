@@ -13,8 +13,8 @@
         <param name="frame_id" value="laser"/>
         <param name="invert_x" value="false"/>
         <param name="angle_offset" value="0.0"/>
-        <remap from="/amr_rplidar/scan" to="/scan"/>
-        <remap from="/amr_rplidar/scan_converted" to="/scan_converted"/>
+        <remap from="/scan" to="/scan"/>
+        <remap from="/scan_converted" to="/scan_converted"/>
     </node>
     
     <!-- 启动 scan_filter 节点 -->
