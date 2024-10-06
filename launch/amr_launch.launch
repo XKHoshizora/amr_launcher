@@ -25,7 +25,8 @@
 
     <!-- Navigation -->
     <include file="$(find amr_launcher)/launch/amr_move_base.launch">
-        <remap from="/scan" to="/filtered_scan" /> <!-- 使用过滤后的激光雷达数据 -->
+        <!-- 参数配置 -->
+        <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
     </include>
     <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
     <include file="$(find amr_launcher)/launch/amr_amcl_diff.launch">

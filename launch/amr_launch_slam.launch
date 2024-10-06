@@ -24,11 +24,7 @@
     <!-- SLAM -->
     <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch">
         <!-- 参数配置 -->
-        <!-- <remap> 用于话题、服务和动作的重映射 -->
-        <remap from="scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
-
         <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
-        <!-- <rosparam param="/slam_gmapping/maxRange" value="30.0"/> -->
     </include>
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
