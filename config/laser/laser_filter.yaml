@@ -78,6 +78,6 @@ scan_filter_chain:
   # 新增滤波器 9: 插值滤波器
   # 该滤波器用于通过插值算法平滑激光雷达数据。
   # 在低分辨率或存在数据缺失的情况下，插值滤波器能够生成更加平滑的激光数据。
-  - name: interpolation_filter
-    type: laser_filters/InterpolationFilter
-    # 该滤波器不需要额外的参数，直接进行插值处理。
+  # - name: interpolation_filter
+  #   type: laser_filters/InterpolationFilter
+  #   # 该滤波器不需要额外的参数，直接进行插值处理。
