@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /LaserScan1
       Splitter Ratio: 0.5
     Tree Height: 363
   - Class: rviz/Selection
@@ -135,7 +136,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.029999999329447746
       Style: Flat Squares
-      Topic: /scan
+      Topic: /filtered_scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
