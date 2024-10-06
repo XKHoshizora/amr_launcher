@@ -1,83 +1,10 @@
-# RPLiDAR S2 优化激光滤波链配置
-scan_filter_chain:
+# 最小有效距离（米）
+min_range: 0.05
 
-  # 滤波器 1: 角度范围滤波器
-  # 限制激光扫描数据的角度范围。
-  # 此处设置为前方 230 度（-115° 到 +115°）。
-  - name: angle_range_filter_1
-    type: laser_filters/LaserScanAngularBoundsFilter
-    params:
-      lower_angle: -2.0071     # 约 115 度，左侧
-      upper_angle: 2.0071      # 约 115 度，右侧
+# 最大有效距离（米）
+max_range: 30.0
 
-  # 滤波器 2: 距离滤波器
-  # 根据测量的距离来过滤激光扫描数据。
-  # 对于 RPLiDAR S2，测量距离为白色物体 0.05-30 米，黑色物体 0.05-10 米。
-  # 我们建议最大距离设置为 25 米，以避免远距离噪声干扰。
-  - name: range_filter
-    type: laser_filters/LaserScanRangeFilter
-    params:
-      lower_threshold: 0.05  # 最小测量距离，设为 5 厘米
-      upper_threshold: 25.0  # 最大测量距离，设为 25 米
-
-  # 滤波器 3: 强度滤波器
-  # 根据激光束的强度值来过滤激光数据。
-  # RPLiDAR S2 的强度值范围较广，因此可以设置合理的阈值来排除低质量数据。
-  # - name: intensity_filter
-  #   type: laser_filters/LaserScanIntensityFilter
-  #   params:
-  #     lower_threshold: 500   # 设定的最小强度值，过滤掉低强度的噪声
-  #     upper_threshold: 4000  # 保留的最大强度值
-
-  # 滤波器 4: 阴影滤波器
-  # 识别障碍物后的激光阴影，过滤掉可能不准确的激光点。
-  # - name: shadow_filter
-  #   type: laser_filters/LaserScanShadowFilter
-  #   params:
-  #     min_angle: 0.02   # 相邻激光束之间的最小角度差
-  #     max_angle: 0.2    # 识别阴影的最大角度差
-  #     window: 2         # 检测阴影时使用的窗口大小
-
-  # 滤波器 5: 时间滤波器（可选）
-  # 用于过滤过期的激光扫描数据，确保处理的是最新数据。
-  # - name: time_filter
-  #   type: laser_filters/LaserScanTimeFilter
-  #   params:
-  #     max_time: 0.3  # 最大允许的时间差，单位为秒
-
-  # 滤波器 6: 中值滤波器（可选）
-  # 通过中值滤波减少激光数据中的噪声，适用于噪声较大的环境。
-  # - name: median_filter
-  #   type: laser_filters/MedianFilter
-  #   params:
-  #     window_size: 3  # 滤波窗口大小
-
-  # 新增滤波器 7: 抖动滤波器
-  # 该滤波器用于去除由于激光雷达检测点的不连续性导致的抖动噪声。
-  # 通过比较相邻激光束的范围差异，过滤掉小范围的抖动点。
-  # - name: speckle_filter
-  #   type: laser_filters/LaserScanSpeckleFilter
-  #   params:
-  #     filter_type: 0             # 滤波类型，0 表示基于范围差异的抖动滤波
-  #     max_range: 5.0             # 最大过滤范围，超过此距离的点将被忽略
-  #     max_range_difference: 0.1  # 相邻激光束之间的最大范围差，超过该差值的点将被视为抖动点
-  #     filter_window: 2           # 滤波窗口大小，表示用于检测抖动点的相邻激光束数量
-
-  # 新增滤波器 8: 体素网格滤波器
-  # 体素网格滤波器用于将激光数据按指定的体素网格大小进行降采样，减少数据点的数量。
-  # 该滤波器有助于在保持整体形状和结构的同时，减少数据处理量。
-  # - name: voxel_grid_filter
-  #   type: laser_filters/VoxelGridFilter
-  #   params:
-  #     filter_field_name: z       # 按照 z 轴（高度）来滤波
-  #     filter_limit_min: -1.0     # 体素网格的最小限制（米）
-  #     filter_limit_max: 1.0      # 体素网格的最大限制（米）
-  #     filter_limit_negative: false # 是否反转限制范围
-  #     leaf_size: 0.05            # 体素网格的大小，0.05 米表示将数据按 5 厘米的间隔降采样
-
-  # 新增滤波器 9: 插值滤波器
-  # 该滤波器用于通过插值算法平滑激光雷达数据。
-  # 在低分辨率或存在数据缺失的情况下，插值滤波器能够生成更加平滑的激光数据。
-  # - name: interpolation_filter
-  #   type: laser_filters/InterpolationFilter
-  #   # 该滤波器不需要额外的参数，直接进行插值处理。
+# 有效角度范围（弧度）
+# 格式：[开始角度1, 结束角度1, 开始角度2, 结束角度2, ...]
+# 这里设置为 [0°, 115°] 和 [-115°, 0°]
+angle_ranges: [-2.0071286, 2.0071286]
