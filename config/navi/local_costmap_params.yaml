@@ -1,10 +1,10 @@
 local_costmap:
-  global_frame: odom
-  robot_base_frame: base_footprint
-  static_map: false
-  rolling_window: true
-  width: 3.0
-  height: 3.0
-  update_frequency: 10.0
-  publish_frequency: 10.0
-  transform_tolerance: 1.0
+    global_frame: odom          # 局部代价地图的参考坐标系为 odom
+    robot_base_frame: base_footprint  # 机器人的基准坐标系为 base_footprint
+    static_map: false           # 不使用静态地图，局部地图动态更新
+    rolling_window: true        # 使用滚动窗口，机器人移动时局部地图也随之更新
+    width: 2.5                  # 局部地图的宽度设置为 2.5 米，适合较小尺寸的 AMR
+    height: 2.5                 # 局部地图的高度设置为 2.5 米，确保在局部范围内足够的信息
+    update_frequency: 12.0       # 地图更新频率为 12 次每秒，确保局部地图实时更新
+    publish_frequency: 12.0      # 地图发布频率为 12 次每秒，保持与更新频率一致
+    transform_tolerance: 1.0     # TF转换的容忍时间为 1 秒，防止延迟影响控制效果

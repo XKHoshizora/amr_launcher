@@ -1,74 +1,67 @@
 TebLocalPlannerROS:
- odom_topic: odom
+    odom_topic: odom       # 使用机器人里程计话题作为局部规划的参考
 
- # 策略相关
- teb_autosize: True  # 是否允许改变轨迹的时域长度，也就是改变 dt_ref
- dt_ref: 0.5         # 路径上的两个相邻姿态的默认距离
- dt_hysteresis: 0.1  # 允许改变的时域解析度的浮动范围
- global_plan_overwrite_orientation: True # 是否修正全局路径中的临时局部路径点的朝向
- max_global_plan_lookahead_dist: 2.0     # 最大向前看距离
- feasibility_check_no_poses: 2           #在判断生成的轨迹是否冲突时使用，此时设置为2，即从轨迹起点开始逐个检查轨迹上的2个点，若2个点均不发生碰撞，则认为本次轨迹有效。
-    
- # 运动相关     
- max_vel_x: 0.4           # 最大速度
- max_vel_x_backwards: 0.2 # 最大倒车速度，设置为0或者负数将导致错误。减少倒车应该修改倒车权重，不改这里。
- max_vel_theta: 1.0       # 最大转向角速度，跟 min_turning_radius 相关 (r = v / omega)
- acc_lim_x: 0.5           # 最大线加速度
- acc_lim_theta: 1.0       # 最大角加速度
+    # 策略相关
+    teb_autosize: True     # 允许自动调整轨迹的时间长度，优化不同速度下的路径规划
+    dt_ref: 0.5            # 每两个姿态之间的时间步长，0.5 秒适合 AMR 在工厂环境中的运动
+    dt_hysteresis: 0.1     # 时间步长的浮动范围，0.1 秒有助于平滑过渡
+    global_plan_overwrite_orientation: True  # 修正全局路径中临时局部路径点的朝向，确保机器人按正确方向前进
+    max_global_plan_lookahead_dist: 2.0      # 最大向前看距离，适合工厂中的复杂路径规划
+    feasibility_check_no_poses: 2            # 检查生成轨迹是否有效的点数，设置为 2 个点确保快速有效的碰撞检测
 
- # ********************** 转弯半径相关 ********************
- min_turning_radius: 0.0         # 小转弯半径。如果设为 0，表示可以原地转弯。
- wheelbase: 0.31                 # 只有在 cmd_angle_instead_rotvel为true时才有效
- cmd_angle_instead_rotvel: False # 是否将收到的角速度消息转换为操作上的角度变化。设置成 True 时，话题 vel_msg.angular.z 内的数据是转轴角度。
- # ********************************************************************
+    # 运动相关     
+    max_vel_x: 0.4             # 最大前进速度，设置为 0.4 m/s，适合工厂环境中的安全行驶
+    max_vel_x_backwards: 0.2   # 最大倒车速度，设置为 0.2 m/s，减少倒车的风险
+    max_vel_theta: 2.0         # 增大最大旋转速度到2 rad/s，利用原地旋转能力快速调整方向
+    acc_lim_x: 0.5             # 最大线加速度，适度增加平稳性，避免过快加速
+    acc_lim_theta: 3.0         # 增加角加速度限制到3 rad/s²，使旋转更加灵活和快速
 
-# 车体轮廓
- footprint_model: # types可选项: "point", "circular", "two_circles", "line", "polygon"
-   type: "circular"
-   # 对 type "circular" 有效的参数：
-   radius: 0.17
-   # 对 type "line" 有效的参数：        
-   line_start: [0.0, 0.0] 
-   line_end: [0.35, 0.0]
-   # 对 type "two_circles" 有效的参数：
-   front_offset: 0.35
-   front_radius: 0.35
-   rear_offset: 0.35
-   rear_radius: 0.35
-   # 对 type "polygon" 有效的参数：
-   vertices: [ [0.35, 0.0], [-0.2, -0.25], [0.2, -0.25]] 
+    # ********************** 转弯半径相关 ********************
+    min_turning_radius: 0.0            # 设置为 0，允许机器人原地转弯
+    wheelbase: 0.4643                  # 机器人的轮距，影响转弯半径的计算
+    cmd_angle_instead_rotvel: False    # 不将角速度转换为角度变化，适合差速驱动机器人
+    # *********************************************************
 
- # 到达目标点的判断容差   
- xy_goal_tolerance: 0.2
- yaw_goal_tolerance: 0.1
-    
- # 障碍物相关 
- min_obstacle_dist: 0.1  # 与障碍物的最小间距
- inflation_dist: 0.4     # 障碍物膨胀距离
- include_costmap_obstacles: True          # 是否检测动态障碍物
- costmap_obstacles_behind_robot_dist: 1.0 # 身后多远距离内障碍物加入检测范围
- obstacle_poses_affected: 25              # 障碍物对附近多少个关键点产生影响
- costmap_converter_plugin: ""             # costmap_converter 插件名称，这里不使用
+    # 车体轮廓
+    footprint_model:            # 使用多边形来拟合机器人形状，反映真实的长方体轮廓
+        type: "polygon"         # 选择多边形类型
+        vertices:               # 使用顶点定义机器人的长方体形状
+            - [0.334, 0.289]    # 前左角 (66.8 cm 长, 57.8 cm 宽 的一半)
+            - [0.334, -0.289]   # 前右角
+            - [-0.334, -0.289]  # 后右角
+            - [-0.334, 0.289]   # 后左角
 
- # 路径优化相关
- no_inner_iterations: 3     # 图优化optimizer的迭代次数
- no_outer_iterations: 3     # 外循环迭代次数
- penalty_epsilon: 0.1       # 为所有的惩罚项增加一个小的安全余量
- weight_max_vel_x: 2        # 平移速度的优化权重
- weight_max_vel_theta: 1    # 角速度的优化权重
- weight_acc_lim_x: 1        # 平移加速度的优化权重
- weight_acc_lim_theta: 1    # 角加速度的优化重量
- weight_kinematics_nh: 1000 # 非完整运动学的优化权重
- weight_kinematics_forward_drive: 1 # 往前移动的权重
- weight_optimaltime: 1      # 耗时权重
- weight_obstacle: 50        # 与障碍物保持距离的权重
+    # 到达目标点的判断容差   
+    xy_goal_tolerance: 0.2     # 到达目标时允许的XY误差，设置为 0.2 米
+    yaw_goal_tolerance: 0.1    # 到达目标时允许的航向误差，设置为 0.1 弧度
 
- # 多线规划
- enable_homotopy_class_planning: True # 激活多线规划
- enable_multithreading: True          # 多线程计算
- max_number_classes: 2                # 规划的路径线数上限
- selection_cost_hysteresis: 1.0       # 路径轨迹入选的评价上限
- selection_obst_cost_scale: 1.0       # 障碍物评价在入选标准中的缩放倍率
- selection_alternative_time_cost: False # 时间成本是否要进行平方计算
- roadmap_graph_no_samples: 15         # 为创建 roadmap graph 而生成的样本数
- roadmap_graph_area_width: 5          # 关键点采样的宽度，单位为米。
+    # 障碍物相关 
+    min_obstacle_dist: 0.2           # 最小障碍物距离设置为 0.2 米，确保机器人与障碍物保持安全距离
+    inflation_dist: 0.5              # 障碍物膨胀距离增加到 0.5 米，给机器人留出更大的避障空间
+    include_costmap_obstacles: True  # 使用代价地图中的障碍物信息
+    costmap_obstacles_behind_robot_dist: 1.0  # 后方 1 米范围内的障碍物也加入检测，确保倒车时的安全
+    obstacle_poses_affected: 25      # 障碍物影响的关键点数量，保持 25，确保较大的范围内障碍物影响路径
+    costmap_converter_plugin: ""     # 不使用 costmap_converter 插件
+
+    # 路径优化相关
+    no_inner_iterations: 3               # 路径优化器的内循环次数，设置为 3 次以确保路径优化精度
+    no_outer_iterations: 3               # 外循环次数，保持 3 次，提高整体规划精度
+    penalty_epsilon: 0.1                 # 增加一点安全余量，防止极端情况下的路径优化失败
+    weight_max_vel_x: 2                  # 平移速度的优化权重，保持 2 次方
+    weight_max_vel_theta: 1              # 角速度的优化权重，保持 1 次方
+    weight_acc_lim_x: 1                  # 平移加速度的优化权重
+    weight_acc_lim_theta: 1              # 角加速度的优化权重
+    weight_kinematics_nh: 1000           # 非完整运动学约束的优化权重，保持较大值以确保轨迹符合差速驱动要求
+    weight_kinematics_forward_drive: 1   # 强调向前行驶的权重，减少倒车的需求
+    weight_optimaltime: 1                # 时间最优规划的权重，保持 1 次方
+    weight_obstacle: 50                  # 避障权重增加到 50，以更好地避免碰撞
+
+    # 多线规划
+    enable_homotopy_class_planning: True     # 启用多线规划，增加路径多样性
+    enable_multithreading: True              # 启用多线程加速路径规划计算
+    max_number_classes: 2                    # 最大规划的路径线数设置为 2 条，以保持计算效率和规划效果的平衡
+    selection_cost_hysteresis: 1.0           # 轨迹选择时的评分变化允许范围
+    selection_obst_cost_scale: 1.0           # 障碍物评分在轨迹选择中的缩放系数
+    selection_alternative_time_cost: False   # 时间成本是否平方计算，保持关闭
+    roadmap_graph_no_samples: 15             # 用于生成 roadmap graph 的样本数量，保持 15，确保路径规划的复杂性
+    roadmap_graph_area_width: 5              # 样本采样的宽度为 5 米，适合工厂环境

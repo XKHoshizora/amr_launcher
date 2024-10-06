@@ -1,7 +1,7 @@
 global_costmap:
-  global_frame: map
-  robot_base_frame: base_footprint
-  static_map: true
-  update_frequency: 1.0
-  publish_frequency: 1.0
-  transform_tolerance: 1.0
+    global_frame: map           # 全局代价地图的参考坐标系为 map
+    robot_base_frame: base_footprint  # 机器人的基准坐标系为 base_footprint
+    static_map: true            # 使用静态地图，由 SLAM 或其他方法生成的占据栅格地图
+    update_frequency: 2.0        # 地图更新频率为 2 次每秒，适合静态地图场景
+    publish_frequency: 1.0       # 地图发布频率为 1 次每秒
+    transform_tolerance: 1.0     # TF转换的容忍时间为 1 秒，允许系统在通信延迟时正常工作

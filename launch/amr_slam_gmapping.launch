@@ -7,67 +7,24 @@
         3. 订阅 /scan 话题
     -->
 
+    <!-- 导入 GMapping 参数文件 -->
+    <rosparam file="$(find amr_launcher)/config/slam/gmapping_params.yaml" command="load"/>
+
     <!-- Gmapping SLAM -->
     <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
+        <!-- 参数配置 -->
+        <!-- <param name="maxRange" value="30.0"/> -->
 
-        <!-- 激光雷达参数 -->
-        <remap from="scan" to="scan"/>   <!-- 确保雷达话题名正确 -->
-        <param name="maxRange" value="30.0"/>  <!-- RPLiDAR S2 的最大探测范围 30 米 -->
-        <param name="maxUrange" value="12.0"/>  <!-- 激光的最大可用范围，光束被裁剪至此值 12 米 -->
-        <param name="sigma" value="0.05"/>      <!-- 激光测距噪声标准差，适应 RPLiDAR S2 的实际性能 -->
-        <param name="lskip" value="3"/>         <!-- 跳过部分激光点，每隔 3 个点采集一个数据，减少计算负担 -->
+        <!-- <remap> 用于话题、服务和动作的重映射 -->
+        <remap from="scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
 
-        <!-- 坐标系设置 -->
-        <param name="map_frame" value="map"/>           <!-- 地图坐标系 -->
-        <param name="odom_frame" value="odom"/>         <!-- 里程计坐标系 -->
-        <param name="base_frame" value="base_link"/>    <!-- 机器人底盘的坐标系，通常接近地面 -->
-
-        <!-- 地图更新和分辨率设置，调整地图分辨率以提高效率 -->
-        <param name="map_update_interval" value="1.0"/>  <!-- 地图更新间隔时间，1.0 秒更新一次 -->
-        <param name="throttle_scans" value="5"/>  <!-- 每进行 5 次扫描，处理 1 次 -->
-        <param name="xmin" value="-30.0"/>  <!-- 地图最小范围 X 轴 -->
-        <param name="ymin" value="-30.0"/>  <!-- 地图最小范围 Y 轴 -->
-        <param name="xmax" value="30.0"/>   <!-- 地图最大范围 X 轴 -->
-        <param name="ymax" value="30.0"/>   <!-- 地图最大范围 Y 轴 -->
-        <param name="delta" value="0.05"/>  <!-- 地图分辨率，5 cm 栅格大小 -->
-
-        <!-- 粒子滤波器设置 -->
-        <param name="particles" value="30"/>           <!-- 粒子数量，减少为 30，减轻 Jetson Orin Nano 的负担 -->
-        <param name="resampleThreshold" value="0.5"/>  <!-- 重新采样阈值 0.5，决定粒子滤波器的重新采样频率 -->
-
-        <!-- 扫描匹配参数，适当调整以匹配实际硬件移动的精度和速度 -->
-        <param name="lstep" value="0.05"/>    <!-- 线性步长，5 cm -->
-        <param name="astep" value="0.05"/>    <!-- 角度步长，0.05 rad -->
-        <param name="iterations" value="5"/>  <!-- 最大迭代次数 5 次，减少计算复杂度 -->
-        <param name="kernelSize" value="1"/>  <!-- 内核大小，1 表示精细匹配 -->
-
-        <!-- 机器人运动噪声设置，根据 RPLiDAR S2 和里程计性能适当调整 -->
-        <param name="srr" value="0.02"/>   <!-- 平移运动对平移的影响噪声，适度增加以减少漂移 -->
-        <param name="srt" value="0.02"/>   <!-- 平移运动对旋转的影响噪声 -->
-        <param name="str" value="0.01"/>   <!-- 旋转运动对平移的影响噪声 -->
-        <param name="stt" value="0.02"/>   <!-- 旋转运动对旋转的影响噪声 -->
-
-        <!-- 平移和旋转更新噪声参数，稍微增大以应对低噪声激光雷达 -->
-        <param name="lsigma" value="0.075"/> <!-- 平移噪声 -->
-        <param name="ogain" value="3.0"/>    <!-- 匹配权重增益保持为 3.0 -->
-        <param name="minimumScore" value="50"/> <!-- 最小得分要求，过滤低质量匹配 -->
-
-        <!-- 机器人移动更新条件 -->
-        <param name="linearUpdate" value="1.0"/>   <!-- 机器人移动 1 m 触发地图更新，减少频繁更新 -->
-        <param name="angularUpdate" value="0.5236"/>  <!-- 机器人旋转 0.5236 rad (约 30°) 触发地图更新 -->
-        <param name="temporalUpdate" value="-1.0"/>  <!-- 时间更新间隔设置为 -1 表示不强制时间更新 -->
-
-        <!-- 粒子滤波器采样范围和步长设置，调优以提高效果 -->
-        <param name="llsamplerange" value="0.01"/>  <!-- 平移采样范围 -->
-        <param name="llsamplestep" value="0.01"/>   <!-- 平移采样步长 -->
-        <param name="lasamplerange" value="0.005"/> <!-- 旋转采样范围 -->
-        <param name="lasamplestep" value="0.005"/>  <!-- 旋转采样步长 -->
-
+        <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
+        <!-- <rosparam param="/slam_gmapping/maxRange" value="30.0"/> -->
     </node>
 
     <!-- 激光雷达和底盘的TF变换，确保正确的旋转中心 -->
-    <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0.1 0 0 0 base_link laser 100"/>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0.1 0 0 0 base_link laser 100"/> -->
     <!-- 激光雷达和底盘的TF变换，确保LiDAR的方向正确 -->
-    <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0 0 0 3.14159 base_link laser 100"/>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0 0 0 3.14159 base_link laser 100"/> -->
 
 </launch>

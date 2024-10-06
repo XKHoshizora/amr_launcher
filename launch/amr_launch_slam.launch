@@ -5,10 +5,15 @@
     <!-- 载入机器人模型 -->
     <include file="$(find amr_launcher)/launch/amr_description.launch"/>
 
-    <!-- Gazebo -->
-
     <!-- RPLiDAR -->
     <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
+    
+    <!-- 通过 laser_filters 过滤激光的角度范围，需要 laser-filters 功能包 -->
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" output="screen">
+        <param name="scan_filter_chain" value="$(find amr_launcher)/config/laser/laser_filter.yaml"/>
+        <remap from="scan" to="/scan"/> <!-- 原始激光雷达数据话题 -->
+        <remap from="scan_filtered" to="/filtered_scan"/> <!-- 过滤后的激光雷达数据 -->
+    </node>
 
     <!-- om_modbusRTU_node & om_ros_node -->
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
@@ -17,7 +22,14 @@
     <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
 
     <!-- SLAM -->
-    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch">
+        <!-- 参数配置 -->
+        <!-- <remap> 用于话题、服务和动作的重映射 -->
+        <remap from="scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
+
+        <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
+        <!-- <rosparam param="/slam_gmapping/maxRange" value="30.0"/> -->
+    </include>
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
 
@@ -25,6 +37,6 @@
     <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
 
     <!-- RViz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_navi)/config/rviz/amr_map.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/slam.rviz" />
 
 </launch>

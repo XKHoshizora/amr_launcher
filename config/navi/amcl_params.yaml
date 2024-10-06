@@ -1,0 +1,82 @@
+# AMCL 参数配置文件
+amcl:
+    # 里程计模型类型，差速驱动的AMR应使用 'diff' 模型
+    odom_model_type: "diff"
+
+    # 里程计模型的 alpha5 参数，用于控制噪声，适中即可
+    odom_alpha5: 0.1
+
+    # TF 转换的容忍时间（单位：秒），默认的 0.2 适合绝大多数应用场景
+    transform_tolerance: 0.2
+
+    # GUI 发布频率，10 Hz适中
+    gui_publish_rate: 10.0
+
+    # 激光扫描的最大束数，RPLiDAR S2可提供较多扫描束数
+    laser_max_beams: 360  # 修改为 360，以充分利用 RPLiDAR S2 的能力
+
+    # 最小粒子数量，50足够用于精确的定位
+    min_particles: 50
+
+    # 最大粒子数量，保持默认值 500，适合大范围定位
+    max_particles: 500
+
+    # KLD 采样误差，精度控制在 0.05
+    kld_err: 0.05
+
+    # KLD 采样置信度
+    kld_z: 0.99
+
+    # 里程计模型的 alpha1 参数，控制旋转运动噪声，适中即可
+    odom_alpha1: 0.2
+
+    # 里程计模型的 alpha2 参数，控制平移运动噪声，设置为适中的 0.2
+    odom_alpha2: 0.2
+
+    # 平移噪声标准差，设置为适中的 0.8
+    odom_alpha3: 0.8
+
+    # 旋转噪声标准差
+    odom_alpha4: 0.2
+
+    # 激光的 z_hit 参数，控制匹配程度的权重，适中设置
+    laser_z_hit: 0.5
+
+    # 激光的 z_short 参数，处理短距离测量，设置为 0.05
+    laser_z_short: 0.05
+
+    # 激光的 z_max 参数，控制最大测距失败的权重
+    laser_z_max: 0.05
+
+    # 激光的 z_rand 参数，控制随机错误的权重
+    laser_z_rand: 0.5
+
+    # 激光的测量噪声标准差
+    laser_sigma_hit: 0.2
+
+    # 激光的 lambda_short 参数，控制短距离测量噪声模型
+    laser_lambda_short: 0.1
+
+    # 激光模型类型，使用 likelihood_field 模型是合适的
+    laser_model_type: "likelihood_field"
+
+    # 激光模型类型最大距离，RPLiDAR S2 的最大有效距离是约 30 米，但为了确保精度，可设置为较小的数值
+    laser_likelihood_max_dist: 8.0  # 修改为 8 米，以适应工厂场景
+
+    # AMCL 更新时的最小平移距离，0.2 米适合
+    update_min_d: 0.2
+
+    # AMCL 更新时的最小旋转角度，保持默认的 0.5 弧度
+    update_min_a: 0.5
+
+    # 里程计的坐标系 ID，保持 "odom"
+    odom_frame_id: "odom"
+
+    # 重采样间隔，1适中
+    resample_interval: 1
+
+    # 恢复模型中的慢速恢复参数，默认值
+    recovery_alpha_slow: 0.0
+
+    # 恢复模型中的快速恢复参数
+    recovery_alpha_fast: 0.0
