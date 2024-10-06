@@ -44,8 +44,8 @@ scan_filter_chain:
   - name: footprint_filter
     type: laser_filters/LaserScanFootprintFilter
     params:
-      footprint: "[[-0.33, -0.26], [0.33, -0.26], [0.33, 0.26], [-0.33, 0.26]]"
-      # 替换为机器人实际的 footprint，这里提供一个四边形的示例。
+      footprint: "[[-0.33, -0.26], [0.33, -0.26], [0.33, 0.26], [-0.33, 0.26]]" # 机器人实际的 footprint
+      inscribed_radius: 0.289  # 机器人宽度的一半 (57.8 cm / 2 = 28.9 cm)
 
   # 滤波器 6: 时间滤波器（可选）
   # 用于过滤过期的激光扫描数据，确保处理的是最新数据。
