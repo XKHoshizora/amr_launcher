@@ -4,17 +4,11 @@ scan_filter_chain:
   # 滤波器 1: 角度范围滤波器
   # 限制激光扫描数据的角度范围。
   # 此处设置为前方 230 度（-115° 到 +115°）。
-  - name: angle_range_filter_1  # 右侧
+  - name: angle_range_filter_1
     type: laser_filters/LaserScanAngularBoundsFilter
     params:
-      lower_angle: 0.0      # 0度
-      upper_angle: 2.0071   # 115度
-
-  - name: angle_range_filter_2  # 左侧
-    type: laser_filters/LaserScanAngularBoundsFilter
-    params:
-      lower_angle: 4.2761     # 245度
-      upper_angle: 6.2832     # 360度 (2π弧度)
+      lower_angle: 2.0071     # 约 +115 度，左侧
+      upper_angle: 2.0071     # 约 +115 度，右侧
 
   # 滤波器 2: 距离滤波器
   # 根据测量的距离来过滤激光扫描数据。
