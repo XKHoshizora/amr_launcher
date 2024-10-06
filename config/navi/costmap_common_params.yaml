@@ -1,5 +1,5 @@
 robot_radius: 0        # 机器人半径，因为现在用的是 polygon 模型，robot_radius不再适用
-inflation_radius: 0.01    # 膨胀半径，确保机器人在障碍物周围留出一定的安全距离
+inflation_radius: 0    # 膨胀半径，确保机器人在障碍物周围留出一定的安全距离
 obstacle_range: 10.0      # 激光雷达检测障碍物的最大距离为 10 米，确保检测到较远的障碍物
 raytrace_range: 10.0      # 激光雷达射线追踪的最大范围，保持与 obstacle_range 一致
 observation_sources: base_lidar  # 指定使用的观测源为激光雷达
