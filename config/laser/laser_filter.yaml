@@ -2,5 +2,5 @@ scan_filter_chain:
   - name: angle_range_filter
     type: laser_filters/LaserScanAngularBoundsFilter
     params:
-      lower_angle: 1.57  # -90 degrees in radians
-      upper_angle: -1.57   # 90 degrees in radians
+      lower_angle: -1.57  # -90 degrees in radians
+      upper_angle: 1.57   # 90 degrees in radians
