@@ -10,14 +10,23 @@
     <!-- RPLiDAR -->
     <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
 
+    <!-- 启动 RPLiDAR 坐标系转换节点 -->
+    <node name="amr_rplidar_tf_lh2rh" pkg="amr_laser_filters" type="amr_rplidar" output="screen">
+        <param name="frame_id" value="laser"/>
+        <param name="invert_x" value="false"/>
+        <param name="angle_offset" value="0.0"/>
+        <remap from="/scan" to="/scan"/>
+        <remap from="/scan_converted" to="/scan_converted"/>
+    </node>
+    
     <!-- 启动 scan_filter 节点 -->
     <node pkg="amr_laser_filters" type="scan_filter" name="laser_filter" output="screen">
         <!-- 加载YAML配置文件 -->
         <rosparam file="$(find amr_laser_filters)/config/laser_filter.yaml" />
-        <!-- 将节点的"scan"话题重映射到全局的"/scan"话题 -->
-        <remap from="/laser_filter/scan" to="/scan"/> <!-- 原始激光雷达数据话题 -->
+        <!-- 将节点的"scan"话题重映射到"/scan_converted"话题 -->
+        <remap from="/scan" to="/scan_converted"/> <!-- 坐标系转换后的激光雷达数据话题 -->
         <!-- 将节点的"scan_filtered"话题重映射到全局的"/filtered_scan"话题 -->
-        <remap from="/laser_filter/scan_filtered" to="/filtered_scan"/> <!-- 过滤后的激光雷达数据 -->
+        <remap from="/scan_filtered" to="/filtered_scan"/> <!-- 过滤后的激光雷达数据 -->
     </node>
 
     <!-- om_modbusRTU_node & om_ros_node -->
