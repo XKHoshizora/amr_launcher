@@ -23,20 +23,20 @@ scan_filter_chain:
   # 滤波器 3: 强度滤波器
   # 根据激光束的强度值来过滤激光数据。
   # RPLiDAR S2 的强度值范围较广，因此可以设置合理的阈值来排除低质量数据。
-  # - name: intensity_filter
-  #   type: laser_filters/LaserScanIntensityFilter
-  #   params:
-  #     lower_threshold: 500   # 设定的最小强度值，过滤掉低强度的噪声
-  #     upper_threshold: 4000  # 保留的最大强度值
+  - name: intensity_filter
+    type: laser_filters/LaserScanIntensityFilter
+    params:
+      lower_threshold: 500   # 设定的最小强度值，过滤掉低强度的噪声
+      upper_threshold: 4000  # 保留的最大强度值
 
   # 滤波器 4: 阴影滤波器
   # 识别障碍物后的激光阴影，过滤掉可能不准确的激光点。
-  # - name: shadow_filter
-  #   type: laser_filters/LaserScanShadowFilter
-  #   params:
-  #     min_angle: 0.02   # 相邻激光束之间的最小角度差
-  #     max_angle: 0.2    # 识别阴影的最大角度差
-  #     window: 2         # 检测阴影时使用的窗口大小
+  - name: shadow_filter
+    type: laser_filters/LaserScanShadowFilter
+    params:
+      min_angle: 0.02   # 相邻激光束之间的最小角度差
+      max_angle: 0.2    # 识别阴影的最大角度差
+      window: 2         # 检测阴影时使用的窗口大小
 
   # 滤波器 5: 时间滤波器（可选）
   # 用于过滤过期的激光扫描数据，确保处理的是最新数据。
