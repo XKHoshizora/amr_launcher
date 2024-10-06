@@ -22,11 +22,8 @@
     <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
 
     <!-- SLAM -->
-    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch">
-        <!-- 参数配置 -->
-        <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
-    </include>
-    <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/> -->
+    <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/>
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
 
     <!-- Controller -->
