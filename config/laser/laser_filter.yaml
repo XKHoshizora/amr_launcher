@@ -1,6 +1,62 @@
+# RPLiDAR S2 优化激光滤波链配置
 scan_filter_chain:
+
+  # 滤波器 1: 角度范围滤波器
+  # 限制激光扫描数据的角度范围。
+  # 此处设置为前方 180 度（-90° 到 +90°）。
   - name: angle_range_filter
     type: laser_filters/LaserScanAngularBoundsFilter
     params:
-      lower_angle: -1.57  # -90 degrees in radians
-      upper_angle: 1.57   # 90 degrees in radians
+      lower_angle: 2.0071     # +115 度，左侧
+      upper_angle: -2.0071    # -115 度，右侧
+
+  # 滤波器 2: 距离滤波器
+  # 根据测量的距离来过滤激光扫描数据。
+  # 对于 RPLiDAR S2，测量距离为白色物体 0.05-30 米，黑色物体 0.05-10 米。
+  # 我们建议最大距离设置为 25 米，以避免远距离噪声干扰。
+  - name: range_filter
+    type: laser_filters/LaserScanRangeFilter
+    params:
+      lower_threshold: 0.05  # 最小测量距离，设为 5 厘米
+      upper_threshold: 25.0  # 最大测量距离，设为 25 米
+
+  # 滤波器 3: 强度滤波器
+  # 根据激光束的强度值来过滤激光数据。
+  # RPLiDAR S2 的强度值范围较广，因此可以设置合理的阈值来排除低质量数据。
+  - name: intensity_filter
+    type: laser_filters/LaserScanIntensityFilter
+    params:
+      lower_threshold: 500   # 设定的最小强度值，过滤掉低强度的噪声
+      upper_threshold: 4000  # 保留的最大强度值
+
+  # 滤波器 4: 阴影滤波器
+  # 识别障碍物后的激光阴影，过滤掉可能不准确的激光点。
+  - name: shadow_filter
+    type: laser_filters/LaserScanShadowFilter
+    params:
+      min_angle: 0.02   # 相邻激光束之间的最小角度差
+      max_angle: 0.2    # 识别阴影的最大角度差
+      window: 2         # 检测阴影时使用的窗口大小
+
+  # 滤波器 5: 机器人足迹过滤器
+  # 去除机器人自身占地范围内的激光点。
+  # 需要提供机器人的实际 footprint。
+  - name: footprint_filter
+    type: laser_filters/LaserScanFootprintFilter
+    params:
+      footprint: "[[-0.33, -0.26], [0.33, -0.26], [0.33, 0.26], [-0.33, 0.26]]"
+      # 替换为机器人实际的 footprint，这里提供一个四边形的示例。
+
+  # 滤波器 6: 时间滤波器（可选）
+  # 用于过滤过期的激光扫描数据，确保处理的是最新数据。
+  - name: time_filter
+    type: laser_filters/LaserScanTimeFilter
+    params:
+      max_time: 0.3  # 最大允许的时间差，单位为秒
+
+  # 滤波器 7: 中值滤波器（可选）
+  # 通过中值滤波减少激光数据中的噪声，适用于噪声较大的环境。
+  - name: median_filter
+    type: laser_filters/MedianFilter
+    params:
+      window_size: 3  # 滤波窗口大小
