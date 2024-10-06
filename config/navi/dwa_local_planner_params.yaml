@@ -20,7 +20,7 @@ DWAPlannerROS:
     # 目标容差参数
     yaw_goal_tolerance: 0.1         # 机器人航向目标的容忍度为 0.1弧度
     xy_goal_tolerance: 0.2          # 机器人位置目标的容忍度为 0.2米
-    min_obstacle_dist: 0.2          # 与障碍物的最小安全距离保持0.2米，匹配AMR的轮廓尺寸
+    min_obstacle_dist: 0.05          # 与障碍物的最小安全距离保持0.2米，匹配AMR的轮廓尺寸
     latch_xy_goal_tolerance: false  # 不锁定 xy 目标容差，允许反复调整位置
 
     # 向前模拟参数

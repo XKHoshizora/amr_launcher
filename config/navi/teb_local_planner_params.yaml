@@ -36,8 +36,8 @@ TebLocalPlannerROS:
     yaw_goal_tolerance: 0.1    # 到达目标时允许的航向误差，设置为 0.1 弧度
 
     # 障碍物相关 
-    min_obstacle_dist: 0.2           # 最小障碍物距离设置为 0.2 米，确保机器人与障碍物保持安全距离
-    inflation_dist: 0.5              # 障碍物膨胀距离增加到 0.5 米，给机器人留出更大的避障空间
+    min_obstacle_dist: 0.05           # 最小障碍物距离设置为 0.2 米，确保机器人与障碍物保持安全距离
+    inflation_dist: 0.1              # 障碍物膨胀距离增加到 0.5 米，给机器人留出更大的避障空间
     include_costmap_obstacles: True  # 使用代价地图中的障碍物信息
     costmap_obstacles_behind_robot_dist: 1.0  # 后方 1 米范围内的障碍物也加入检测，确保倒车时的安全
     obstacle_poses_affected: 25      # 障碍物影响的关键点数量，保持 25，确保较大的范围内障碍物影响路径
