@@ -1,4 +1,4 @@
-image: amr_ws/amr_map_gmapping.pgm
+image: amr_map.pgm
 resolution: 0.050000
 origin: [-30.000000, -42.800000, 0.000000]
 negate: 0
