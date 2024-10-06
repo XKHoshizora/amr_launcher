@@ -18,7 +18,7 @@
         <param name="scan_frequency" type="double" value="10.0"/>  <!-- 扫描频率为 10 Hz，适中频率适合 SLAM -->
 
         <!-- 其他参数 -->
-        <param name="inverted" type="bool" value="false"/>  <!-- 雷达是否倒置安装 -->
+        <param name="inverted" type="bool" value="true"/>  <!-- 雷达是否倒置安装 -->
     </node>
 
 </launch>
