@@ -2,6 +2,6 @@
 
     <!-- Hector SLAM -->
     <node name="hector_mapping" pkg="hector_mapping" type="hector_mapping" output="screen">
-        <remap from="scan" to="/scan"/> <!-- 使用过滤后的激光雷达数据 -->
+        <remap from="scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
     </node>
 </launch>

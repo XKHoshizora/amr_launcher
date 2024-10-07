@@ -1,20 +1,20 @@
 DWAPlannerROS:
     # 速度参数
-    max_vel_x: 0.3              # 机器人前进方向的最大速度，设置为 0.3 m/s，适合工厂环境的安全速度
-    min_vel_x: -0.05            # 机器人后退的最小速度，允许少量倒车操作
+    max_vel_x: 1.0              # 机器人前进方向的最大速度，设置为 0.3 m/s，适合工厂环境的安全速度
+    min_vel_x: -0.3            # 机器人后退的最小速度，允许少量倒车操作
     max_vel_y: 0.0              # 由于是差速驱动机器人，y 方向速度为 0
     min_vel_y: 0.0              # 同样y方向的最小速度也为 0
     max_vel_trans: 0.3          # 最大平移速度设置为 0.3 m/s，确保机器人安全平移
     min_vel_trans: 0.01         # 最小平移速度，设置为 0.01 m/s，防止机器人完全静止
-    trans_stopped_vel: 0.1      # 低于此速度时认为机器人已停止
+    trans_stopped_vel: 0.01      # 低于此速度时认为机器人已停止
     acc_lim_trans: 2.5          # 平移加速度限制，设置为 2.5 m/s²，确保平稳加速
     acc_lim_x: 2.5              # x 方向加速度限制，确保机器人平稳起步
     acc_lim_y: 0.0              # y 方向加速度限制为 0，因为是差速驱动
 
     # 旋转速度参数
-    max_vel_theta: 2.0          # 最大旋转速度设置为 2 rad/s，确保转弯时的控制灵活性，适合原地旋转
+    max_vel_theta: 1.5708          # 最大旋转速度设置为 2 rad/s，确保转弯时的控制灵活性，适合原地旋转
     min_vel_theta: -0.01        # 最小旋转速度，允许轻微的反向旋转
-    theta_stopped_vel: 0.1      # 旋转速度低于此值时认为机器人已停止
+    theta_stopped_vel: 0.035      # 旋转速度低于此值时认为机器人已停止
     acc_lim_theta: 6.0          # 旋转加速度限制为 6 rad/s²，确保旋转平稳
 
     # 目标容差参数
@@ -24,9 +24,9 @@ DWAPlannerROS:
     latch_xy_goal_tolerance: false  # 不锁定 xy 目标容差，允许反复调整位置
 
     # 向前模拟参数
-    sim_time: 1.7               # 模拟未来 1.7 秒的轨迹
-    vx_samples: 3               # x 方向的速度采样数
-    vy_samples: 1               # y 方向的速度采样数，差速驱动机器人 y 方向为 0
+    sim_time: 1.0               # 模拟未来 1.0 秒的轨迹
+    vx_samples: 10               # x 方向的速度采样数
+    vy_samples: 0               # y 方向的速度采样数，差速驱动机器人 y 方向为 0
     vtheta_samples: 20          # 旋转速度的采样数，确保足够的旋转控制精度
 
     # 轨迹评分参数

@@ -16,15 +16,10 @@
         <!-- <param name="maxRange" value="30.0"/> -->
 
         <!-- <remap> 用于话题、服务和动作的重映射 -->
-        <remap from="scan" to="/scan"/> <!-- 使用过滤后的激光雷达数据 -->
+        <remap from="scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
 
         <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
         <!-- <rosparam param="/slam_gmapping/maxRange" value="30.0"/> -->
     </node>
-
-    <!-- 激光雷达和底盘的TF变换，确保正确的旋转中心 -->
-    <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0.1 0 0 0 base_link laser 100"/> -->
-    <!-- 激光雷达和底盘的TF变换，确保LiDAR的方向正确 -->
-    <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0 0 0 0 0 3.14159 base_link laser 100"/> -->
 
 </launch>

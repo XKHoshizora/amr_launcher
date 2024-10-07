@@ -43,8 +43,8 @@ slam_gmapping:
     minimumScore: 50           # 最小得分要求
 
     # 机器人移动更新条件
-    linearUpdate: 1.0          # 机器人移动 1 米触发地图更新
-    angularUpdate: 0.5236      # 机器人旋转约 30 度触发地图更新
+    linearUpdate: 0.5          # 机器人移动 0.5 米触发地图更新
+    angularUpdate: 0.35      # 机器人旋转约 20 度触发地图更新
     temporalUpdate: -1.0       # 时间更新间隔设置为 -1 表示不强制时间更新
 
     # 粒子滤波器采样参数

@@ -8,8 +8,9 @@
         <!-- 坐标系设置 -->
         <param name="frame_id" type="string" value="laser"/>  <!-- 激光雷达的坐标系 -->
 
-        <!-- 扫描模式设置 -->
-        <param name="scan_mode" type="string" value="Standard"/>  <!-- 使用标准扫描模式，适合 SLAM -->
+        <!-- 扫描模式设置 标准模式(每秒1434个数据点)：Standard 密集增强模式(每秒3584个数据点)：DenseBoost -->
+        <!-- <param name="scan_mode" type="string" value="Standard"/> -->
+        <param name="scan_mode" type="string" value="DenseBoost"/>
 
         <!-- 角度补偿设置 -->
         <param name="angle_compensate" type="bool" value="true"/>  <!-- 打开角度补偿，确保扫描点均匀分布 -->
