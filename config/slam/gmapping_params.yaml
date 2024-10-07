@@ -22,7 +22,7 @@ slam_gmapping:
     delta: 0.05                # 地图分辨率 5 cm
 
     # 粒子滤波器参数
-    particles: 30              # 粒子数量
+    particles: 50              # 粒子数量
     resampleThreshold: 0.5     # 重采样阈值
 
     # 扫描匹配参数

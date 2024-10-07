@@ -1,0 +1,31 @@
+<launch>
+    <!-- 使用实际的时间 -->
+    <param name="/use_sim_time" value="false" />
+    
+    <!-- 载入机器人模型 -->
+    <include file="$(find amr_launcher)/launch/test_description.launch"/>
+
+    <!-- RPLiDAR -->
+    <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
+
+    <!-- om_modbusRTU_node & om_ros_node -->
+    <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
+
+    <!-- IMU -->
+    <!-- <include file="$(find amr_imu)/launch/amr_imu.launch"/> -->
+
+    <!-- SLAM -->
+    <!-- GMapping -->
+    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
+    <!-- Hector -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
+    <!-- Cartographer -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
+
+    <!-- Controller -->
+    <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
+
+    <!-- RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/slam.rviz" />
+
+</launch>
