@@ -3,7 +3,7 @@ slam_gmapping:
     # 激光雷达参数
     scan_topic: "/scan"        # 激光雷达话题名
     maxRange: 30.0             # RPLiDAR S2 的最大探测范围 30 米
-    maxUrange: 12.0            # 激光的最大可用范围，光束被裁剪至此值 12 米
+    maxUrange: 16.0            # 激光的最大可用范围，光束被裁剪至此值 16 米
     sigma: 0.05                # 激光测距噪声标准差
     lskip: 0                   # 跳过部分激光点，减少计算负担
 
@@ -15,10 +15,10 @@ slam_gmapping:
     # 地图更新和分辨率参数
     map_update_interval: 1.0   # 地图更新间隔时间
     throttle_scans: 5          # 每 5 次扫描处理一次
-    xmin: -30.0                # 地图最小范围 X 轴
-    ymin: -30.0                # 地图最小范围 Y 轴
-    xmax: 30.0                 # 地图最大范围 X 轴
-    ymax: 30.0                 # 地图最大范围 Y 轴
+    xmin: -100.0                # 地图最小范围 X 轴
+    ymin: -100.0                # 地图最小范围 Y 轴
+    xmax: 100.0                 # 地图最大范围 X 轴
+    ymax: 100.0                 # 地图最大范围 Y 轴
     delta: 0.05                # 地图分辨率 5 cm
 
     # 粒子滤波器参数
