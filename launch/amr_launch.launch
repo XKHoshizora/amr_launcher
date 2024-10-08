@@ -17,7 +17,7 @@
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
 
     <!-- IMU -->
-    <include file="$(find amr_launcher)/launch/amr_imu.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_imu.launch"/> -->
 
     <!-- Navigation -->
     <include file="$(find amr_launcher)/launch/amr_move_base.launch">
