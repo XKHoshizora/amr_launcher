@@ -9,7 +9,25 @@
     <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
 
     <!-- 启动激光雷达滤波器 -->
-    <include file="$(find amr_launcher)/launch/amr_laser_filters.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_laser_filters.launch"/> -->
+    <!-- 启动自适应激光数据压缩器节点 -->
+    <node pkg="amr_laser_filters" type="adaptive_laser_compressor" name="adaptive_laser_compressor" output="screen">
+        <!-- 设置最大输出数据点数量 -->
+        <param name="max_output_points" value="1440" />
+        <!-- 重映射话题 -->
+        <remap from="/scan" to="/scan" />
+        <remap from="/compressed_scan" to="/compressed_scan" />
+    </node>
+
+    <!-- 启动 scan_filter 节点 -->
+    <node pkg="amr_laser_filters" type="scan_filter" name="laser_filter" output="screen">
+        <!-- 加载YAML配置文件 -->
+        <rosparam file="$(find amr_launcher)/config/laser/laser_filter.yaml" />
+        <!-- 将节点的"scan"话题重映射到"/compressed_scan"话题 -->
+        <remap from="/scan" to="/compressed_scan"/>
+        <!-- 将节点的"scan_filtered"话题重映射到全局的"/filtered_scan"话题 -->
+        <remap from="/scan_filtered" to="/filtered_scan"/>
+    </node>
     
     <!-- om_modbusRTU_node & om_ros_node -->
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
