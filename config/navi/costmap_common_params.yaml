@@ -39,6 +39,8 @@ base_lidar: {
   expected_update_rate: 10.0,  # 预期的更新率 [Hz]（默认值：0.0，表示不检查更新率）
   min_obstacle_height: 0.0,  # 考虑的最小障碍物高度 [m]（默认值：0.0）
   max_obstacle_height: 0.5,  # 考虑的最大障碍物高度 [m]（默认值：2.0）
+  obstacle_range: ${obstacle_range},
+  raytrace_range: ${raytrace_range}
 }
 
 # 其他通用参数
@@ -72,9 +74,3 @@ obstacle_range: ${use_dwa_config:=${dwa_config.obstacle_range}}${use_teb_config:
 raytrace_range: ${use_dwa_config:=${dwa_config.raytrace_range}}${use_teb_config:=${teb_config.raytrace_range}}
 inflation_radius: ${use_dwa_config:=${dwa_config.inflation_radius}}${use_teb_config:=${teb_config.inflation_radius}}
 cost_scaling_factor: ${use_dwa_config:=${dwa_config.cost_scaling_factor}}${use_teb_config:=${teb_config.cost_scaling_factor}}
-
-# 更新激光雷达配置
-base_lidar: {
-  obstacle_range: ${obstacle_range},
-  raytrace_range: ${raytrace_range},
-}
