@@ -35,7 +35,7 @@ base_frame_id: "base_link" # 机器人基座坐标系 (默认: "base_link") - �
 transform_tolerance: 0.5   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
 
 # 恢复参数
-recovery_alpha_slow: 0.0 # 慢速恢复参数 (默认: 0.0) - 增加以改善长期定位稳定性
+recovery_alpha_slow: 0.0   # 慢速恢复参数 (默认: 0.0) - 增加以改善长期定位稳定性
 recovery_alpha_fast: 0.0   # 快速恢复参数 (默认: 0.0) - 增加以快速恢复定位
 
 # 初始姿态估计
