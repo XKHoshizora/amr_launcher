@@ -12,7 +12,7 @@ TebLocalPlannerROS:
 
   # 机器人配置参数
   max_vel_x: 0.8  # 最大前进速度 [m/s] (默认: 0.4)
-  max_vel_x_backwards: 0.0  # 最大后退速度 [m/s] (默认: 0.2)
+  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s] (默认: 0.2)
   max_vel_theta: 0.8  # 最大旋转速度 [rad/s] (默认: 0.3)
   acc_lim_x: 0.3  # 最大前进加速度 [m/s^2] (默认: 0.5)
   acc_lim_theta: 0.3  # 最大角加速度 [rad/s^2] (默认: 0.5)
@@ -56,7 +56,7 @@ TebLocalPlannerROS:
   weight_max_vel_theta: 1.0  # 最大角速度目标的权重 (默认: 1.0)
   weight_acc_lim_x: 2.0  # 加速度限制的权重 (默认: 1.0)
   weight_acc_lim_theta: 2.0  # 角加速度限制的权重 (默认: 1.0)
-  weight_kinematics_nh: 2000.0  # 非完整运动学约束的权重 (默认: 1000.0)
+  weight_kinematics_nh: 1000.0  # 非完整运动学约束的权重 (默认: 1000.0)
   weight_kinematics_forward_drive: 1.0  # 向前行驶的权重 (默认: 1.0)
   weight_kinematics_turning_radius: 1.0  # 转弯半径的权重 (默认: 1.0)
   weight_optimaltime: 1.0  # 时间优化的权重 (默认: 1.0)
@@ -64,6 +64,7 @@ TebLocalPlannerROS:
   weight_dynamic_obstacle: 50.0  # 动态障碍物权重 (默认: 50.0)
   weight_viapoint: 1.0  # 经由点权重 (默认: 1.0)
   weight_adapt_factor: 2.0  # 自适应因子的权重 (默认: 2.0)
+  weight_optimaltime_penalty_backward_driving: 5.0  # 后退行驶的时间惩罚权重 (默认: 1.0)
 
   # 路径执行参数
   min_samples: 3  # 最小采样点数 (默认: 3)
