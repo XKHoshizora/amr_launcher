@@ -11,21 +11,21 @@ TebLocalPlannerROS:
     ]
 
   # 机器人配置参数
-  max_vel_x: 2.0  # 最大前进速度 [m/s]
-  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s]
-  max_vel_theta: 1.047197551  # 最大旋转速度 [rad/s] (60°/s)
-  acc_lim_x: 0.025  # 最大前进加速度 [m/s^2]
-  acc_lim_theta: 0.025  # 最大角加速度 [rad/s^2]
-  min_turning_radius: 0.0  # 最小转弯半径，0表示能够原地旋转 [m]
-  wheelbase: 0.4643  # 轮距 [m]
-  cmd_angle_instead_rotvel: false
+  max_vel_x: 1.0  # 最大前进速度 [m/s] (默认: 0.4)
+  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s] (默认: 0.2)
+  max_vel_theta: 1.0  # 最大旋转速度 [rad/s] (默认: 0.3)
+  acc_lim_x: 0.5  # 最大前进加速度 [m/s^2] (默认: 0.5)
+  acc_lim_theta: 0.5  # 最大角加速度 [rad/s^2] (默认: 0.5)
+  min_turning_radius: 0.0  # 最小转弯半径，0表示能够原地旋转 [m] (默认: 0.0)
+  wheelbase: 0.4643  # 轮距 [m] (默认: 1.0)
+  cmd_angle_instead_rotvel: false  # 使用角速度命令 (默认: false)
 
   # 轨迹配置
   teb_autosize: True  # 自动调整轨迹大小 (默认: True)
   dt_ref: 0.3  # 期望的轨迹时间分辨率 [s] (默认: 0.3)
-  dt_hysteresis: 0.03  # 时间分辨率的滞后 [s] (默认: 0.1)
+  dt_hysteresis: 0.1  # 时间分辨率的滞后 [s] (默认: 0.1)
   global_plan_overwrite_orientation: True  # 覆盖全局规划的方向 (默认: True)
-  max_global_plan_lookahead_dist: 4.0  # 考虑全局规划的最大前瞻距离 [m] (默认: 3.0)
+  max_global_plan_lookahead_dist: 3.0  # 考虑全局规划的最大前瞻距离 [m] (默认: 3.0)
   force_reinit_new_goal_dist: 1.0  # 强制重新初始化的新目标距离 [m] (默认: 1.0)
   feasibility_check_no_poses: 5  # 每隔多少个姿态检查一次可行性 (默认: 4)
   publish_feedback: false  # 是否发布反馈信息 (默认: false)
@@ -39,9 +39,7 @@ TebLocalPlannerROS:
   include_costmap_obstacles: True  # 是否包含代价地图障碍物 (默认: True)
   costmap_obstacles_behind_robot_dist: 1.0  # 考虑机器人后方多远的障碍物 [m] (默认: 1.0)
   obstacle_poses_affected: 30  # 每个障碍物影响的姿态数 (默认: 30)
-  costmap_converter_spin_thread: True
-  costmap_converter_rate: 5
-  inflation_dist: 0.4  # 障碍物膨胀距离 [m] (默认: 0.6)
+  inflation_dist: 0.6  # 障碍物膨胀距离 [m] (默认: 0.6)
   include_dynamic_obstacles: true  # 是否考虑动态障碍物 (默认: false)
   dynamic_obstacle_inflation_dist: 0.6  # 动态障碍物膨胀距离 [m] (默认: 0.6)
   legacy_obstacle_association: false  # 使用旧版障碍物关联 (默认: false)
@@ -53,26 +51,23 @@ TebLocalPlannerROS:
   no_outer_iterations: 4  # 外循环迭代次数 (默认: 4)
   optimization_activate: True  # 激活优化 (默认: True)
   optimization_verbose: False  # 优化过程是否详细输出 (默认: False)
-  penalty_epsilon: 0.05  # 添加到惩罚函数的小常数 (默认: 0.1)
-  weight_max_vel_x: 1.0  # 最大速度目标的权重 (默认: 2.0)
+  penalty_epsilon: 0.1  # 添加到惩罚函数的小常数 (默认: 0.1)
+  weight_max_vel_x: 2.0  # 最大速度目标的权重 (默认: 2.0)
   weight_max_vel_theta: 1.0  # 最大角速度目标的权重 (默认: 1.0)
-  weight_acc_lim_x: 3.0  # 加速度限制的权重 (默认: 1.0)
-  weight_acc_lim_theta: 3.0  # 角加速度限制的权重 (默认: 1.0)
-  weight_kinematics_nh: 2000.0  # 非完整运动学约束的权重 (默认: 1000.0)
+  weight_acc_lim_x: 1.0  # 加速度限制的权重 (默认: 1.0)
+  weight_acc_lim_theta: 1.0  # 角加速度限制的权重 (默认: 1.0)
+  weight_kinematics_nh: 1000.0  # 非完整运动学约束的权重 (默认: 1000.0)
   weight_kinematics_forward_drive: 1.0  # 向前行驶的权重 (默认: 1.0)
   weight_kinematics_turning_radius: 1.0  # 转弯半径的权重 (默认: 1.0)
   weight_optimaltime: 1.0  # 时间优化的权重 (默认: 1.0)
-  weight_shortest_path: 0.5  # 添加最短路径权重
   weight_obstacle: 50.0  # 障碍物权重 (默认: 50.0)
-  weight_dynamic_obstacle: 10.0  # 动态障碍物权重 (默认: 50.0)
-  weight_inflation: 0.1  # 添加膨胀权重
+  weight_dynamic_obstacle: 50.0  # 动态障碍物权重 (默认: 50.0)
   weight_viapoint: 1.0  # 经由点权重 (默认: 1.0)
   weight_adapt_factor: 2.0  # 自适应因子的权重 (默认: 2.0)
-  weight_optimaltime_penalty_backward_driving: 5.0  # 后退行驶的时间惩罚权重 (默认: 1.0)
 
   # 路径执行参数
   min_samples: 3  # 最小采样点数 (默认: 3)
-  max_samples: 20  # 最大采样点数 (默认: 50)
+  max_samples: 50  # 最大采样点数 (默认: 50)
 
   # 规划器行为
   xy_goal_tolerance: 0.2  # 目标点的XY容差 [m] (默认: 0.2)
@@ -95,19 +90,15 @@ TebLocalPlannerROS:
   # 恢复行为
   shrink_horizon_backup: true  # 在失败时缩小规划范围 (默认: true)
   oscillation_recovery: true  # 检测和恢复振荡 (默认: true)
-  oscillation_v_eps: 0.1
-  oscillation_omega_eps: 0.1
-  oscillation_recovery_min_duration: 10
-  oscillation_filter_duration: 10
 
 # 1.5 m/s 配置（注释掉）
 #  max_vel_x: 1.5
 #  acc_lim_x: 0.7
-#  max_vel_theta: 1.570796327
+#  max_vel_theta: 1.5
 #  acc_lim_theta: 0.7
 
 # 2.0 m/s 配置（注释掉）
 #  max_vel_x: 2.0
 #  acc_lim_x: 1.0
-#  max_vel_theta: 2.094395102
+#  max_vel_theta: 2.0
 #  acc_lim_theta: 1.0

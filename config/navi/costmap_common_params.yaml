@@ -10,7 +10,7 @@ footprint: [
 footprint_padding: 0.05  # 为机器人轮廓添加的额外填充 [m]（默认值：0.01）
 
 # 地图分辨率
-transform_tolerance: 2  # TF 变换容忍时间 [s]（默认值：0.3）
+transform_tolerance: 0.5  # TF 变换容忍时间 [s]（默认值：0.3）
 resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
 
 # 地图类型和坐标系
@@ -38,7 +38,7 @@ base_lidar:
   clearing: true  # 是否清除空间（默认值：true）
   expected_update_rate: 10.0  # 预期的更新率 [Hz]（默认值：0.0，表示不检查更新率）
   min_obstacle_height: 0.0  # 考虑的最小障碍物高度 [m]（默认值：0.0）
-  max_obstacle_height: 0.5  # 考虑的最大障碍物高度 [m]（默认值：2.0）
+  max_obstacle_height: 2.0  # 考虑的最大障碍物高度 [m]（默认值：2.0）
   obstacle_range: ${obstacle_range}
   raytrace_range: ${raytrace_range}
 
@@ -59,8 +59,8 @@ dwa_config: {
 teb_config: {
   obstacle_range: 10.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
   raytrace_range: 10.0,  # 清除空间的最大范围 [m]（默认值：3.0）
-  inflation_radius: 0.2,  # 障碍物膨胀半径 [m]（默认值：0.55）
-  cost_scaling_factor: 15.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0）
+  inflation_radius: 0.3,  # 障碍物膨胀半径 [m]（默认值：0.55）
+  cost_scaling_factor: 10.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0）
 }
 
 # 取消注释以下行之一来选择使用 DWA 或 TEB 配置
