@@ -65,8 +65,8 @@ teb_config: {
 }
 
 # 取消注释以下行之一来选择使用 DWA 或 TEB 配置
-use_dwa_config: true
-# use_teb_config: true
+# use_dwa_config: true
+use_teb_config: true
 
 # 根据选择的配置设置参数
 obstacle_range: ${use_dwa_config:=${dwa_config.obstacle_range}}${use_teb_config:=${teb_config.obstacle_range}}
