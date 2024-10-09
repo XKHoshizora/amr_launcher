@@ -2,20 +2,20 @@
     <!-- 参数：模式选择 (record 或 play) -->
     <arg name="mode" default="record" />
 
-    <!-- 如果选择记录模式 -->
-    <if unless="$(arg mode) == play">
+    <!-- 记录模式 -->
+    <group if="$(eval mode == 'record')">
         <!-- 开始 SLAM 建图 -->
         <include file="$(find amr_launcher)/launch/amr_launch_slam.launch" />
 
         <!-- 记录 bag 文件，保存数据到指定路径 -->
         <node pkg="rosbag" type="record" name="slam_record" args="-O $(find amr_launcher)/data/slam_record.bag /scan /median_filtered_scan /angle_filtered_scan /filtered_scan /odom /tf /map /map_metadata" />
-    </if>
+    </group>
 
-    <!-- 如果选择回放模式 -->
-    <if unless="$(arg mode) == record">
+    <!-- 回放模式 -->
+    <group if="$(eval mode == 'play')">
         <!-- 回放之前记录的 bag 文件 -->
         <node pkg="rosbag" type="play" name="slam_playback" args="$(find amr_launcher)/data/slam_record.bag" />
-    </if>
+    </group>
 </launch>
 
 <!-- 记录 SLAM 建图过程： -->
