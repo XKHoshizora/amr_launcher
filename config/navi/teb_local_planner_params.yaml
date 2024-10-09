@@ -11,14 +11,14 @@ TebLocalPlannerROS:
     ]
 
   # 机器人配置参数
-  max_vel_x: 0.8  # 最大前进速度 [m/s] (默认: 0.4)
-  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s] (默认: 0.2)
-  max_vel_theta: 0.8  # 最大旋转速度 [rad/s] (默认: 0.3)
-  acc_lim_x: 0.5  # 最大前进加速度 [m/s^2] (默认: 0.5)
-  acc_lim_theta: 0.5  # 最大角加速度 [rad/s^2] (默认: 0.5)
-  min_turning_radius: 0.0  # 最小转弯半径，0表示能够原地旋转 [m] (默认: 0.0)
-  wheelbase: 0.4643  # 轮距 [m] (默认: 1.0)
-  cmd_angle_instead_rotvel: false  # 使用角速度命令 (默认: false)
+  max_vel_x: 1.0  # 最大前进速度 [m/s]
+  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s]
+  max_vel_theta: 1.047197551  # 最大旋转速度 [rad/s] (60°/s)
+  acc_lim_x: 0.5  # 最大前进加速度 [m/s^2]
+  acc_lim_theta: 0.5  # 最大角加速度 [rad/s^2]
+  min_turning_radius: 0.0  # 最小转弯半径，0表示能够原地旋转 [m]
+  wheelbase: 0.4643  # 轮距 [m]
+  cmd_angle_instead_rotvel: false
 
   # 轨迹配置
   teb_autosize: True  # 自动调整轨迹大小 (默认: True)
@@ -35,9 +35,9 @@ TebLocalPlannerROS:
   shrink_horizon_min_duration: 10.0  # 最小收缩时间 [s] (默认: 10.0)
 
   # 障碍物参数
-  min_obstacle_dist: 0.25  # 与障碍物的最小距离 [m] (默认: 0.5)
+  min_obstacle_dist: 0.3  # 与障碍物的最小距离 [m] (默认: 0.5)
   include_costmap_obstacles: True  # 是否包含代价地图障碍物 (默认: True)
-  costmap_obstacles_behind_robot_dist: 1.  # 考虑机器人后方多远的障碍物 [m] (默认: 1.0)
+  costmap_obstacles_behind_robot_dist: 1.0  # 考虑机器人后方多远的障碍物 [m] (默认: 1.0)
   obstacle_poses_affected: 30  # 每个障碍物影响的姿态数 (默认: 30)
   costmap_converter_spin_thread: True
   costmap_converter_rate: 5
@@ -103,11 +103,11 @@ TebLocalPlannerROS:
 # 1.5 m/s 配置（注释掉）
 #  max_vel_x: 1.5
 #  acc_lim_x: 0.7
-#  max_vel_theta: 1.5
+#  max_vel_theta: 1.570796327
 #  acc_lim_theta: 0.7
 
 # 2.0 m/s 配置（注释掉）
 #  max_vel_x: 2.0
 #  acc_lim_x: 1.0
-#  max_vel_theta: 2.0
+#  max_vel_theta: 2.094395102
 #  acc_lim_theta: 1.0
