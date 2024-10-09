@@ -10,7 +10,7 @@
     
     <!-- 2. 启动激光雷达扫描点角度滤波器 scan_filter 节点 -->
     <node pkg="amr_laser_filters" type="scan_filter" name="laser_angle_filter" output="screen">
-        <rosparam file="$(find amr_laser_filters)/config/laser_filter.yaml" />
+        <rosparam file="$(find amr_launcher)/config/laser/laser_filter.yaml" />
         <remap from="/scan" to="/median_filtered_scan"/> <!-- 原始激光雷达数据话题 -->
         <remap from="/filtered_scan" to="/angle_filtered_scan"/> <!-- 角度过滤后的数据 -->
     </node>
