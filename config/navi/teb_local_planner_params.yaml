@@ -12,7 +12,7 @@ TebLocalPlannerROS:
 
   # 机器人配置参数
   max_vel_x: 1.5  # 最大前进速度 [m/s] (默认: 0.4)
-  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s] (默认: 0.2)
+  max_vel_x_backwards: 0.0  # 最大后退速度 [m/s] (默认: 0.2)
   max_vel_theta: 1.5  # 最大旋转速度 [rad/s] (默认: 0.3)
   acc_lim_x: 0.5  # 最大前进加速度 [m/s^2] (默认: 0.5)
   acc_lim_theta: 0.5  # 最大角加速度 [rad/s^2] (默认: 0.5)
