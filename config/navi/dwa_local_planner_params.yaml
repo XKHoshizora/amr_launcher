@@ -1,75 +1,75 @@
 DWAPlannerROS:
     # 机器人配置参数
-    max_vel_x: 1.0  # 最大前进速度，单位：m/s (默认: 0.55)
-    min_vel_x: -0.1  # 最小前进速度（允许后退），单位：m/s (默认: 0.0)
+    max_vel_x: 1.5  # 最大前进速度，单位：m/s (默认: 0.55)
+    min_vel_x: 0.0  # 最小前进速度（允许后退），单位：m/s (默认: 0.0)
     max_vel_y: 0.0  # 最大侧向速度，单位：m/s (默认: 0.1)
     min_vel_y: 0.0  # 最小侧向速度，单位：m/s (默认: -0.1)
-    max_vel_trans: 1.0  # 最大平移速度，单位：m/s (默认: 0.55)
+    max_vel_trans: 1.5  # 最大平移速度，单位：m/s (默认: 0.55)
     min_vel_trans: 0.1  # 最小平移速度，单位：m/s (默认: 0.1)
     max_vel_theta: 1.0  # 最大旋转速度，单位：rad/s (默认: 1.0)
     min_vel_theta: 0.2  # 最小旋转速度，单位：rad/s (默认: 0.4)
-    acc_lim_x: 0.5  # X方向加速度限制，单位：m/s^2 (默认: 2.5)
+    acc_lim_x: 0.7  # X方向加速度限制，单位：m/s^2 (默认: 2.5)
     acc_lim_y: 0.0  # Y方向加速度限制，单位：m/s^2 (默认: 2.5)
-    acc_lim_theta: 0.5  # 角加速度限制，单位：rad/s^2 (默认: 3.2)
+    acc_lim_theta: 0.7  # 角加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 目标容差
-    xy_goal_tolerance: 0.1  # 到达目标点的XY平面容差，单位：m (默认: 0.1)
-    yaw_goal_tolerance: 0.05  # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
+    xy_goal_tolerance: 0.15  # 到达目标点的XY平面容差，单位：m (默认: 0.1)
+    yaw_goal_tolerance: 0.15  # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
     latch_xy_goal_tolerance: false  # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
-    sim_time: 2.0  # 前向模拟时间，单位：s (默认: 1.7)
+    sim_time: 2.5  # 前向模拟时间，单位：s (默认: 1.7)
     sim_granularity: 0.025  # 轨迹模拟的步长，单位：m (默认: 0.025)
-    vx_samples: 10  # X方向速度采样点数 (默认: 3)
+    vx_samples: 15  # X方向速度采样点数 (默认: 3)
     vy_samples: 1   # Y方向速度采样点数 (默认: 10)
-    vth_samples: 20  # 旋转速度采样点数 (默认: 20)
+    vth_samples: 25  # 旋转速度采样点数 (默认: 20)
 
     # 轨迹评分
-    path_distance_bias: 32.0  # 路径距离权重 (默认: 32.0)
-    goal_distance_bias: 24.0  # 目标距离权重 (默认: 24.0)
-    occdist_scale: 0.05  # 障碍物代价权重 (默认: 0.01)
+    path_distance_bias: 35.0  # 路径距离权重 (默认: 32.0)
+    goal_distance_bias: 26.0  # 目标距离权重 (默认: 24.0)
+    occdist_scale: 0.06  # 障碍物代价权重 (默认: 0.01)
     forward_point_distance: 0.325  # 前向点距离，单位：m (默认: 0.325)
-    stop_time_buffer: 0.2  # 停止时间缓冲，单位：s (默认: 0.2)
+    stop_time_buffer: 0.3  # 停止时间缓冲，单位：s (默认: 0.2)
     scaling_speed: 0.25  # 缩放速度，单位：m/s (默认: 0.25)
     max_scaling_factor: 0.2  # 最大缩放因子 (默认: 0.2)
 
     # 振荡防止
-    oscillation_reset_dist: 0.05  # 振荡重置距离，单位：m (默认: 0.05)
-    oscillation_reset_angle: 0.2  # 振荡重置角度，单位：rad (默认: 0.2)
+    oscillation_reset_dist: 0.1  # 振荡重置距离，单位：m (默认: 0.05)
+    oscillation_reset_angle: 0.3  # 振荡重置角度，单位：rad (默认: 0.2)
 
     # 全局规划
     publish_traj_pc: true  # 是否发布轨迹点云 (默认: true)
     publish_cost_grid_pc: true  # 是否发布代价网格点云 (默认: false)
-    global_frame_id: "odom"  # 全局坐标系 (默认: "odom")
+    global_frame_id: "map"  # 全局坐标系 (默认: "odom")
 
     # 差速驱动配置
     holonomic_robot: false  # 是否为全向机器人 (默认: true)
 
     # 安全性
-    min_obstacle_dist: 0.3  # 最小障碍物距离，单位：m (默认: 0.1)
+    min_obstacle_dist: 0.35  # 最小障碍物距离，单位：m (默认: 0.1)
 
     # 额外的重要参数
-    yaw_goal_tolerance: 0.05  # 目标姿态角度容差，单位：rad (默认: 0.05)
-    trans_stopped_vel: 0.1  # 认为机器人停止的线速度阈值，单位：m/s (默认: 0.1)
+    yaw_goal_tolerance: 0.15  # 目标姿态角度容差，单位：rad (默认: 0.05)
+    trans_stopped_vel: 0.05  # 认为机器人停止的线速度阈值，单位：m/s (默认: 0.1)
     rot_stopped_vel: 0.1  # 认为机器人停止的角速度阈值，单位：rad/s (默认: 0.1)
     meter_scoring: true  # 是否使用米制单位进行评分 (默认: false)
     heading_lookahead: 0.325  # 前瞻距离，用于计算机器人朝向，单位：m (默认: 0.325)
-    heading_scoring: false  # 是否考虑机器人朝向进行评分 (默认: false)
+    heading_scoring: true  # 是否考虑机器人朝向进行评分 (默认: false)
     heading_scoring_timestep: 0.8  # 计算朝向得分时的时间步长，单位：s (默认: 0.8)
     dwa: true  # 是否使用DWA算法，false则使用传统轨迹rollout方法 (默认: true)
     simple_attractor: false  # 是否使用简单吸引子行为 (默认: false)
     publish_cost_grid_pc: true  # 是否发布成本网格点云 (默认: false)
 
     # 恢复行为参数
-    escape_reset_dist: 0.1  # 逃逸重置距离，单位：m (默认: 0.1)
-    escape_reset_theta: 0.1  # 逃逸重置角度，单位：rad (默认: 0.1)
+    escape_reset_dist: 0.2  # 逃逸重置距离，单位：m (默认: 0.1)
+    escape_reset_theta: 0.2  # 逃逸重置角度，单位：rad (默认: 0.1)
 
     # 可视化参数
     publish_traj_pc: true  # 是否发布轨迹点云 (默认: true)
     publish_cost_grid_pc: true  # 是否发布成本网格点云 (默认: false)
 
     # 控制频率
-    controller_frequency: 20.0  # 控制器更新频率，单位：Hz (默认: 20.0)
+    controller_frequency: 10.0  # 控制器更新频率，单位：Hz (默认: 20.0)
 
     # 以下是1.5 m/s和2.0 m/s的配置，默认注释掉
     # 1.5 m/s 配置
