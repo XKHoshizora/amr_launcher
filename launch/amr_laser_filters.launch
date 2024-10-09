@@ -1,26 +1,26 @@
 <launch>
-    <!-- 1. 启动激光雷达扫描点角度滤波器 scan_filter 节点 -->
-    <node pkg="amr_laser_filters" type="scan_filter" name="laser_angle_filter" output="screen">
-        <rosparam file="$(find amr_laser_filters)/config/laser_filter.yaml" />
-        <remap from="/scan" to="/scan"/> <!-- 原始激光雷达数据话题 -->
-        <remap from="/scan_filtered" to="/angle_filtered_scan"/> <!-- 角度过滤后的数据 -->
-    </node>
-
-    <!-- 2. 启动激光雷达中值滤波器节点 -->
+    <!-- 1. 启动激光雷达中值滤波器节点 -->
     <node pkg="amr_laser_filters" type="laser_median_filter" name="laser_median_filter" output="screen">
         <param name="window_size" value="5"/>
         <param name="max_range" value="30.0"/>
         <param name="min_range" value="0.05"/>
         <param name="max_angle" value="3.14"/>
         <param name="min_angle" value="-3.14"/>
-        <remap from="/scan" to="/angle_filtered_scan"/> <!-- 订阅角度过滤后的数据 -->
+        <remap from="/scan" to="/scan"/> <!-- 订阅角度过滤后的数据 -->
         <remap from="/median_scan" to="/median_filtered_scan"/> <!-- 发布中值过滤后的数据 -->
+    </node>
+    
+    <!-- 2. 启动激光雷达扫描点角度滤波器 scan_filter 节点 -->
+    <node pkg="amr_laser_filters" type="scan_filter" name="laser_angle_filter" output="screen">
+        <rosparam file="$(find amr_laser_filters)/config/laser_filter.yaml" />
+        <remap from="/scan" to="/median_filtered_scan"/> <!-- 原始激光雷达数据话题 -->
+        <remap from="/scan_filtered" to="/angle_filtered_scan"/> <!-- 角度过滤后的数据 -->
     </node>
 
     <!-- 3. 启动自适应激光数据压缩器节点 -->
     <node pkg="amr_laser_filters" type="adaptive_laser_compressor" name="adaptive_laser_compressor" output="screen">
         <param name="max_output_points" value="1440" />
-        <remap from="/scan" to="/median_filtered_scan" /> <!-- 订阅中值过滤后的数据 -->
+        <remap from="/scan" to="/angle_filtered_scan" /> <!-- 订阅中值过滤后的数据 -->
         <remap from="/compressed_scan" to="/filtered_scan" /> <!-- 发布最终压缩后的数据 -->
     </node>
 </launch>
