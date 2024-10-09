@@ -52,7 +52,7 @@ use_maximum: false  # 在合并多个代价地图层时是否使用最大值（�
 dwa_config: {
   obstacle_range: 10.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
   raytrace_range: 10.0,  # 清除空间的最大范围 [m]（默认值：3.0）
-  inflation_radius: 0.1,  # 障碍物膨胀半径 [m]（默认值：0.55）
+  inflation_radius: 0.2,  # 障碍物膨胀半径 [m]（默认值：0.55）
   cost_scaling_factor: 15.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0）
 }
 
@@ -60,7 +60,7 @@ dwa_config: {
 teb_config: {
   obstacle_range: 10.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
   raytrace_range: 10.0,  # 清除空间的最大范围 [m]（默认值：3.0）
-  inflation_radius: 0.1,  # 障碍物膨胀半径 [m]（默认值：0.55）
+  inflation_radius: 0.2,  # 障碍物膨胀半径 [m]（默认值：0.55）
   cost_scaling_factor: 15.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0）
 }
 
