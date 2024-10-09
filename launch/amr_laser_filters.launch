@@ -4,8 +4,6 @@
         <param name="window_size" value="5"/>
         <param name="max_range" value="30.0"/>
         <param name="min_range" value="0.05"/>
-        <param name="max_angle" value="3.14"/>
-        <param name="min_angle" value="-3.14"/>
         <remap from="/scan" to="/scan"/> <!-- 订阅角度过滤后的数据 -->
         <remap from="/median_scan" to="/median_filtered_scan"/> <!-- 发布中值过滤后的数据 -->
     </node>

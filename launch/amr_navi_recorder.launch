@@ -1,6 +1,8 @@
 <launch>
     <!-- 参数：模式选择 (record 或 play) -->
     <arg name="mode" default="record" />
+    <!-- 使用实际的时间 -->
+    <param name="/use_sim_time" value="false" />
 
     <!-- 记录模式 -->
     <group if="$(eval mode == 'record')">
