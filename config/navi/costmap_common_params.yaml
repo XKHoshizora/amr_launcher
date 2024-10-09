@@ -10,7 +10,7 @@ footprint: [
 footprint_padding: 0.05  # 为机器人轮廓添加的额外填充 [m]（默认值：0.01）
 
 # 地图分辨率
-transform_tolerance: 0.5  # TF 变换容忍时间 [s]（默认值：0.3）
+transform_tolerance: 2  # TF 变换容忍时间 [s]（默认值：0.3）
 resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
 
 # 地图类型和坐标系

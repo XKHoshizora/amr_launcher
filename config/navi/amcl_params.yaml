@@ -32,7 +32,7 @@ laser_likelihood_max_dist: 2.0  # 最大似然距离，单位：米 (默认: 2.0
 global_frame_id: "map"     # 全局坐标系 (默认: "map") - 保持默认值
 odom_frame_id: "odom"      # 里程计坐标系 (默认: "odom") - 保持默认值
 base_frame_id: "base_link" # 机器人基座坐标系 (默认: "base_link") - 保持默认值
-transform_tolerance: 0.5   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
+transform_tolerance: 2   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
 
 # 恢复参数
 recovery_alpha_slow: 0.0   # 慢速恢复参数 (默认: 0.0) - 增加以改善长期定位稳定性
