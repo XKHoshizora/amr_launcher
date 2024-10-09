@@ -3,19 +3,19 @@
     <arg name="mode" default="record" />
 
     <!-- 如果选择记录模式 -->
-    <group if="$(arg mode) == 'record'">
+    <if unless="$(arg mode) == play">
         <!-- 启动导航 -->
         <include file="$(find amr_launcher)/launch/amr_launch.launch.launch" />
 
         <!-- 记录 bag 文件，保存数据到指定路径 -->
         <node pkg="rosbag" type="record" name="navi_record" args="-O $(find amr_launcher)/data/navi_record.bag /scan /median_filtered_scan /angle_filtered_scan /filtered_scan /odom /tf /move_base/TrajectoryPlannerROS/global_plan /move_base/TrajectoryPlannerROS/local_plan /cmd_vel" />
-    </group>
+    </if>
 
     <!-- 如果选择回放模式 -->
-    <group if="$(arg mode) == 'play'">
+    <if unless="$(arg mode) == record">
         <!-- 回放之前记录的 bag 文件 -->
         <node pkg="rosbag" type="play" name="navi_playback" args="$(find amr_launcher)/data/navi_record.bag" />
-    </group>
+    </if>
 </launch>
 
 <!-- 记录自动导航过程： -->
