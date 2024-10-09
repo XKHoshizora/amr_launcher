@@ -3,3 +3,13 @@
     <arg name="filename" value="$(find amr_launcher)/map/amr_map" />
     <node name="map_saver" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
 </launch>
+
+<!-- YAML 文件内容说明： -->
+
+<!-- image: .pgm 文件路径 -->
+<!-- resolution: 地图分辨率 -->
+<!-- origin: [-30.000000, -30.000000, 0.000000] -->
+        <!-- 地图左下角像素的二维姿态，为 (x, y, yaw)，yaw 为逆时针旋转（yaw=0 表示不旋转） -->
+<!-- negate: 是否黑白反转 -->
+<!-- occupied_thresh: 占用阈值 -->
+<!-- free_thresh: 空闲阈值 -->

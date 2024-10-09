@@ -1,54 +1,75 @@
 # GMapping 参数配置
 slam_gmapping:
     # 激光雷达参数
-    scan_topic: "/scan"        # 激光雷达话题名
-    maxRange: 30.0             # RPLiDAR S2 的最大探测范围 30 米
-    maxUrange: 16.0            # 激光的最大可用范围，光束被裁剪至此值 16 米
-    sigma: 0.05                # 激光测距噪声标准差
-    lskip: 0                   # 跳过部分激光点，减少计算负担
+    scan_topic: "/scan"        # 激光雷达话题名 (默认: /scan)
+    maxRange: 30.0             # RPLiDAR S2 的最大探测范围 30 米 (默认: 无限制)
+    maxUrange: 30.0            # 激光的最大可用范围，光束被裁剪至此值 30 米 (默认: 无限制)
+    sigma: 0.05                # 激光测距噪声标准差 (默认: 0.05)
+    lskip: 0                   # 跳过部分激光点，减少计算负担 (默认: 0)
 
     # 坐标系参数
-    map_frame: "map"           # 地图坐标系
-    odom_frame: "odom"         # 里程计坐标系
-    base_frame: "base_link"    # 机器人底盘的坐标系
+    map_frame: "map"           # 地图坐标系 (默认: map)
+    odom_frame: "odom"         # 里程计坐标系 (默认: odom)
+    base_frame: "base_link"    # 机器人底盘的坐标系 (默认: base_link)
 
     # 地图更新和分辨率参数
-    map_update_interval: 1.0   # 地图更新间隔时间
-    throttle_scans: 5          # 每 5 次扫描处理一次
-    xmin: -100.0                # 地图最小范围 X 轴
-    ymin: -100.0                # 地图最小范围 Y 轴
-    xmax: 100.0                 # 地图最大范围 X 轴
-    ymax: 100.0                 # 地图最大范围 Y 轴
-    delta: 0.05                # 地图分辨率 5 cm
+    map_update_interval: 0.5   # 地图更新间隔时间 (默认: 5.0)
+    throttle_scans: 1          # 每 1 次扫描处理一次 (默认: 1)
+    xmin: -150.0               # 地图最小范围 X 轴 (默认: -100.0)
+    ymin: -100.0               # 地图最小范围 Y 轴 (默认: -100.0)
+    xmax: 150.0                # 地图最大范围 X 轴 (默认: 100.0)
+    ymax: 100.0                # 地图最大范围 Y 轴 (默认: 100.0)
+    delta: 0.05                # 地图分辨率 5 cm (默认: 0.05)
 
     # 粒子滤波器参数
-    particles: 50              # 粒子数量
-    resampleThreshold: 0.5     # 重采样阈值
+    particles: 50              # 粒子数量 (默认: 30)
+    resampleThreshold: 0.5     # 重采样阈值 (默认: 0.5)
 
     # 扫描匹配参数
-    lstep: 0.05                # 线性步长
-    astep: 0.05                # 角度步长
-    iterations: 5              # 最大迭代次数
-    kernelSize: 1              # 内核大小
+    lstep: 0.05                # 线性步长 (默认: 0.05)
+    astep: 0.05                # 角度步长 (默认: 0.05)
+    iterations: 5              # 最大迭代次数 (默认: 5)
+    kernelSize: 1              # 内核大小 (默认: 1)
 
     # 机器人运动噪声参数
-    srr: 0.02                  # 平移对平移的噪声
-    srt: 0.02                  # 平移对旋转的噪声
-    str: 0.01                  # 旋转对平移的噪声
-    stt: 0.02                  # 旋转对旋转的噪声
+    srr: 0.1                   # 平移对平移的噪声 (默认: 0.1)
+    srt: 0.2                   # 平移对旋转的噪声 (默认: 0.2)
+    str: 0.1                   # 旋转对平移的噪声 (默认: 0.1)
+    stt: 0.2                   # 旋转对旋转的噪声 (默认: 0.2)
 
     # 平移和旋转更新噪声参数
-    lsigma: 0.075              # 平移噪声
-    ogain: 3.0                 # 匹配权重增益
-    minimumScore: 50           # 最小得分要求
+    lsigma: 0.075              # 平移噪声 (默认: 0.075)
+    ogain: 3.0                 # 匹配权重增益 (默认: 3.0)
+    minimumScore: 50           # 最小得分要求 (默认: 0.0)
 
     # 机器人移动更新条件
-    linearUpdate: 0.5          # 机器人移动 0.5 米触发地图更新
-    angularUpdate: 0.35      # 机器人旋转约 20 度触发地图更新
-    temporalUpdate: -1.0       # 时间更新间隔设置为 -1 表示不强制时间更新
+    linearUpdate: 0.25         # 机器人移动 0.25 米触发地图更新 (默认: 1.0)
+    angularUpdate: 0.262       # 机器人旋转约 15 度触发地图更新 (默认: 0.5)
+    temporalUpdate: -1.0       # 时间更新间隔设置为 -1 表示不强制时间更新 (默认: -1.0)
 
     # 粒子滤波器采样参数
-    llsamplerange: 0.01        # 平移采样范围
-    llsamplestep: 0.01         # 平移采样步长
-    lasamplerange: 0.005       # 旋转采样范围
-    lasamplestep: 0.005        # 旋转采样步长
+    llsamplerange: 0.01        # 平移采样范围 (默认: 0.01)
+    llsamplestep: 0.01         # 平移采样步长 (默认: 0.01)
+    lasamplerange: 0.005       # 旋转采样范围 (默认: 0.005)
+    lasamplestep: 0.005        # 旋转采样步长 (默认: 0.005)
+
+    # 其他参数
+    transform_publish_period: 0.05  # 发布变换的周期 [s]
+    occ_thresh: 0.25           # 占据阈值
+    maxTreeDepth: 0            # 四叉树的最大深度（0表示无限制）
+
+    # 可选的速度配置（默认注释）
+    # 最大线速度 1.5 m/s 配置
+    # maxUrange: 25.0  # 减小最大可用范围以提高实时性
+    # linearUpdate: 0.3  # 略微增加更新频率
+    # particles: 40  # 略微减少粒子数以提高性能
+
+    # 最大线速度 2.0 m/s 配置
+    # maxUrange: 20.0  # 进一步减小最大可用范围
+    # linearUpdate: 0.35  # 进一步增加更新频率
+    # particles: 30  # 进一步减少粒子数
+    # iterations: 3  # 减少迭代次数以提高实时性
+
+    # 最大角速度配置
+    # angularUpdate: 0.2  # 约11.5度，适用于 90°/s
+    # angularUpdate: 0.175  # 约10度，适用于 120°/s

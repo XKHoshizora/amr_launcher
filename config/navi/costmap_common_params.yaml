@@ -1,11 +1,80 @@
-robot_radius: 0.25        # 机器人半径，因为现在用的是 polygon 模型，robot_radius不再适用
-inflation_radius: 0.3    # 膨胀半径，确保机器人在障碍物周围留出一定的安全距离
-obstacle_range: 10.0      # 激光雷达检测障碍物的最大距离为 10 米，确保检测到较远的障碍物
-raytrace_range: 10.0      # 激光雷达射线追踪的最大范围，保持与 obstacle_range 一致
-observation_sources: base_lidar  # 指定使用的观测源为激光雷达
-base_lidar: {             # 基于激光雷达的设置
-    data_type: LaserScan,   # 使用 LaserScan 类型数据
-    topic: /scan,           # 激光雷达数据话题
-    marking: true,          # 将障碍物标记到地图中
-    clearing: true          # 将清除激光雷达检测到的无障碍区域
+# 全局代价地图和局部代价地图的通用参数
+
+# 机器人描述
+footprint: [
+  [0.334, 0.289],   # 前左角
+  [0.334, -0.289],  # 前右角
+  [-0.334, -0.289], # 后右角
+  [-0.334, 0.289]   # 后左角
+]  # 默认值：[]（空数组，表示圆形机器人）
+footprint_padding: 0.05  # 为机器人轮廓添加的额外填充 [m]（默认值：0.01）
+
+# 地图分辨率
+transform_tolerance: 0.5  # TF 变换容忍时间 [s]（默认值：0.3）
+resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
+
+# 地图类型和坐标系
+map_type: costmap  # 使用代价地图（默认值：costmap）
+origin_x: 0.0  # 地图原点 X 坐标 [m]（默认值：0.0）
+origin_y: 0.0  # 地图原点 Y 坐标 [m]（默认值：0.0）
+origin_z: 0.0  # 地图原点 Z 坐标 [m]（默认值：0.0）
+
+# 代价值设置
+lethal_cost_threshold: 100  # 致命障碍物的代价阈值（默认值：100）
+unknown_cost_value: -1  # 未知区域的代价值（默认值：-1）
+
+# 障碍物参数
+max_obstacle_height: 0.6  # 考虑的最大障碍物高度 [m]（默认值：2.0）
+min_obstacle_height: 0.0  # 考虑的最小障碍物高度 [m]（默认值：0.0）
+
+# 传感器数据处理
+observation_sources: base_lidar  # 使用的传感器源（默认值：""）
+
+base_lidar: {
+  sensor_frame: laser,  # 激光雷达的坐标系（默认值：""）
+  data_type: LaserScan,  # 数据类型（默认值：LaserScan）
+  topic: /scan,  # 激光雷达数据的话题（默认值：""）
+  marking: true,  # 是否标记障碍物（默认值：true）
+  clearing: true,  # 是否清除空间（默认值：true）
+  expected_update_rate: 10.0,  # 预期的更新率 [Hz]（默认值：0.0，表示不检查更新率）
+  min_obstacle_height: 0.0,  # 考虑的最小障碍物高度 [m]（默认值：0.0）
+  max_obstacle_height: 0.5,  # 考虑的最大障碍物高度 [m]（默认值：2.0）
+}
+
+# 其他通用参数
+always_send_full_costmap: false  # 是否始终发送完整的代价地图（默认值：false）
+rolling_window: false  # 是否使用滚动窗口（默认值：false）
+track_unknown_space: true  # 是否跟踪未知空间（默认值：false）
+use_maximum: false  # 在合并多个代价地图层时是否使用最大值（默认值：false）
+
+# DWA 特定配置
+dwa_config: {
+  obstacle_range: 5.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
+  raytrace_range: 5.5,  # 清除空间的最大范围 [m]（默认值：3.0）
+  inflation_radius: 0.5,  # 障碍物膨胀半径 [m]（默认值：0.55）
+  cost_scaling_factor: 5.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0）
+}
+
+# TEB 特定配置
+teb_config: {
+  obstacle_range: 10.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
+  raytrace_range: 10.0,  # 清除空间的最大范围 [m]（默认值：3.0）
+  inflation_radius: 0.3,  # 障碍物膨胀半径 [m]（默认值：0.55）
+  cost_scaling_factor: 10.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0）
+}
+
+# 取消注释以下行之一来选择使用 DWA 或 TEB 配置
+use_dwa_config: true
+# use_teb_config: true
+
+# 根据选择的配置设置参数
+obstacle_range: ${use_dwa_config:=${dwa_config.obstacle_range}}${use_teb_config:=${teb_config.obstacle_range}}
+raytrace_range: ${use_dwa_config:=${dwa_config.raytrace_range}}${use_teb_config:=${teb_config.raytrace_range}}
+inflation_radius: ${use_dwa_config:=${dwa_config.inflation_radius}}${use_teb_config:=${teb_config.inflation_radius}}
+cost_scaling_factor: ${use_dwa_config:=${dwa_config.cost_scaling_factor}}${use_teb_config:=${teb_config.cost_scaling_factor}}
+
+# 更新激光雷达配置
+base_lidar: {
+  obstacle_range: ${obstacle_range},
+  raytrace_range: ${raytrace_range},
 }

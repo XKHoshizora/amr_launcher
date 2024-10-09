@@ -1,10 +1,24 @@
 local_costmap:
-    global_frame: odom          # 局部代价地图的参考坐标系为 odom
-    robot_base_frame: base_footprint  # 机器人的基准坐标系为 base_footprint
-    static_map: false           # 不使用静态地图，局部地图动态更新
-    rolling_window: true        # 使用滚动窗口，机器人移动时局部地图也随之更新
-    width: 2.5                  # 局部地图的宽度设置为 2.5 米，适合较小尺寸的 AMR
-    height: 2.5                 # 局部地图的高度设置为 2.5 米，确保在局部范围内足够的信息
-    update_frequency: 12.0       # 地图更新频率为 12 次每秒，确保局部地图实时更新
-    publish_frequency: 12.0      # 地图发布频率为 12 次每秒，保持与更新频率一致
-    transform_tolerance: 1.0     # TF转换的容忍时间为 1 秒，防止延迟影响控制效果
+  global_frame: odom  # 局部代价地图的参考坐标系（默认值：odom）
+  robot_base_frame: base_footprint  # 机器人的基准坐标系（默认值：base_link）
+  update_frequency: 12.0  # 地图更新频率 [Hz]（默认值：5.0）
+  publish_frequency: 12.0  # 地图发布频率 [Hz]（默认值：0.0）
+  static_map: false  # 不使用静态地图（默认值：true）
+  rolling_window: true  # 使用滚动窗口（默认值：false）
+  width: 2.5  # 局部地图的宽度 [m]（默认值：10.0）
+  height: 2.5  # 局部地图的高度 [m]（默认值：10.0）
+  resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
+  transform_tolerance: 1.0  # TF转换的容忍时间 [s]（默认值：0.3）
+  plugins:
+    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+  # 障碍物层参数
+  obstacle_layer:
+    observation_sources: base_lidar
+    base_lidar: {sensor_frame: laser, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+
+  # 膨胀层参数
+  inflation_layer:
+    inflation_radius: 0.5  # 膨胀半径 [m]（默认值：0.55）
+    cost_scaling_factor: 5.0  # 代价缩放因子（默认值：10.0）

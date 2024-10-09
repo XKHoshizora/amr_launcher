@@ -2,7 +2,7 @@
     <arg name="com" default="/dev/om_controller"/>
     <arg name="topicID" default="1"/>
     <arg name="baudrate" default="230400"/>
-    <arg name="updateRate" default="20"/>
+    <arg name="updateRate" default="20"/> <!-- 里程计数据的更新和发布频率,默认为20Hz。 -->
     <arg name="firstGen" default="" doc="description for this ary"/>
     <arg name="secondGen" default="1," doc="description for this ary"/>
     <arg name="globalID" default="-1"/>
@@ -18,6 +18,6 @@
         <param name="global_id" type="str" value="$(arg globalID)"/>
         <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
-    
+
     <node name="amr_ros_node" pkg="om_modbus_master" type="amr_ros_node" />
 </launch>
