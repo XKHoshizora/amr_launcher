@@ -11,7 +11,7 @@ global_costmap:
     # 代价地图插件配置
     plugins:
         - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
-        - {name: obstacles, type: "costmap_2d::VoxelLayer"} # 障碍物图层，负责动态障碍物检测
+        - {name: obstacles, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
         - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，用于增加障碍物的安全边界
 
     # 恢复行为配置
