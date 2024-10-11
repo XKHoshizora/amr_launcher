@@ -29,7 +29,7 @@ laser_lambda_short: 0.1    # 短距离测量的指数衰减参数 (默认: 0.1) 
 laser_likelihood_max_dist: 2.0  # 最大似然距离，单位：米 (默认: 2.0) - 保持默认值，适应工厂环境
 
 # 全局定位参数
-# global_frame_id: "map"     # 全局坐标系 (默认: "map") - 保持默认值
+global_frame_id: "map"     # 全局坐标系 (默认: "map") - 保持默认值
 odom_frame_id: "odom"      # 里程计坐标系 (默认: "odom") - 保持默认值
 base_frame_id: "base_link" # 机器人基座坐标系 (默认: "base_link") - 保持默认值
 transform_tolerance: 2.0   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
