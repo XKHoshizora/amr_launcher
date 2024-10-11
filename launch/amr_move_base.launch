@@ -31,7 +31,7 @@
         <!-- 自定义局部规划器 -->
 
         <!-- 控制器频率 -->
-        <param name="controller_frequency" value="5" type="double" />
+        <param name="controller_frequency" value="5.0" type="double" />
     </node>
 
 </launch>
