@@ -1,24 +1,17 @@
 local_costmap:
-  global_frame: map  # 局部代价地图的参考坐标系（默认值：odom）
-  robot_base_frame: base_footprint  # 机器人的基准坐标系（默认值：base_link）
-  update_frequency: 5.0  # 地图更新频率 [Hz]（默认值：5.0）
-  publish_frequency: 5.0  # 地图发布频率 [Hz]（默认值：0.0）
-  # static_map: false  # 不使用静态地图（默认值：true）
-  rolling_window: true  # 使用滚动窗口（默认值：false）
-  width: 3.0  # 局部地图的宽度 [m]（默认值：10.0）
-  height: 3.0  # 局部地图的高度 [m]（默认值：10.0）
-  resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
-  transform_tolerance: 2.0  # TF转换的容忍时间 [s]（默认值：0.3）
-  plugins:
-    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
-    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+    global_frame: odom  # 局部代价地图的参考坐标系（默认值：odom）
+    robot_base_frame: base_footprint  # 机器人的基准坐标系（默认值：base_link）
+    
+    update_frequency: 10.0  # 地图更新频率 [Hz]（默认值：5.0）
+    publish_frequency: 10.0  # 地图发布频率 [Hz]（默认值：0.0）
+    transform_tolerance: 1.0  # TF转换的容忍时间 [s]（默认值：0.3）
 
-  # 障碍物层参数
-  obstacle_layer:
-    observation_sources: base_lidar
-    base_lidar: {sensor_frame: laser, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+    static_map: false  # 不使用静态地图（默认值：true）
+    rolling_window: true  # 使用滚动窗口（默认值：false），保持机器人在当前局部地图的中心
+    width: 3.0  # 局部地图的宽度 [m]（默认值：10.0）
+    height: 3.0  # 局部地图的高度 [m]（默认值：10.0）
+    resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
 
-  # 膨胀层参数
-  inflation_layer:
-    inflation_radius: 0.5  # 膨胀半径 [m]（默认值：0.55）
-    cost_scaling_factor: 5.0  # 代价缩放因子（默认值：10.0）
+    plugins:
+        - {name: obstacle_layer,      type: "costmap_2d::ObstacleLayer"}  # 障碍物图层，用于动态检测障碍物
+        - {name: inflation_layer,     type: "costmap_2d::InflationLayer"} # 膨胀图层，增加障碍物的安全边界

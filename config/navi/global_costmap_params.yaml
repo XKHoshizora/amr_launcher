@@ -1,26 +1,32 @@
 global_costmap:
-  global_frame: map  # 全局代价地图的参考坐标系（默认值：map）
-  robot_base_frame: base_footprint  # 机器人的基准坐标系（默认值：base_link）
-  update_frequency: 5.0  # 地图更新频率 [Hz]（默认值：5.0）
-  publish_frequency: 1.0  # 地图发布频率 [Hz]（默认值：0.0）
-  # static_map: true  # 是否使用静态地图（默认值：true）
-  transform_tolerance: 2.0  # TF转换的容忍时间 [s]（默认值：0.3）
-  plugins:
-    - {name: static_layer, type: "costmap_2d::StaticLayer"}
-    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
-    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
-  
-  # 静态层参数
-  static_layer:
-    map_topic: /map  # 静态地图话题（默认值：map）
-    subscribe_to_updates: false  # 是否订阅地图更新（默认值：false）
+    global_frame: map  # 全局代价地图的参考坐标系（默认值：map）
+    robot_base_frame: base_footprint  # 机器人的基准坐标系（默认值：base_link）
 
-  # 障碍物层参数
-  obstacle_layer:
-    observation_sources: base_lidar
-    base_lidar: {sensor_frame: laser, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+    update_frequency: 5.0  # 地图更新频率 [Hz]（默认值：5.0）
+    publish_frequency: 5.0  # 地图发布频率 [Hz]（默认值：0.0）
+    transform_tolerance: 1.0  # TF转换的容忍时间 [s]（默认值：0.3）
 
-  # 膨胀层参数
-  inflation_layer:
-    inflation_radius: 0.5  # 膨胀半径 [m]（默认值：0.55）
-    cost_scaling_factor: 5.0  # 代价缩放因子（默认值：10.0）
+    static_map: true  # 是否使用静态地图（默认值：true）
+
+    # 代价地图插件配置
+    plugins:
+        - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
+        - {name: obstacles, type: "costmap_2d::VoxelLayer"} # 障碍物图层，负责动态障碍物检测
+        - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，用于增加障碍物的安全边界
+
+    # 恢复行为配置
+    recovery_behaviors:
+        - name: 'conservative_reset'
+            type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 保守重置行为，清除代价地图
+        - name: 'rotate_recovery'
+            type: 'rotate_recovery/RotateRecovery'               # 旋转恢复行为，机器人原地旋转以摆脱困境
+        - name: 'aggressive_reset'
+            type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 激进重置行为，用于彻底清除代价地图
+
+    conservative_reset:
+        reset_distance: 0.668          # 保守重置距离调小为0.668米，更适合狭窄区域或细小障碍物的清除
+        # layer_names: ["obstacle"]  # 针对障碍物层进行重置
+
+    aggressive_reset:
+        reset_distance: 0.0          # 激进重置时完全清除代价地图的障碍物层
+        # layer_names: ["obstacle"]

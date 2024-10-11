@@ -1,5 +1,5 @@
 <launch>
-    <!-- 导入 amcl 参数文件 -->
+    <!-- 导入 AMCL 参数文件 -->
     <rosparam file="$(find amr_launcher)/config/navi/amcl_params.yaml" command="load" />
 
     <!-- 启动 AMCL 节点 -->
