@@ -7,11 +7,12 @@ local_costmap:
     transform_tolerance: 2.0  # TF转换的容忍时间 [s]（默认值：0.3）
 
     static_map: false  # 不使用静态地图（默认值：true），该参数已经弃用
+    map_type: costmap
     rolling_window: true  # 使用滚动窗口（默认值：false），保持机器人在当前局部地图的中心
     width: 3.0  # 局部地图的宽度 [m]（默认值：10.0）
     height: 3.0  # 局部地图的高度 [m]（默认值：10.0）
     resolution: 0.05  # 地图分辨率 [m/cell]（默认值：0.05）
 
-    plugins:
-        - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}  # 障碍物图层，用于动态检测障碍物
-        - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，增加障碍物的安全边界
+    # plugins:
+    #     - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}  # 障碍物图层，用于动态检测障碍物
+    #     - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，增加障碍物的安全边界
