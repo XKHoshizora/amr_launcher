@@ -16,7 +16,7 @@ inflation_radius: 0.578,  # 障碍物膨胀半径 [m]（默认值：0.55）
 cost_scaling_factor: 3.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价
 
 # 地图类型
-map_type: costmap  # 使用代价地图（默认值：costmap）
+# map_type: costmap  # 使用代价地图（默认值：costmap），该参数已经弃用
 
 # 传感器数据处理
 observation_sources: base_lidar  # 使用的传感器源（默认值：""）
