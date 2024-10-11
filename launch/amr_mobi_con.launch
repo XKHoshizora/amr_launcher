@@ -2,7 +2,7 @@
     <arg name="com" default="/dev/om_controller"/>
     <arg name="topicID" default="1"/>
     <arg name="baudrate" default="230400"/>
-    <arg name="updateRate" default="20"/> <!-- 里程计数据的更新和发布频率,默认为20Hz。 -->
+    <arg name="updateRate" default="10"/> <!-- 里程计数据的更新和发布频率,默认为10Hz。 -->
     <arg name="firstGen" default="" doc="description for this ary"/>
     <arg name="secondGen" default="1," doc="description for this ary"/>
     <arg name="globalID" default="-1"/>
