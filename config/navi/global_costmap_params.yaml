@@ -11,7 +11,7 @@ global_costmap:
     # 代价地图插件配置
     plugins:
         - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
-        - {name: obstacles, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
+        - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
         - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，用于增加障碍物的安全边界
 
     # 恢复行为配置
@@ -25,8 +25,8 @@ global_costmap:
 
     conservative_reset:
         reset_distance: 0.668          # 保守重置距离调小为0.668米，更适合狭窄区域或细小障碍物的清除
-        # layer_names: ["obstacle"]  # 针对障碍物层进行重置
+        layer_names: ["obstacle_layer"]  # 针对障碍物层进行重置
 
     aggressive_reset:
         reset_distance: 0.0          # 激进重置时完全清除代价地图的障碍物层
-        # layer_names: ["obstacle"]
+        layer_names: ["obstacle_layer"]
