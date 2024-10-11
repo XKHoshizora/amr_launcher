@@ -10,7 +10,7 @@ slam_gmapping:
     # 坐标系参数
     map_frame: "map"           # 地图坐标系 (默认: map)
     odom_frame: "odom"         # 里程计坐标系 (默认: odom)
-    base_frame: "base_footprint"    # 机器人底盘的坐标系 (默认: base_link)
+    base_frame: "base_link"    # 机器人底盘的坐标系 (默认: base_link)
 
     # 地图更新和分辨率参数
     map_update_interval: 0.5   # 地图更新间隔时间 (默认: 5.0)
