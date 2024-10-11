@@ -40,7 +40,7 @@ DWAPlannerROS:
     oscillation_reset_dist: 0.1  # 振荡重置距离，单位：m (默认: 0.05)
 
     # 控制频率
-    controller_frequency: 20.0  # 控制器更新频率，单位：Hz (默认: 20.0)
+    controller_frequency: 10.0  # 控制器更新频率，单位：Hz (默认: 20.0)
 
     # 辅助调试选项
     publish_traj_pc : true      # 是否在 RViz 里发布轨迹
