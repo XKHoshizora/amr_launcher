@@ -14,9 +14,6 @@
     <!-- om_modbusRTU_node & om_ros_node -->
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
 
-    <!-- IMU -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_imu.launch"/> -->
-
     <!-- SLAM -->
     <!-- GMapping -->
     <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
