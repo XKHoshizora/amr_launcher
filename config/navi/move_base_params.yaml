@@ -1,0 +1,41 @@
+# 与move_base一起使用的全局规划器插件的名称
+base_global_planner: "global_planner/GlobalPlanner"       # str，默认值：“navfn/NavfnROS”
+
+# 与move_base一起使用的本地规划器插件的名称
+base_local_planner: "dwa_local_planner/DWAPlannerROS"     # str，默认值："base_local_planner/TrajectoryPlannerROS"
+
+# 运行全局规划循环的速率（以 Hz 为单位）如果频率设置为 0.0，则全局规划器仅在收到新目标或本地规划器报告其路径受阻时运行
+planner_frequency: 2.0      # double，默认值：0.0
+
+# 在执行空间清理操作之前，规划器将等待多长时间（以秒为单位)来尝试找到有效计划
+planner_patience: 1.0       # double，默认值：5.0
+
+# 运行控制回路并向基站发送速度命令的速率（以赫兹为单位）
+controller_frequency: 5.0   # double，默认值：20.0
+
+# 在执行空间清理操作之前，控制器未收到有效控制将等待的时间（秒)
+controller_patience: 1.0    # double，默认值：15.0
+
+# 确定当move_base处于非活动状态时是否关闭节点的 costmaps
+shutdown_costmaps: false    # bool，默认值：false
+
+# 在执行恢复行为之前允许振荡的时间（以秒为单位） 0.0 表示无限超时
+oscillation_timeout: 10.0   # double，默认值：0.0
+
+# 机器人必须移动多远（以米为单位）才被认为不会振荡移动这么远会重置计时器，直到计数到oscillation_timeout
+oscillation_distance: 0.2   # double，默认值：0.5
+
+# 与move_base一起使用的恢复行为插件列表
+# recovery_behaviors: # list，默认：[{名称：conservative_reset，类型：clear_costmap_recovery/ClearCostmapRecovery}，{名称：rotate_recovery，类型：rotate_recovery/RotateRecovery}，{名称：aggressive_reset，类型：clear_costmap_recovery/ClearCostmapRecovery}]
+
+# 距离机器人的距离（以米为单位），当尝试清除地图中的空间时，超过此距离的障碍物将从代价地图中清除。
+# conservative_reset_dist: # double，默认值：3.0，此参数仅在对move_base使用默认恢复行为时使用
+
+# 是否启用move_base恢复行为来尝试清除空间
+# recovery_behavior_enabled: # bool，默认值：true
+
+# 确定机器人在尝试清理空间时是否尝试原地旋转
+# clearing_rotation_allowed: # bool，默认值：true，此参数仅在使用默认恢复行为时使用，这意味着用户未将recovery_behaviors参数设置为任何自定义内容
+
+# 执行恢复行为之前允许计划重试的次数值 -1.0 表示无限次重试
+# max_planning_retries: # int32_t，默认值： -1 

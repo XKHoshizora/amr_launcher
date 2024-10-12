@@ -22,7 +22,7 @@
         <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
     </include>
     <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
-    <include file="$(find amr_launcher)/launch/amr_amcl_diff.launch">
+    <include file="$(find amr_launcher)/launch/amr_amcl.launch">
         <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
         <!-- <rosparam param="/amcl/gui_publish_rate" value="10.0"/> -->
     </include>

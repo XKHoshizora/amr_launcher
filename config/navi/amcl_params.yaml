@@ -1,9 +1,9 @@
 # AMCL 参数配置文件
 
 # 基本设置
-max_particles: 500        # 最大粒子数 (默认: 5000) - 增加以提高定位精度
-min_particles: 100         # 最小粒子数 (默认: 100) - 增加以保持足够的采样
-kld_err: 0.01              # KLD采样误差 (默认: 0.01) - 保持默认值以平衡精度和效率
+max_particles: 3000        # 最大粒子数 (默认: 5000) - 增加以提高定位精度
+min_particles: 500         # 最小粒子数 (默认: 100) - 增加以保持足够的采样
+kld_err: 0.02              # KLD采样误差 (默认: 0.01) - 保持默认值以平衡精度和效率
 kld_z: 0.99                # KLD采样置信度 (默认: 0.99) - 保持高置信度
 
 # 更新阈值
@@ -19,6 +19,7 @@ odom_alpha4: 0.2           # 旋转运动引起的平移误差 (默认: 0.2) - �
 odom_alpha5: 0.1           # 平移误差 (默认: 0.2) - 略微降低以反映较好的里程计性能
 
 # 激光扫描参数
+scan_topic: "scan"  # 使用中值滤波后的激光雷达数据话题（默认: scan）
 laser_max_beams: 180       # 每次扫描使用的最大激光束数 (默认: 30) - 增加以提高精度，但不超过硬件限制
 laser_z_hit: 0.5          # "hit"的权重 (默认: 0.95) - 保持高权重以重视有效匹配
 laser_z_short: 0.05        # "short"的权重 (默认: 0.1) - 降低以减少短距离测量的影响
@@ -31,7 +32,7 @@ laser_likelihood_max_dist: 2.0  # 最大似然距离，单位：米 (默认: 2.0
 # 全局定位参数
 global_frame_id: "map"     # 全局坐标系 (默认: "map") - 保持默认值
 odom_frame_id: "odom"      # 里程计坐标系 (默认: "odom") - 保持默认值
-base_frame_id: "base_link" # 机器人基座坐标系 (默认: "base_link") - 保持默认值
+base_frame_id: "base_footprint" # 机器人基座坐标系 (默认: "base_link") - 保持默认值
 transform_tolerance: 2.0   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
 
 # 恢复参数
@@ -47,7 +48,7 @@ initial_cov_yy: 0.25       # Y 方向初始协方差 (默认: 0.25) - 保持默�
 initial_cov_aa: 0.068      # 角度初始协方差 (默认: 0.068) - 保持默认值
 
 # 其他参数
-gui_publish_rate: 20     # GUI 发布率，单位：Hz (默认: -1.0) - 设置适当值以减少计算负担
+gui_publish_rate: 50     # GUI 发布率，单位：Hz (默认: -1.0) - 设置适当值以减少计算负担
 save_pose_rate: 0.5        # 保存姿态的频率，单位：Hz (默认: 0.5) - 保持默认值
 use_map_topic: false       # 是否使用地图话题 (默认: false) - 保持默认值
 first_map_only: false      # 是否只使用第一次接收到的地图 (默认: false) - 保持默认值

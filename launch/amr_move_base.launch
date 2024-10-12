@@ -1,37 +1,46 @@
 <launch>
 
+    <!-- 导入 move_base 参数文件 -->
+    <rosparam file="$(find amr_launcher)/config/navi/move_base_params.yaml" command="load"/>
+
+    <arg name="scan_topic" default="/filtered_scan"/>
+    <arg name="cmd_vel_topic" default="/cmd_vel"/>
+    <arg name="odom_topic" default="odom"/>
+
     <!-- move_base -->
-    <node name="move_base" pkg="move_base" type="move_base">
-        <rosparam file="$(find amr_launcher)/config/navi/costmap_common_params.yaml" command="load" ns="global_costmap" />
-        <rosparam file="$(find amr_launcher)/config/navi/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find amr_launcher)/config/navi/global_costmap_params.yaml" command="load" />
-        <rosparam file="$(find amr_launcher)/config/navi/local_costmap_params.yaml" command="load" />
+    <node name="move_base" pkg="move_base" type="move_base" output="screen">
+        <rosparam file="$(find amr_launcher)/config/navi/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+        <rosparam file="$(find amr_launcher)/config/navi/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+        <rosparam file="$(find amr_launcher)/config/navi/global_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find amr_launcher)/config/navi/local_costmap_params.yaml" command="load"/>
 
         <!-- <remap> 用于话题、服务和动作的重映射 -->
-        <remap from="/scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
+        <remap from="/scan" to="$(arg scan_topic)"/> <!-- 使用过滤后的激光雷达数据 -->
+        <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+        <remap from="odom" to="$(arg odom_topic)"/>
 
         <!-- 使用 GlobalPlanner 作为全局规划器 -->
-        <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+        <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
         <!-- GlobalPlanner 的默认算法为 Dijkstra，若要切换为 A*，则需要设置以下 2 个参数 -->
-        <param name="global_costmap/GlobalPlanner/use_dijkstra" value="false" />
-        <param name="global_costmap/GlobalPlanner/use_grid_path" value="true" />
+        <param name="global_costmap/GlobalPlanner/use_dijkstra" value="false"/>
+        <param name="global_costmap/GlobalPlanner/use_grid_path" value="true"/>
 
         <!-- 自定义全局规划器 -->
         
         <!-- 以下为 2 种局部规划器 -->
 
         <!-- DWA Planner -->
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-        <rosparam file="$(find amr_launcher)/config/navi/dwa_local_planner_params.yaml" command="load" />
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+        <rosparam file="$(find amr_launcher)/config/navi/dwa_local_planner_params.yaml" command="load"/>
 
         <!-- TEB Planner -->
-        <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> -->
-        <!-- <rosparam file="$(find amr_launcher)/config/navi/teb_local_planner_params.yaml" command="load" /> -->
+        <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/> -->
+        <!-- <rosparam file="$(find amr_launcher)/config/navi/teb_local_planner_params.yaml" command="load"/> -->
 
         <!-- 自定义局部规划器 -->
 
         <!-- 控制器频率 -->
-        <param name="controller_frequency" value="5.0" type="double" />
+        <param name="controller_frequency" value="5.0" type="double"/>
     </node>
 
 </launch>
