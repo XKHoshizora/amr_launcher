@@ -45,7 +45,7 @@ DWAPlannerROS:
     # 辅助调试选项
     publish_traj_pc : true      # 是否在 RViz 里发布轨迹
     publish_cost_grid_pc: true  # 是否在 RViz 里发布代价网格
-    global_frame_id: odom       # 基础坐标系
+    global_frame_id: odom     # 基础坐标系
 
     # 以下是1.5 m/s和2.0 m/s的配置，默认注释掉
     # 1.5 m/s 配置
