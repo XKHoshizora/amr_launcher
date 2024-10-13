@@ -2,15 +2,15 @@
 slam_gmapping:
     # 激光雷达参数
     scan_topic: "/scan"        # 激光雷达话题名 (默认: /scan)
-    maxRange: 0.0             # RPLiDAR S2 的最大探测范围 30 米 (默认: 无限制)
-    maxUrange: 0.0            # 激光的最大可用范围，光束被裁剪至此值 30 米 (默认: 无限制)
+    maxRange: 30.0             # RPLiDAR S2 的最大探测范围 30 米 (默认: 无限制)
+    maxUrange: 30.0            # 激光的最大可用范围，光束被裁剪至此值 30 米 (默认: 无限制)
     sigma: 0.05                # 激光测距噪声标准差 (默认: 0.05)
     lskip: 0                   # 跳过部分激光点，减少计算负担 (默认: 0)
 
     # 坐标系参数
     map_frame: "map"           # 地图坐标系 (默认: map)
     odom_frame: "odom"         # 里程计坐标系 (默认: odom)
-    base_frame: "base_footprint"    # 机器人底盘的坐标系 (默认: base_footprint)
+    base_frame: "base_link"    # 机器人底盘的坐标系 (默认: base_link)
 
     # 地图更新和分辨率参数
     map_update_interval: 5.0   # 地图更新间隔时间 (默认: 5.0)
