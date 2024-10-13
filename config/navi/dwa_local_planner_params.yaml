@@ -37,7 +37,7 @@ DWAPlannerROS:
     max_scaling_factor: 0.2  # 最大缩放因子 (默认: 0.2)
 
     # 振荡防止
-    oscillation_reset_dist: 0.1  # 振荡重置距离，单位：m (默认: 0.05)
+    oscillation_reset_dist: 0.2  # 振荡重置距离，单位：m (默认: 0.05)
 
     # 控制频率
     controller_frequency: 20.0  # 控制器更新频率，单位：Hz (默认: 20.0)
