@@ -54,6 +54,9 @@ DWAPlannerROS:
     # Global Planner
     prune_plan: true  # 定义机器人沿路径移动时是否吃掉计划。如果设置为 true，则机器人越过这些点 1 米后，这些点将从计划末尾掉落。
 
+    # 差分驱动机器人配置
+    holonomic_robot: false      # 差速驱动机器人，不具备全向移动能力
+
     # 以下是1.5 m/s和2.0 m/s的配置，默认注释掉
     # 1.5 m/s 配置
     # max_vel_x: 1.5
