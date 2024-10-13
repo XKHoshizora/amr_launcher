@@ -17,17 +17,19 @@
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
 
     <!-- Navigation -->
+    <!-- move_base -->
     <include file="$(find amr_launcher)/launch/amr_move_base.launch">
         <!-- 参数配置 -->
         <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
     </include>
+
+    <!-- 地图加载 -->
     <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
-    <include file="$(find amr_launcher)/launch/amr_amcl.launch">
-        <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
-        <!-- <rosparam param="/amcl/gui_publish_rate" value="10.0"/> -->
-    </include>
-    <!-- <include file="$(find amr_launcher)/launch/amr_navi_server.launch"/> -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_navi_aids.launch"/> -->
+
+    <!-- AMCL 定位 -->
+    <include file="$(find amr_launcher)/launch/amr_amcl.launch"/>
+    <!-- 可使用 lidar_loc 替换 AMCL 节点 -->
+    <include file="$(find amr_launcher)/launch/amr_lidar_loc.launch"/>
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
@@ -35,4 +37,7 @@
     <!-- RViz -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/navi.rviz" />
 
+    <!-- 航标设置与连续导航 -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_navi_server.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/amr_navi_aids.launch"/> -->
 </launch>
