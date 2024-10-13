@@ -1,6 +1,6 @@
 local_costmap:
     global_frame: odom  # 局部代价地图的参考坐标系（默认值：odom）
-    robot_base_frame: base_footprint  # 机器人的基准坐标系（默认值：base_link）
+    robot_base_frame: base_link  # 机器人的基准坐标系（默认值：base_link）
     
     update_frequency: 10.0  # 地图更新频率 [Hz]（默认值：5.0）
     publish_frequency: 5.0  # 地图发布频率 [Hz]（默认值：0.0）
