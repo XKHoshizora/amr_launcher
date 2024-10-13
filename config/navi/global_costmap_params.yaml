@@ -6,13 +6,13 @@ global_costmap:
     publish_frequency: 2.0  # 地图发布频率 [Hz]（默认值：0.0）
     transform_tolerance: 2.0  # TF转换的容忍时间 [s]（默认值：0.3）
 
-    static_map: true  # 是否使用静态地图（默认值：true），该参数已经弃用
+    # static_map: true  # 是否使用静态地图（默认值：true），该参数已经弃用
 
     # 代价地图插件配置
-    # plugins:
-        # - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
-        # - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
-        # - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，用于增加障碍物的安全边界
+    plugins:
+        - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
+        - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
+        - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，用于增加障碍物的安全边界
 
     # 恢复行为配置
     recovery_behaviors:
