@@ -20,9 +20,6 @@
         <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
 
-    <!-- 里程计节点 -->
-    <node name="amr_odom_to_ros" pkg="om_modbus_master" type="amr_odom_to_ros" />
-
-    <!-- 速度命令节点 -->
-    <!-- <node name="cmd_vel_to_amr" pkg="om_modbus_master" type="cmd_vel_to_amr" /> -->
+    <!-- 里程计接收与发布 速度命令接收与发送 节点 -->
+    <node name="amr_ros_node" pkg="om_modbus_master" type="amr_ros_node" />
 </launch>
