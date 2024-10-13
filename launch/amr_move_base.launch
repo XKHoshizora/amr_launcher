@@ -3,7 +3,7 @@
     <!-- 导入 move_base 参数文件 -->
     <rosparam file="$(find amr_launcher)/config/navi/move_base_params.yaml" command="load"/>
 
-    <arg name="scan_topic" default="/filtered_scan"/>
+    <arg name="scan_topic" default="/angle_filtered_scan"/>
     <arg name="cmd_vel_topic" default="/cmd_vel"/>
     <arg name="odom_topic" default="/odom"/>
 
@@ -22,8 +22,8 @@
         <!-- 使用 GlobalPlanner 作为全局规划器 -->
         <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
         <!-- GlobalPlanner 的默认算法为 Dijkstra，若要切换为 A*，则需要设置以下 2 个参数 -->
-        <param name="global_costmap/GlobalPlanner/use_dijkstra" value="false"/>
-        <param name="global_costmap/GlobalPlanner/use_grid_path" value="true"/>
+        <!-- <param name="global_costmap/GlobalPlanner/use_dijkstra" value="false"/> -->
+        <!-- <param name="global_costmap/GlobalPlanner/use_grid_path" value="true"/> -->
 
         <!-- 自定义全局规划器 -->
         
