@@ -24,5 +24,5 @@
     <node name="amr_odom_to_ros" pkg="om_modbus_master" type="amr_odom_to_ros" />
 
     <!-- 速度命令节点 -->
-    <node name="cmd_vel_to_amr" pkg="om_modbus_master" type="cmd_vel_to_amr" />
+    <!-- <node name="cmd_vel_to_amr" pkg="om_modbus_master" type="cmd_vel_to_amr" /> -->
 </launch>
