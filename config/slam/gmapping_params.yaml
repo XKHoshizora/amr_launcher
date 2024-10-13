@@ -13,7 +13,7 @@ slam_gmapping:
     base_frame: "base_link"    # 机器人底盘的坐标系 (默认: base_link)
 
     # 地图更新和分辨率参数
-    map_update_interval: 5.0   # 地图更新间隔时间 (默认: 5.0)
+    map_update_interval: 3.0   # 地图更新间隔时间 (默认: 5.0)
     throttle_scans: 1          # 每 1 次扫描处理一次 (默认: 1)
     xmin: -30.0                # 地图最小范围 X 轴 (默认: -100.0)
     ymin: -30.0                # 地图最小范围 Y 轴 (默认: -100.0)
@@ -40,7 +40,7 @@ slam_gmapping:
     # 平移和旋转更新噪声参数
     lsigma: 0.075              # 平移噪声 (默认: 0.075)
     ogain: 3.0                 # 匹配权重增益 (默认: 3.0)
-    minimumScore: 0.0          # 最小得分要求 (默认: 0.0)
+    minimumScore: 100.0        # 最小得分要求 (默认: 0.0)
 
     # 机器人移动更新条件
     linearUpdate: 0.3         # 机器人移动 0.25 米触发地图更新 (默认: 1.0)
