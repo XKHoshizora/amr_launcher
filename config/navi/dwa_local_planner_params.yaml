@@ -16,8 +16,8 @@ DWAPlannerROS:
     acc_lim_th: 1.0      # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 目标容差
-    xy_goal_tolerance: 0.2   # 到达目标点的XY平面容差，单位：m (默认: 0.1)
-    yaw_goal_tolerance: 0.1  # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
+    xy_goal_tolerance: 0.2       # 到达目标点的XY平面容差，单位：m (默认: 0.1)
+    yaw_goal_tolerance: 0.17     # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
     latch_xy_goal_tolerance: false  # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
