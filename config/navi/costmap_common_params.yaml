@@ -13,7 +13,7 @@ footprint: [
 
 # 膨胀层参数
 inflation_radius: 0.2,  # 障碍物膨胀半径 [m]（默认值：0.55）
-cost_scaling_factor: 10.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价
+cost_scaling_factor: 15.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价
 
 # 地图类型
 # map_type: costmap  # 使用代价地图（默认值：costmap），该参数已经弃用
