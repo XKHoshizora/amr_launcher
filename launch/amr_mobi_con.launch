@@ -8,6 +8,7 @@
     <arg name="globalID" default="-1"/>
     <arg name="axisNum" default="1" />
 
+    <!-- 主控节点 -->
     <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
         <param name="init_com" type="str" value="$(arg com)"/>
         <param name="init_topicID" type="str" value="$(arg topicID)"/>
@@ -19,5 +20,9 @@
         <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
 
-    <node name="amr_odom_node" pkg="om_modbus_master" type="amr_odom_node" />
+    <!-- 里程计节点 -->
+    <node name="amr_odom_to_ros" pkg="om_modbus_master" type="amr_odom_to_ros" />
+
+    <!-- 速度命令节点 -->
+    <node name="cmd_vel_to_amr" pkg="om_modbus_master" type="cmd_vel_to_amr" />
 </launch>
