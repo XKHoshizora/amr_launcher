@@ -1,6 +1,6 @@
 DWAPlannerROS:
     # 机器人配置参数
-    max_vel_x: 2.0  # 最大 X 方向速度，单位：m/s (默认: 0.55)
+    max_vel_x: 0.5  # 最大 X 方向速度，单位：m/s (默认: 0.55)
     min_vel_x: 0.0  # 最小 X 方向速度（设为负数则允许后退），单位：m/s (默认: 0.0)
     acc_lim_x: 1.0  # X 方向加速度限制，单位：m/s^2 (默认: 2.5)
 
@@ -9,15 +9,15 @@ DWAPlannerROS:
     acc_lim_y: 0.0  # Y 方向加速度限制，单位：m/s^2 (默认: 2.5)
 
     max_vel_trans: 2.0  # 最大平移速度，单位：m/s (默认: 0.55)
-    min_vel_trans: 0.2  # 最小平移速度，单位：m/s (默认: 0.1)
+    min_vel_trans: 0.1  # 最小平移速度，单位：m/s (默认: 0.1)
 
-    max_vel_theta: 1.0  # 最大旋转速度，单位：rad/s (默认: 1.0)
-    min_vel_theta: 0.4  # 最小旋转速度，单位：rad/s (默认: 0.4)
-    acc_lim_th: 0.6  # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
+    max_vel_theta: 1.0   # 最大旋转速度，单位：rad/s (默认: 1.0)
+    min_vel_theta: -1.0  # 最小旋转速度，单位：rad/s (默认: 0.4)
+    acc_lim_th: 1.0      # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 目标容差
-    xy_goal_tolerance: 0.15  # 到达目标点的XY平面容差，单位：m (默认: 0.1)
-    yaw_goal_tolerance: 0.15  # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
+    xy_goal_tolerance: 0.2   # 到达目标点的XY平面容差，单位：m (默认: 0.1)
+    yaw_goal_tolerance: 0.1  # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
     latch_xy_goal_tolerance: false  # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
