@@ -1,4 +1,5 @@
 <launch>
+    <!-- <arg name="com" default="/dev/ttyUSB0"/> -->
     <arg name="com" default="/dev/om_controller"/>
     <arg name="topicID" default="1"/>
     <arg name="baudrate" default="230400"/>
