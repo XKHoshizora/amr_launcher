@@ -11,11 +11,11 @@ TebLocalPlannerROS:
     ]
 
   # 机器人配置参数
-  max_vel_x: 0.5  # 最大前进速度 [m/s] (默认: 0.4)
+  max_vel_x: 1.0  # 最大前进速度 [m/s] (默认: 0.4)
   max_vel_x_backwards: 0.2  # 最大后退速度 [m/s] (默认: 0.2)
-  max_vel_theta: 0.3  # 最大旋转速度 [rad/s] (默认: 0.3)
-  acc_lim_x: 0.5  # 最大前进加速度 [m/s^2] (默认: 0.5)
-  acc_lim_theta: 0.5  # 最大角加速度 [rad/s^2] (默认: 0.5)
+  max_vel_theta: 1.0  # 最大旋转速度 [rad/s] (默认: 0.3)
+  acc_lim_x: 0.3  # 最大前进加速度 [m/s^2] (默认: 0.5)
+  acc_lim_theta: 0.3  # 最大角加速度 [rad/s^2] (默认: 0.5)
   min_turning_radius: 0.0  # 最小转弯半径，0表示能够原地旋转 [m] (默认: 0.0)
   wheelbase: 0.4643  # 轮距 [m] (默认: 1.0)
   cmd_angle_instead_rotvel: false  # 使用角速度命令 (默认: false)
@@ -35,7 +35,7 @@ TebLocalPlannerROS:
   shrink_horizon_min_duration: 10.0  # 最小收缩时间 [s] (默认: 10.0)
 
   # 障碍物参数
-  min_obstacle_dist: 0.2  # 与障碍物的最小距离 [m] (默认: 0.5)
+  min_obstacle_dist: 0.3  # 与障碍物的最小距离 [m] (默认: 0.5)
   include_costmap_obstacles: True  # 是否包含代价地图障碍物 (默认: True)
   costmap_obstacles_behind_robot_dist: 1.0  # 考虑机器人后方多远的障碍物 [m] (默认: 1.0)
   obstacle_poses_affected: 30  # 每个障碍物影响的姿态数 (默认: 30)
@@ -90,3 +90,15 @@ TebLocalPlannerROS:
   # 恢复行为
   shrink_horizon_backup: true  # 在失败时缩小规划范围 (默认: true)
   oscillation_recovery: true  # 检测和恢复振荡 (默认: true)
+
+# 1.5 m/s 配置（注释掉）
+#  max_vel_x: 1.5
+#  acc_lim_x: 0.7
+#  max_vel_theta: 1.5
+#  acc_lim_theta: 0.7
+
+# 2.0 m/s 配置（注释掉）
+#  max_vel_x: 2.0
+#  acc_lim_x: 1.0
+#  max_vel_theta: 2.0
+#  acc_lim_theta: 1.0

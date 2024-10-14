@@ -33,7 +33,7 @@ laser_likelihood_max_dist: 2.0  # 最大似然距离，单位：米 (默认: 2.0
 global_frame_id: "map"     # 全局坐标系 (默认: "map") - 保持默认值
 odom_frame_id: "odom"      # 里程计坐标系 (默认: "odom") - 保持默认值
 base_frame_id: "base_footprint" # 机器人基座坐标系 (默认: "base_link") - 保持默认值
-transform_tolerance: 0.3   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
+transform_tolerance: 2.0   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
 
 # 恢复参数
 recovery_alpha_slow: 0.0   # 慢速恢复参数 (默认: 0.0) - 增加以改善长期定位稳定性
@@ -61,7 +61,7 @@ global_localization_min_d: 0.5  # 全局定位最小距离，单位：米 (默�
 global_localization_min_a: 0.5  # 全局定位最小角度，单位：弧度 (默认: 0.5) - 保持默认值
 
 # 重采样参数
-resample_interval: 1       # 重采样间隔 (默认: 2) - 降低以增加重采样频率，提高响应性
+resample_interval: 2       # 重采样间隔 (默认: 2) - 降低以增加重采样频率，提高响应性
 
 # 选择性重采样
 selective_resampling: false  # 是否使用选择性重采样 (默认: false) - 保持默认值
