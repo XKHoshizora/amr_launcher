@@ -27,9 +27,9 @@
     <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
 
     <!-- AMCL 定位 -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_amcl.launch"/> -->
+    <include file="$(find amr_launcher)/launch/amr_amcl.launch"/>
     <!-- 用于替换 AMCL 定位的 lidar_loc 节点 -->
-    <include file="$(find amr_launcher)/launch/amr_lidar_loc.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_lidar_loc.launch"/> -->
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
