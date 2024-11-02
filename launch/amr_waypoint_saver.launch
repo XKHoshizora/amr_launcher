@@ -1,0 +1,10 @@
+<!-- 导航点文件 -->
+<launch>
+
+    <!-- 航点信息文件保存路径 -->
+    <arg name="waypoint_file" value="$(find amr_launcher)/waypoint/waypoint.xml"/>
+
+    <!-- 航点保存 -->
+    <node pkg="waterplus_map_tools" type="wp_saver" name="amr_waypoint_saver" args="-f $(arg waypoint_file)" output="screen"/>
+
+</launch>
