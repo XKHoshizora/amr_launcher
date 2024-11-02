@@ -2,7 +2,7 @@
     <!-- 启动 RPLiDAR S2 节点 -->
     <node name="rplidar_node" pkg="rplidar_ros" type="rplidarNode" output="screen">
         <!-- RPLiDAR 的串口配置 -->
-        <!-- <param name="serial_port" type="string" value="/dev/ttyUSB0"/> -->  <!-- 修改为实际的设备端口 -->
+        <!-- <param name="serial_port" type="string" value="/dev/ttyUSB0"/> -->
         <param name="serial_port" type="string" value="/dev/rplidar"/>
         <param name="serial_baudrate" type="int" value="1000000"/>  <!-- 默认波特率，1M bps -->
 
