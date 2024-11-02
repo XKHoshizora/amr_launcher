@@ -1,6 +1,0 @@
-<launch>
-
-    <!-- wp_manager -->
-    <node name="wp_manager" pkg="waterplus_map_tools" type="wp_manager" output="screen" />
-
-</launch>
