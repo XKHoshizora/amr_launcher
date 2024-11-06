@@ -12,6 +12,7 @@ include "trajectory_builder.lua"
 --    - 精度：±30mm
 --    - 距离分辨率：13mm
 -- 2. 使用轮式里程计
+--    - 数据发布频率：20Hz
 -- 3. 暂未使用IMU
 -- 4. 不使用GPS
 --------------------------------------------------
@@ -53,14 +54,14 @@ options = {
   -- 由于激光10Hz的扫描频率，适当调整发布周期
   lookup_transform_timeout_sec = 0.2,
   submap_publish_period_sec = 0.3,
-  pose_publish_period_sec = 5e-3,  -- 200Hz，可以考虑改为0.02-0.05（20-50Hz）减少计算负担
-  trajectory_publish_period_sec = 30e-3,
+  pose_publish_period_sec = 5e-2,  -- 200Hz，可以考虑改为0.02-0.05（20-50Hz）减少计算负担
+  trajectory_publish_period_sec = 5e-2,
 
   --------------------------------------------------
   -- 5. 传感器数据采样比例配置
   --------------------------------------------------
   rangefinder_sampling_ratio = 1.,  -- 由于扫描频率较低，保持完整采样
-  odometry_sampling_ratio = 1.,
+  odometry_sampling_ratio = 0.5,
   fixed_frame_pose_sampling_ratio = 1.,
   imu_sampling_ratio = 1.,
   landmarks_sampling_ratio = 1.,
@@ -76,7 +77,7 @@ MAP_BUILDER.num_background_threads = 4
 -- 7. 2D SLAM前端配置
 --------------------------------------------------
 -- 在进行扫描匹配之前需要累积的激光雷达扫描帧数
--- TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 2
+TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 10
 -- 子地图参数，每个子图使用多少帧数据构建
 TRAJECTORY_BUILDER_2D.submaps.num_range_data = 35
 -- 考虑到13mm的距离分辨率，可设置较小的栅格分辨率（>13mm），默认为0.05m
@@ -103,8 +104,8 @@ TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.rotation_delta_cost_wei
 
 -- 由于激光精度较高，提高优化权重
 -- TRAJECTORY_BUILDER_2D.ceres_scan_matcher.occupied_space_weight = 2.0
-TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 20.
-TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 50.
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 10.  -- 平移权重
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 40.     -- 旋转权重
 
 -- voxel滤波参数，根据距离分辨率设置
 -- TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.025  -- 25mm的体素大小
@@ -114,20 +115,18 @@ TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 50.
 --------------------------------------------------
 -- 考虑到10Hz的扫描频率，适当调整优化频率
 POSE_GRAPH.optimize_every_n_nodes = 35
--- POSE_GRAPH.constraint_builder.sampling_ratio = 0.3
-POSE_GRAPH.constraint_builder.min_score = 0.65
+-- POSE_GRAPH.constraint_builder.sampling_ratio = 0.3  -- 采样率
+POSE_GRAPH.constraint_builder.min_score = 0.65      -- 匹配阈值
 -- POSE_GRAPH.constraint_builder.global_localization_min_score = 0.7
 -- POSE_GRAPH.constraint_builder.max_constraint_distance = 30.0
 
--- 由于激光精度较高，提高优化权重
-POSE_GRAPH.optimization_problem.huber_scale = 1e2
--- POSE_GRAPH.optimization_problem.acceleration_weight = 1e2
--- POSE_GRAPH.optimization_problem.rotation_weight = 1e2
--- -- 提高局部SLAM权重，因为前向数据更可靠
--- POSE_GRAPH.optimization_problem.local_slam_pose_translation_weight = 1e2
--- POSE_GRAPH.optimization_problem.local_slam_pose_rotation_weight = 1e2
--- -- 适当降低里程计权重
--- POSE_GRAPH.optimization_problem.odometry_translation_weight = 1e2
--- POSE_GRAPH.optimization_problem.odometry_rotation_weight = 1e2
+-- 平衡各项优化权重
+POSE_GRAPH.optimization_problem.huber_scale = 1e2   -- 优化器的鲁棒性核函数尺度
+-- POSE_GRAPH.optimization_problem.acceleration_weight = 1e1
+-- POSE_GRAPH.optimization_problem.rotation_weight = 1e1
+-- POSE_GRAPH.optimization_problem.local_slam_pose_translation_weight = 1e1
+-- POSE_GRAPH.optimization_problem.local_slam_pose_rotation_weight = 1e1
+-- POSE_GRAPH.optimization_problem.odometry_translation_weight = 1e1
+-- POSE_GRAPH.optimization_problem.odometry_rotation_weight = 1e1
 
 return options
