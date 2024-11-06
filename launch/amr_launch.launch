@@ -20,8 +20,8 @@
     <!-- Map Server -->
     <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
     <!-- AMCL or lidar_loc-->
-    <!-- <include file="$(find amr_launcher)/launch/amr_amcl.launch"/> -->
-    <include file="$(find amr_launcher)/launch/amr_lidar_loc.launch"/>
+    <include file="$(find amr_launcher)/launch/amr_amcl.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_lidar_loc.launch"/> -->
     <!-- move_base -->
     <include file="$(find amr_launcher)/launch/amr_move_base.launch"/>
 
