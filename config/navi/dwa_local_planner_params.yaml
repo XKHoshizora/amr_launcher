@@ -1,6 +1,6 @@
 DWAPlannerROS:
     # 机器人配置参数
-    max_vel_x: 0.5   # 最大 X 方向速度，单位：m/s (默认: 0.55)
+    max_vel_x: 2.0   # 最大 X 方向速度，单位：m/s (默认: 0.55)
     min_vel_x: 0.0   # 最小 X 方向速度（设为负数则允许后退），单位：m/s (默认: 0.0)
     acc_lim_x: 2.5   # X 方向加速度限制，单位：m/s^2 (默认: 2.5)
 
@@ -36,8 +36,8 @@ DWAPlannerROS:
     #     path_distance_bias * (distance to path from the endpoint of the trajectory in meters)
     #     + goal_distance_bias * (distance to local goal from the endpoint of the trajectory in meters)
     #     + occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
-    path_distance_bias: 32.0  # 沿全局路径的偏向权重 (默认: 32.0)
-    goal_distance_bias: 24.0  # 朝向目标点的偏向权重 (默认: 24.0)
+    path_distance_bias: 20.0  # 沿全局路径的偏向权重 (默认: 32.0)
+    goal_distance_bias: 30.0  # 朝向目标点的偏向权重 (默认: 24.0)
     occdist_scale: 0.01  # # 障碍物距离的缩放因子 (默认: 0.01)
     forward_point_distance: 0.334  # 前向点距离，单位：m (默认: 0.325)
     stop_time_buffer: 0.2  # 停止时间缓冲，单位：s (默认: 0.2)
