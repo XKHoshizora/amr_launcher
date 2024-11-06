@@ -15,13 +15,13 @@
         <!-- 话题重映射 -->
         <remap from="scan" to="/angle_filtered_scan" />
         <remap from="odom" to="/odom" />
-        <!-- <remap from="imu" to="/imu" /> -->
+        <remap from="imu" to="/imu" />
     </node>
 
     <!-- 启动 Cartographer 的 Occupancy Grid 地图服务 -->
     <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" output="screen">
         <param name="resolution" value="0.05"/> <!-- 地图分辨率，可以根据需要调整 -->
-        <param name="publish_period_sec" value="1.0"/> <!-- 发布地图消息的时间间隔 -->
+        <param name="publish_period_sec" value="0.5"/> <!-- 发布地图消息的时间间隔 -->
     </node>
 
 </launch>
