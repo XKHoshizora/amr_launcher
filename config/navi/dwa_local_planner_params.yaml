@@ -22,7 +22,7 @@ DWAPlannerROS:
     # 目标容差
     yaw_goal_tolerance: 0.2     # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
     xy_goal_tolerance: 0.15       # 到达目标点的XY平面容差，单位：m (默认: 0.1)
-    latch_xy_goal_tolerance: false  # 是否锁定XY目标容差 (默认: false)
+    latch_xy_goal_tolerance: true  # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
     sim_time: 1.7  # 前向模拟时间，单位：s (默认: 1.7)
