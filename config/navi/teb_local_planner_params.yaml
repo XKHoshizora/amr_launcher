@@ -58,7 +58,7 @@ TebLocalPlannerROS:
   weight_obstacle: 50 # 与障碍物保持距离的权重
 
   # 多线规划
-  enable_homotopy_class_planning: True # 激活多线规划
+  enable_homotopy_class_planning: False # 激活多线规划
   enable_multithreading: True # 多线程计算
   max_number_classes: 2 # 规划的路径线数上限
   selection_cost_hysteresis: 1.0 # 路径轨迹入选的评价上限
