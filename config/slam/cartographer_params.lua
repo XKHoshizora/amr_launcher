@@ -53,7 +53,7 @@ options = {
   -- 由于激光10Hz的扫描频率，适当调整发布周期
   lookup_transform_timeout_sec = 0.2,
   submap_publish_period_sec = 0.3,
-  pose_publish_period_sec = 5e-3,  -- 200Hz，可以考虑改为0.02-0.05（20-50Hz）减少计算负担
+  pose_publish_period_sec = 5e-2,  -- 200Hz，可以考虑改为0.02-0.05（20-50Hz）减少计算负担
   trajectory_publish_period_sec = 30e-3,
 
   --------------------------------------------------
