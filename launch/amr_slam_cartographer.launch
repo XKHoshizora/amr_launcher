@@ -1,15 +1,25 @@
 <launch>
+
     <!-- 使用实际的时间 -->
     <param name="/use_sim_time" value="false" />
 
+    <!-- 设置配置文件路径 -->
+    <arg name="config_dir" value="$(find amr_launcher)/config" />
+    <arg name="config_file" value="cartographer_params.lua" />
+
     <!-- 启动 Cartographer -->
-    <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" output="screen" args="-configuration_directory /home/jetson/amr_ws/amr_launcher/config
-              -configuration_basename amr_slam_cartographer.lua">
-        <!-- Remap topics to match your laser scan topic -->
-        <remap from="scan" to="rplidar_scan" />
+    <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" output="screen"
+          args="-configuration_directory $(arg config_dir) -configuration_basename $(arg config_file)">
+        <!-- 话题重映射 -->
+        <remap from="scan" to="/angle_filtered_scan" />
+        <remap from="odom" to="/odom" />
+        <remap from="imu" to="/imu" />
     </node>
 
-    <!-- 启动 Occupancy Grid 地图服务 -->
-    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+    <!-- 启动 Cartographer 的 Occupancy Grid 地图服务 -->
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" output="screen">
+        <param name="resolution" value="0.05"/> <!-- 地图分辨率，可以根据需要调整 -->
+        <param name="publish_period_sec" value="1.0"/> <!-- 发布地图消息的时间间隔 -->
+    </node>
 
 </launch>

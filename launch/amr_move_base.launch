@@ -26,8 +26,8 @@
         <!-- <param name="global_costmap/GlobalPlanner/use_grid_path" value="true"/> -->
 
         <!-- 自定义全局规划器 -->
-        
-        <!-- 以下为 2 种局部规划器 -->
+
+        <!-- 局部规划器 -->
 
         <!-- DWA Planner -->
         <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>

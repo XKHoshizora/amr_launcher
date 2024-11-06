@@ -1,0 +1,10 @@
+<!-- 将 Cartographer 生成的 .pbstream 格式地图文件转换为 ROS 标准格式的栅格地图（Occupancy Grid） -->
+<launch>
+    <!-- 设置 .pbstream 文件路径和输出地图文件名 -->
+    <arg name="pbstream_file" default="$(find amr_launcher)/map/amr_map.pbstream" />
+    <arg name="map_output" default="$(find amr_launcher)/map/amr_map" />
+
+    <!-- 使用 cartographer_pbstream_to_ros_map 工具转换地图 -->
+    <node name="pbstream_to_map" pkg="cartographer_ros" type="cartographer_pbstream_to_ros_map" output="screen"
+          args="-pbstream_filename $(arg pbstream_file) -map_filename $(arg map_output)" />
+</launch>

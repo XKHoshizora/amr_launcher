@@ -1,7 +1,7 @@
 <launch>
     <!-- 使用实际的时间 -->
     <param name="/use_sim_time" value="false" />
-    
+
     <!-- 载入机器人模型 -->
     <include file="$(find amr_launcher)/launch/amr_description.launch"/>
 
@@ -16,11 +16,11 @@
 
     <!-- SLAM -->
     <!-- GMapping -->
-    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/> -->
     <!-- Hector -->
     <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
     <!-- Cartographer -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
+    <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/>
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
