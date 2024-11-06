@@ -30,12 +30,12 @@
         <!-- 局部规划器 -->
 
         <!-- DWA Planner -->
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
-        <rosparam file="$(find amr_launcher)/config/navi/dwa_local_planner_params.yaml" command="load"/>
+        <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
+        <!-- <rosparam file="$(find amr_launcher)/config/navi/dwa_local_planner_params.yaml" command="load"/> -->
 
         <!-- TEB Planner -->
-        <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/> -->
-        <!-- <rosparam file="$(find amr_launcher)/config/navi/teb_local_planner_params.yaml" command="load"/> -->
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>
+        <rosparam file="$(find amr_launcher)/config/navi/teb_local_planner_params.yaml" command="load"/>
 
         <!-- 自定义局部规划器 -->
 

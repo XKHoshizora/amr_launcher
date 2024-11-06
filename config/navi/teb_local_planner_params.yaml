@@ -1,104 +1,117 @@
 TebLocalPlannerROS:
+  # 注释前的 "~" 代表该参数常被修改，其余参数可保持默认值
 
-  # 车体轮廓
-  footprint_model:      # 使用多边形来拟合机器人形状，反映真实的长方体轮廓
-    type: "polygon"     # 选择多边形类型
-    vertices: [         # 使用顶点定义机器人的长方体形状
-      [0.334, 0.289],   # 前左角 (66.8 cm 长, 57.8 cm 宽 的一半)
-      [0.334, -0.289],  # 前右角
-      [-0.334, -0.289], # 后右角
-      [-0.334, 0.289]   # 后左角
+  # Robot Configuration Parameters (机器人配置参数)
+  acc_lim_x: 1.0                      # ~机器人的最大x方向加速度 (默认: 0.5 m/s^2)
+  acc_lim_theta: 2.0                  # ~机器人的最大角加速度 (默认: 0.5 rad/s^2)
+  max_vel_x: 2.0                      # ~机器人的最大x方向速度 (默认: 0.4 m/s)
+  max_vel_x_backwards: 0.1            # ~机器人的最大后退速度 (默认: 0.2 m/s)
+  max_vel_theta: 2.0                  # ~机器人的最大角速度 (默认: 0.3 rad/s)
+
+  # 以下参数仅适用于阿克曼/类车型机器人
+  min_turning_radius: 0.0             # ~最小转弯半径，差速驱动机器人设为0 (默认: 0.0 m)
+  wheelbase: 0.4643                   # ~前后轮轴距，后轮驱动为负值 (默认: 1.0 m)
+  cmd_angle_instead_rotvel: false     # 是否将转向角替代旋转速度 (默认: false)
+
+  # 以下参数仅适用于全向机器人
+  max_vel_y: 0.0                      # ~机器人的最大y方向速度，非全向机器人设为0 (默认: 0.0 m/s)
+  acc_lim_y: 0.0                      # ~机器人的最大y方向加速度 (默认: 0.5 m/s^2)
+
+  # Robot Footprint Model (机器人足迹模型)
+  # footprint_model:
+  #   type: "point"                     # 足迹模型类型：point, circular, line, two_circles, polygon (默认: "point")
+  #   radius: 0.2                       # 圆形足迹的半径 (默认: 0.2 m)
+  #   line_start: [-0.3, 0.0]          # 线段足迹的起点坐标 [x, y] (默认: [-0.3, 0.0])
+  #   line_end: [0.3, 0.0]             # 线段足迹的终点坐标 [x, y] (默认: [0.3, 0.0])
+  #   front_offset: 0.2                 # 双圆模型前圆中心的x偏移量 (默认: 0.2 m)
+  #   front_radius: 0.2                 # 双圆模型前圆的半径 (默认: 0.2 m)
+  #   rear_offset: 0.2                  # 双圆模型后圆中心的x偏移量 (默认: 0.2 m)
+  #   rear_radius: 0.2                  # 双圆模型后圆的半径 (默认: 0.2 m)
+  #   vertices: [[0.25, -0.05]]        # 多边形足迹的顶点坐标列表 (默认: [[0.25, -0.05]])
+  footprint_model:               # ~使用多边形来拟合机器人形状，反映真实的长方体轮廓
+    type: "polygon"              # 选择多边形类型
+    vertices: [                  # 使用顶点定义机器人的长方体形状
+      [0.334, 0.289],            # 前左角 (66.8 cm 长, 57.8 cm 宽 的一半)
+      [0.334, -0.289],           # 前右角
+      [-0.334, -0.289],          # 后右角
+      [-0.334, 0.289]            # 后左角
     ]
+  is_footprint_dynamic: false    # 是否动态更新足迹 (默认: false)
 
-  # 机器人配置参数
-  max_vel_x: 1.0  # 最大前进速度 [m/s] (默认: 0.4)
-  max_vel_x_backwards: 0.2  # 最大后退速度 [m/s] (默认: 0.2)
-  max_vel_theta: 1.0  # 最大旋转速度 [rad/s] (默认: 0.3)
-  acc_lim_x: 0.3  # 最大前进加速度 [m/s^2] (默认: 0.5)
-  acc_lim_theta: 0.3  # 最大角加速度 [rad/s^2] (默认: 0.5)
-  min_turning_radius: 0.0  # 最小转弯半径，0表示能够原地旋转 [m] (默认: 0.0)
-  wheelbase: 0.4643  # 轮距 [m] (默认: 1.0)
-  cmd_angle_instead_rotvel: false  # 使用角速度命令 (默认: false)
+  # Goal Tolerance Parameters (目标容差参数)
+  xy_goal_tolerance: 0.15             # ~到达目标点的xy平面容差 (默认: 0.2 m)
+  yaw_goal_tolerance: 0.2             # ~到达目标点的偏航角容差 (默认: 0.2 rad)
+  free_goal_vel: false                # ~到达目标点时是否允许非零速度 (默认: false)
 
-  # 轨迹配置
-  teb_autosize: True  # 自动调整轨迹大小 (默认: True)
-  dt_ref: 0.3  # 期望的轨迹时间分辨率 [s] (默认: 0.3)
-  dt_hysteresis: 0.1  # 时间分辨率的滞后 [s] (默认: 0.1)
-  global_plan_overwrite_orientation: True  # 覆盖全局规划的方向 (默认: True)
-  max_global_plan_lookahead_dist: 3.0  # 考虑全局规划的最大前瞻距离 [m] (默认: 3.0)
-  force_reinit_new_goal_dist: 1.0  # 强制重新初始化的新目标距离 [m] (默认: 1.0)
-  feasibility_check_no_poses: 2  # 每隔多少个姿态检查一次可行性 (默认: 4)
-  publish_feedback: false  # 是否发布反馈信息 (默认: false)
-  shrink_horizon_backup: true  # 在计算问题出现时允许缩小范围 (默认: true)
-  allow_init_with_backwards_motion: false  # 允许后退初始化 (默认: false)
-  exact_arc_length: false  # 精确计算弧长 (默认: false)
-  shrink_horizon_min_duration: 10.0  # 最小收缩时间 [s] (默认: 10.0)
+  # Trajectory Configuration Parameters (轨迹配置参数)
+  teb_autosize: true                  # ~轨迹是否自动调整大小以适应机器人运动 (默认: true)
+  dt_ref: 0.3                         # ~轨迹时间分辨率参考值 (默认: 0.3 s)
+  dt_hysteresis: 0.1                  # ~轨迹时间分辨率滞后值 (默认: 0.1 s)
+  min_samples: 3                      # 最小轨迹采样点数 (默认: 3)
+  global_plan_overwrite_orientation: true  # ~是否覆盖全局路径的方向 (默认: true)
+  global_plan_viapoint_sep: -0.1      # 参考路径的最小分辨率，负值表示禁用 (默认: -0.1 m)
+  max_global_plan_lookahead_dist: 3.0  # ~考虑优化的全局路径最大长度 (默认: 3.0 m)
+  force_reinit_new_goal_dist: 1.0     # 重新初始化轨迹的目标点距离阈值 (默认: 1.0 m)
+  feasibility_check_no_poses: 4       # ~每个采样间隔检查可行性的姿态数 (默认: 4)
+  publish_feedback: false             # 是否发布规划器反馈信息 (默认: false)
+  shrink_horizon_backup: true         # 是否允许临时缩小规划范围 (默认: true)
+  allow_init_with_backwards_motion: false  # 是否允许向后运动初始化轨迹 (默认: false)
+  exact_arc_length: false             # 是否使用精确弧长计算 (默认: false)
+  shrink_horizon_min_duration: 10.0    # 缩小规划范围的最小持续时间 (默认: 10.0 s)
 
-  # 障碍物参数
-  min_obstacle_dist: 0.3  # 与障碍物的最小距离 [m] (默认: 0.5)
-  include_costmap_obstacles: True  # 是否包含代价地图障碍物 (默认: True)
-  costmap_obstacles_behind_robot_dist: 1.0  # 考虑机器人后方多远的障碍物 [m] (默认: 1.0)
-  obstacle_poses_affected: 30  # 每个障碍物影响的姿态数 (默认: 30)
-  inflation_dist: 0.6  # 障碍物膨胀距离 [m] (默认: 0.6)
-  include_dynamic_obstacles: true  # 是否考虑动态障碍物 (默认: false)
-  dynamic_obstacle_inflation_dist: 0.6  # 动态障碍物膨胀距离 [m] (默认: 0.6)
-  legacy_obstacle_association: false  # 使用旧版障碍物关联 (默认: false)
-  obstacle_association_force_inclusion_factor: 1.5  # 强制包含因子 (默认: 1.5)
-  obstacle_association_cutoff_factor: 5.0  # 障碍物关联截断因子 (默认: 5.0)
+  # Obstacle Parameters (障碍物参数)
+  min_obstacle_dist: 0.2              # ~与障碍物的最小期望间距 (默认: 0.5 m)
+  include_costmap_obstacles: true     # ~是否包含代价地图障碍物 (默认: true)
+  costmap_obstacles_behind_robot_dist: 1.0  # ~考虑机器人后方障碍物的距离 (默认: 1.0 m)
+  obstacle_poses_affected: 30         # ~每个障碍物影响的轨迹姿态数 (范围: 0~30，默认: 30)
+  inflation_dist: 0.6                 # 障碍物膨胀距离 (默认: 0.6 m)
+  include_dynamic_obstacles: false     # 是否考虑动态障碍物 (默认: false)
+  legacy_obstacle_association: false   # 是否使用旧版障碍物关联策略 (默认: false)
+  obstacle_association_force_inclusion_factor: 1.5  # 强制考虑障碍物的距离因子 (默认: 1.5)
+  obstacle_association_cutoff_factor: 5.0  # 障碍物关联的截断因子 (默认: 5.0)
+  costmap_converter_plugin: ""        # 代价地图转换插件名称 (默认: "")
+  costmap_converter_spin_thread: true  # 代价地图转换是否使用独立线程 (默认: true)
+  costmap_converter_rate: 5.0         # ~代价地图转换频率 (默认: 5.0 Hz)
 
-  # 优化参数
-  no_inner_iterations: 5  # 每次外循环的内部迭代次数 (默认: 5)
-  no_outer_iterations: 4  # 外循环迭代次数 (默认: 4)
-  optimization_activate: True  # 激活优化 (默认: True)
-  optimization_verbose: False  # 优化过程是否详细输出 (默认: False)
-  penalty_epsilon: 0.1  # 添加到惩罚函数的小常数 (默认: 0.1)
-  weight_max_vel_x: 2.0  # 最大速度目标的权重 (默认: 2.0)
-  weight_max_vel_theta: 1.0  # 最大角速度目标的权重 (默认: 1.0)
-  weight_acc_lim_x: 1.0  # 加速度限制的权重 (默认: 1.0)
-  weight_acc_lim_theta: 1.0  # 角加速度限制的权重 (默认: 1.0)
-  weight_kinematics_nh: 1000.0  # 非完整运动学约束的权重 (默认: 1000.0)
-  weight_kinematics_forward_drive: 1.0  # 向前行驶的权重 (默认: 1.0)
-  weight_kinematics_turning_radius: 1.0  # 转弯半径的权重 (默认: 1.0)
-  weight_optimaltime: 1.0  # 时间优化的权重 (默认: 1.0)
-  weight_obstacle: 50.0  # 障碍物权重 (默认: 50.0)
-  weight_dynamic_obstacle: 50.0  # 动态障碍物权重 (默认: 50.0)
-  weight_viapoint: 1.0  # 经由点权重 (默认: 1.0)
-  weight_adapt_factor: 2.0  # 自适应因子的权重 (默认: 2.0)
+  # Optimization Parameters (优化参数)
+  no_inner_iterations: 5              # ~内循环迭代次数 (默认: 5)
+  no_outer_iterations: 4              # ~外循环迭代次数 (默认: 4)
+  optimization_activate: true         # ~是否激活优化 (默认: true)
+  optimization_verbose: false         # ~是否输出优化详细信息 (默认: false)
+  penalty_epsilon: 0.1                # ~软约束惩罚函数epsilon (默认: 0.1)
+  weight_max_vel_x: 1.0               # ~最大 x 速度约束权重 (范围: 0~2，默认: 2.0)
+  weight_max_vel_y: 0.0               # ~最大 y 速度约束权重 (范围: 0~2，默认: 2.0)
+  weight_max_vel_theta: 1.0           # ~最大角速度约束权重 (范围: 0~1，默认: 1.0)
+  weight_acc_lim_x: 1.0               # ~x 加速度约束权重 (范围: 0~1，默认: 1.0)
+  weight_acc_lim_y: 0.0               # ~y 加速度约束权重 (范围: 0~1，默认: 1.0)
+  weight_acc_lim_theta: 1.0           # ~角加速度约束权重 (范围: 0~1，默认: 1.0)
+  weight_kinematics_nh: 1.0           # ~非完整运动学约束权重 (范围: 0~1000，默认: 1000.0)
+  weight_kinematics_forward_drive: 1000.0  # ~前向运动优先权重 (范围: 0~1000，默认: 1.0)
+  weight_kinematics_turning_radius: 1.0  # ~转弯半径约束权重 (默认: 1.0)
+  weight_optimaltime: 1.0             # ~时间优化权重 (默认: 1.0)
+  weight_obstacle: 50.0               # ~障碍物约束权重 (范围: 0~50，默认: 50.0)
+  weight_dynamic_obstacle: 10.0       # ~动态障碍物约束权重 (范围: 0~50，默认: 10.0)
+  weight_viapoint: 1.0                # 参考路径跟随权重 (默认: 1.0)
+  weight_inflation: 0.1               # 障碍物膨胀权重 (默认: 0.1)
+  weight_adapt_factor: 2.0            # 自适应权重调整因子 (默认: 2.0)
 
-  # 路径执行参数
-  min_samples: 3  # 最小采样点数 (默认: 3)
-  max_samples: 50  # 最大采样点数 (默认: 50)
+  # Parallel Planning Parameters (并行规划参数)
+  enable_homotopy_class_planning: true  # 是否启用同伦类规划 (默认: true)
+  enable_multithreading: true         # 是否启用多线程 (默认: true)
+  max_number_classes: 4               # 最大同伦类数量 (默认: 4)
+  selection_cost_hysteresis: 1.0      # 轨迹选择滞后成本系数 (默认: 1.0)
+  selection_obst_cost_scale: 100.0    # 障碍物成本比例因子 (默认: 100.0)
+  selection_viapoint_cost_scale: 1.0   # 参考路径成本比例因子 (默认: 1.0)
+  selection_alternative_time_cost: false  # ~是否使用替代时间成本 (默认: false)
+  roadmap_graph_no_samples: 15        # 路线图采样点数量 (默认: 15)
+  roadmap_graph_area_width: 6.0       # 路线图采样区域宽度 (默认: 6.0 m)
+  h_signature_prescaler: 1.0          # H特征预缩放因子 (默认: 1.0)
+  h_signature_threshold: 0.1          # H特征阈值 (默认: 0.1)
+  obstacle_heading_threshold: 1.0      # 障碍物航向阈值 (默认: 1.0)
+  visualize_hc_graph: false           # 是否可视化同伦类图 (默认: false)
+  viapoints_all_candidates: true      # 是否将参考点连接到所有候选轨迹 (默认: true)
+  switching_blocking_period: 0.0       # 同伦类切换的阻塞时间 (默认: 0.0 s)
 
-  # 规划器行为
-  xy_goal_tolerance: 0.2  # 目标点的XY容差 [m] (默认: 0.2)
-  yaw_goal_tolerance: 0.1  # 目标点的偏航角容差 [rad] (默认: 0.1)
-  free_goal_vel: false  # 允许目标速度自由 (默认: false)
-  complete_global_plan: true  # 完成整个全局规划 (默认: true)
-
-  # Via点
-  global_plan_viapoint_sep: 0.5  # 全局规划中via点的最小分离距离 [m] (默认: -0.1)
-  via_points_ordered: False  # via点是否有序 (默认: False)
-
-  # 可视化
-  publish_feedback: false  # 是否发布优化反馈 (默认: false)
-  visualize_with_time_as_z_axis_scale: false  # 使用时间作为Z轴可视化 (默认: false)
-
-  # 杂项
-  odom_topic: "odom"  # 里程计话题名称 (默认: "odom")
-  map_frame: "map"  # 地图坐标系名称 (默认: "map")
-
-  # 恢复行为
-  shrink_horizon_backup: true  # 在失败时缩小规划范围 (默认: true)
-  oscillation_recovery: true  # 检测和恢复振荡 (默认: true)
-
-# 1.5 m/s 配置（注释掉）
-#  max_vel_x: 1.5
-#  acc_lim_x: 0.7
-#  max_vel_theta: 1.5
-#  acc_lim_theta: 0.7
-
-# 2.0 m/s 配置（注释掉）
-#  max_vel_x: 2.0
-#  acc_lim_x: 1.0
-#  max_vel_theta: 2.0
-#  acc_lim_theta: 1.0
+  # Miscellaneous Parameters (其他参数)
+  odom_topic: "odom"                  # 里程计话题名称 (默认: "odom")
+  map_frame: "odom"                   # 全局规划坐标系 (默认: "odom")
