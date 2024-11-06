@@ -79,7 +79,7 @@ MAP_BUILDER.num_background_threads = 4
 -- 在进行扫描匹配之前需要累积的激光雷达扫描帧数
 TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 10
 -- 子地图参数，每个子图使用多少帧数据构建
-TRAJECTORY_BUILDER_2D.submaps.num_range_data = 35
+TRAJECTORY_BUILDER_2D.submaps.num_range_data = 50
 -- 考虑到13mm的距离分辨率，可设置较小的栅格分辨率（>13mm），默认为0.05m
 TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.resolution = 0.05
 -- TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.grid_type = "PROBABILITY_GRID"
