@@ -25,7 +25,7 @@ DWAPlannerROS:
     latch_xy_goal_tolerance: true  # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
-    sim_time: 1.7  # 前向模拟时间，单位：s (默认: 1.7)
+    sim_time: 2.5  # 前向模拟时间，单位：s (默认: 1.7)
     sim_granularity: 0.05  # 模拟的粒度，即速度变化轨迹模拟的步长，单位：m (默认: 0.025)
     vx_samples: 20  # X方向速度采样点数 (默认: 3)
     vy_samples: 1   # Y方向速度采样点数 (默认: 10)
