@@ -1,6 +1,6 @@
 DWAPlannerROS:
     # 机器人配置参数
-    max_vel_x: 2.0   # 最大 X 方向速度，单位：m/s (默认: 0.55)
+    max_vel_x: 0.5   # 最大 X 方向速度，单位：m/s (默认: 0.55)
     min_vel_x: 0.0   # 最小 X 方向速度（设为负数则允许后退），单位：m/s (默认: 0.0)
     acc_lim_x: 2.5   # X 方向加速度限制，单位：m/s^2 (默认: 2.5)
 
@@ -45,7 +45,7 @@ DWAPlannerROS:
     max_scaling_factor: 0.2  # 最大缩放因子 (默认: 0.2)
 
     # 振荡防止
-    oscillation_reset_dist: 0.5  # 振荡重置距离，单位：m (默认: 0.05)
+    oscillation_reset_dist: 0.05  # 振荡重置距离，单位：m (默认: 0.05)
     oscillation_reset_angle: 0.2  # （ROS Wiki 未记录）振荡重置角度，单位：rad (默认: 0.2)
 
     # 控制频率
