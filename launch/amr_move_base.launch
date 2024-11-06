@@ -3,7 +3,11 @@
     <!-- 导入 move_base 参数文件 -->
     <rosparam file="$(find amr_launcher)/config/navi/move_base_params.yaml" command="load"/>
 
+    <!-- 已被限制角度的激光雷达数据 -->
     <arg name="scan_topic" default="/angle_filtered_scan"/>
+    <!-- 限制角度且被压缩过的激光雷达数据 -->
+    <!-- <arg name="scan_topic" default="/filtered_scan"/> -->
+
     <arg name="cmd_vel_topic" default="/cmd_vel"/>
     <arg name="odom_topic" default="/odom"/>
 
@@ -34,7 +38,6 @@
         <rosparam file="$(find amr_launcher)/config/navi/dwa_local_planner_params.yaml" command="load"/>
 
         <!-- TEB Planner （要使用压缩后的激光雷达数据） -->
-        <!-- <remap from="scan" to="/filtered_scan"/> -->
         <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/> -->
         <!-- <rosparam file="$(find amr_launcher)/config/navi/teb_local_planner_params.yaml" command="load"/> -->
 

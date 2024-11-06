@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="rqt_multiplot" type="rqt_multiplot" name="rqt_multiplot" output="screen">
+        <param name="config_file" value="$(find your_package)/config/debug/rqt_multiplot.mpl"/>
+    </node>
+</launch>
