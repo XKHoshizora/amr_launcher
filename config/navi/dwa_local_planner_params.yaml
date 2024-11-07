@@ -13,7 +13,7 @@ DWAPlannerROS:
 
     max_vel_theta: 2.0     # 最大旋转速度，单位：rad/s (默认: 1.0)
     min_vel_theta: 0.25    # 最小旋转速度，单位：rad/s (默认: 0.4)
-    acc_lim_th: 5.0      # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
+    acc_lim_theta: 5.0      # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 停止条件
     theta_stopped_vel: 0.01      # （ROS Wiki 未记录）旋转停止的阈值
