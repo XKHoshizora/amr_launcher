@@ -13,7 +13,7 @@ DWAPlannerROS:
 
     max_vel_theta: 2.0     # 最大旋转速度，单位：rad/s (默认: 1.0)
     min_vel_theta: 0.24    # 最小旋转速度，单位：rad/s (默认: 0.4)
-    acc_lim_theta: 5.0      # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
+    acc_lim_theta: 6.0      # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 停止条件
     theta_stopped_vel: 0.01      # （ROS Wiki 未记录）旋转停止的阈值
@@ -46,7 +46,7 @@ DWAPlannerROS:
 
     # 振荡防止
     oscillation_reset_dist: 0.05  # 振荡重置距离，单位：m (默认: 0.05)
-    oscillation_reset_angle: 0.05  # （ROS Wiki 未记录）振荡重置角度，单位：rad (默认: 0.2)
+    oscillation_reset_angle: 0.2  # （ROS Wiki 未记录）振荡重置角度，单位：rad (默认: 0.2)
 
     # 控制频率
     controller_frequency: 20.0  # 控制器更新频率，单位：Hz (默认: 20.0)
