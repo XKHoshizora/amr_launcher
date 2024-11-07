@@ -13,7 +13,7 @@ include "trajectory_builder.lua"
 --    - 距离分辨率：13mm
 -- 2. 使用轮式里程计
 --    - 数据发布频率：20Hz
--- 3. 暂未使用IMU
+-- 3. 使用IMU
 -- 4. 不使用GPS
 --------------------------------------------------
 
@@ -25,7 +25,7 @@ options = {
   -- 1. 坐标系统配置
   --------------------------------------------------
   map_frame = "map",
-  tracking_frame = "base_link",  -- 当使用IMU时改为"imu_link"
+  tracking_frame = "imu_link",  -- 当使用IMU时改为"imu_link",否则为"base_link"
   published_frame = "odom",  -- 当没有外部里程计时，改为"base_link"
   odom_frame = "odom",  -- 当使用外部里程计时，该参数无效
   provide_odom_frame = false,  -- 当没有外部里程计时改为true，会产生虚拟里程计数据
@@ -94,7 +94,7 @@ TRAJECTORY_BUILDER_2D.max_range = 30.0  -- 最大量程30m
 TRAJECTORY_BUILDER_2D.missing_data_ray_length = 1.
 
 -- 考虑到高精度的角分辨率(0.1125°)和距离精度(±30mm)
-TRAJECTORY_BUILDER_2D.use_imu_data = false  -- 使用IMU时改为true
+TRAJECTORY_BUILDER_2D.use_imu_data = true  -- 使用IMU时改为true
 -- TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 6.
 TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 是否使用在线相关性扫描匹配算法（Online Correlative Scan Matching）进行激光雷达数据的匹配
 TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.1
