@@ -28,7 +28,7 @@ local_costmap:
     plugins:
         - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}  # 障碍物图层
         - {name: inflation_layer, type: "costmap_2d::InflationLayer"}  # 膨胀图层
-        - {name: social_layer, type: "costmap_2d::SocialLayer"}  # 社交图层，动态处理人流等障碍
+        # - {name: social_layer, type: "costmap_2d::SocialLayer"}  # 社交图层，动态处理人流等障碍
 
 obstacle_layer:
     enabled: true                       # 启用障碍物图层
@@ -60,24 +60,24 @@ inflation_layer:
     inflate_around_unknown: false       # 是否在未知区域周围膨胀
 
 # 社交图层配置
-social_layer:
-    enabled: true                       # 启用社交图层
-    people_topic: "/people"             # 人员检测话题
+# social_layer:
+#     enabled: true                       # 启用社交图层
+#     people_topic: "/people"             # 人员检测话题
 
-    # 社交距离参数
-    min_dist_approach: 0.3              # 最小接近距离，单位：米
-    intimate_zone_width: 0.45           # 私密区域宽度，单位：米
-    personal_zone_width: 1.2            # 个人区域宽度，单位：米
-    social_zone_width: 2.8              # 社交区域宽度，单位：米
+#     # 社交距离参数
+#     min_dist_approach: 0.3              # 最小接近距离，单位：米
+#     intimate_zone_width: 0.45           # 私密区域宽度，单位：米
+#     personal_zone_width: 1.2            # 个人区域宽度，单位：米
+#     social_zone_width: 2.8              # 社交区域宽度，单位：米
 
-    # 代价计算参数
-    cutoff_radius: 3.5                  # 截止半径，单位：米
-    amplitude: 255.0                    # 最大代价值
-    use_velocity: false                 # 是否使用速度信息
-    velocity_scale: 1.0                 # 速度缩放因子
+#     # 代价计算参数
+#     cutoff_radius: 3.5                  # 截止半径，单位：米
+#     amplitude: 255.0                    # 最大代价值
+#     use_velocity: false                 # 是否使用速度信息
+#     velocity_scale: 1.0                 # 速度缩放因子
 
-    # 更新参数
-    update_frequency: 10.0              # 更新频率，单位：Hz
-    decay_time: 0.5                     # 数据衰减时间，单位：秒
-    people_keep_time: 1.0               # 人员数据保持时间，单位：秒
-    mark_people_through_obstacles: false # 是否穿过障碍物标记人员
+#     # 更新参数
+#     update_frequency: 10.0              # 更新频率，单位：Hz
+#     decay_time: 0.5                     # 数据衰减时间，单位：秒
+#     people_keep_time: 1.0               # 人员数据保持时间，单位：秒
+#     mark_people_through_obstacles: false # 是否穿过障碍物标记人员
