@@ -1,0 +1,23 @@
+<launch>
+    <!-- 设置参数 -->
+    <arg name="bag_name" default="navi_data"/>
+    <arg name="save_path" default="$(find amr_launcher)/data/navi_data"/>
+
+    <!-- 要记录的话题列表 -->
+    <arg name="record_all" default="false"/>  <!-- 是否记录所有话题 -->
+
+    <!-- 启动录制节点 -->
+    <node pkg="rosbag" type="record" name="rosbag_record_node"
+          args="--split --size=1024
+                -j
+                -o $(arg save_path)/$(arg bag_name)
+                $(if $(arg record_all),-a,
+                /camera/image_raw
+                /imu
+                /odom
+                /tf
+                /tf_static
+                )"
+          output="screen">
+    </node>
+</launch>
