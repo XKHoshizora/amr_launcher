@@ -16,6 +16,9 @@
     <!-- om_modbusRTU_node & om_ros_node -->
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
 
+    <!-- 启动 IMU 滤波器 -->
+    <include file="$(find amr_launcher)/launch/amr_imu_filter.launch"/>
+
     <!-- Navigation -->
     <!-- Map Server -->
     <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
