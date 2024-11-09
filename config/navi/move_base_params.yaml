@@ -11,7 +11,7 @@ planner_frequency: 2.0      # double，默认值：0.0
 planner_patience: 1.0       # double，默认值：5.0
 
 # 运行控制回路并向基站发送速度命令的速率（以赫兹为单位）
-controller_frequency: 5.0   # double，默认值：20.0
+controller_frequency: 20.0   # double，默认值：20.0
 
 # 在执行空间清理操作之前，控制器未收到有效控制将等待的时间（秒)
 controller_patience: 1.0    # double，默认值：15.0
@@ -20,7 +20,7 @@ controller_patience: 1.0    # double，默认值：15.0
 shutdown_costmaps: false    # bool，默认值：false
 
 # 在执行恢复行为之前允许振荡的时间（以秒为单位） 0.0 表示无限超时
-oscillation_timeout: 10.0   # double，默认值：0.0
+oscillation_timeout: 6.0   # double，默认值：0.0
 
 # 机器人必须移动多远（以米为单位）才被认为不会振荡移动这么远会重置计时器，直到计数到oscillation_timeout
 oscillation_distance: 0.2   # double，默认值：0.5
@@ -38,4 +38,4 @@ oscillation_distance: 0.2   # double，默认值：0.5
 # clearing_rotation_allowed: # bool，默认值：true，此参数仅在使用默认恢复行为时使用，这意味着用户未将recovery_behaviors参数设置为任何自定义内容
 
 # 执行恢复行为之前允许计划重试的次数值 -1.0 表示无限次重试
-# max_planning_retries: # int32_t，默认值： -1 
+# max_planning_retries: # int32_t，默认值： -1

@@ -24,7 +24,7 @@ global_costmap:
           type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 激进重置行为，用于彻底清除代价地图
 
     conservative_reset:
-        reset_distance: 0.668          # 保守重置距离调小为0.668米，更适合狭窄区域或细小障碍物的清除
+        reset_distance: 0.334          # 保守重置距离调小为0.334米，更适合狭窄区域或细小障碍物的清除
         layer_names: ["obstacle_layer"]  # 针对障碍物层进行重置
 
     aggressive_reset:
