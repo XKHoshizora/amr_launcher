@@ -1,0 +1,24 @@
+<launch>
+    <!-- 参数设置：文件生成路径 -->
+    <arg name="tf_tree_pdf_path" default="$(find amr_launcher)/data/graphs/tf_tree.pdf"/>
+    <arg name="tf_tree_png_path" default="$(find amr_launcher)/data/graphs/tf_tree.png"/>
+    <arg name="node_graph_png_path" default="$(find amr_launcher)/data/graphs/node_graph.png"/>
+
+    <!-- 启动 view_frames.py，生成 frames.pdf 文件 -->
+    <node pkg="tf2_tools" type="view_frames.py" name="view_frames" output="screen">
+        <param name="output_file" value="$(arg tf_tree_pdf_path)"/>
+    </node>
+
+    <!-- 启动 rqt_tf_tree，生成 tf_tree.png 文件 -->
+    <node pkg="rqt_tf_tree" type="rqt_tf_tree" name="rqt_tf_tree" output="screen">
+        <param name="output_file" value="$(arg tf_tree_png_path)"/>
+    </node>
+
+    <!-- 启动 rqt_graph，生成 graph.png 文件 -->
+    <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" output="screen">
+        <param name="output_file" value="$(arg node_graph_png_path)"/>
+    </node>
+</launch>
+
+<!-- 终端运行： -->
+<!-- roslaunch amr_launcher amr_node_tf_generator.launch tf_tree_pdf_path:=/path/to/frames.pdf tf_tree_png_path:=/path/to/tf_tree.png node_graph_png_path:=/path/to/graph.png -->
