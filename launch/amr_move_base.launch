@@ -23,6 +23,11 @@
         <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
         <remap from="odom" to="$(arg odom_topic)"/>
 
+        <!-- 添加IMU配置 -->
+        <param name="imu/use_imu" value="true"/>
+        <param name="imu/imu_topic" value="/imu_filtered/data"/>
+        <param name="imu/frame_id" value="imu_link"/>
+
         <!-- 使用 GlobalPlanner 作为全局规划器 -->
         <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
         <!-- GlobalPlanner 的默认算法为 Dijkstra，若要切换为 A*，则需要设置以下 2 个参数 -->
@@ -39,6 +44,7 @@
 
         <!-- TEB Planner （要使用压缩后的激光雷达数据） -->
         <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/> -->
+        <!-- <param name="TebLocalPlannerROS/use_imu_data" value="true"/> -->
         <!-- <rosparam file="$(find amr_launcher)/config/navi/teb_local_planner_params.yaml" command="load"/> -->
 
         <!-- 自定义局部规划器 -->

@@ -56,5 +56,9 @@ DWAPlannerROS:
     publish_cost_grid: true     # 是否在 RViz 里发布代价网格
     global_frame_id: odom       # （ROS Wiki 未记录）基础坐标系
 
+    # 添加IMU配置
+    use_imu: true
+    imu_topic: /imu_filtered/data
+
     # Global Planner
     prune_plan: true  # 定义机器人沿路径移动时是否吃掉计划。如果设置为 true，则机器人越过这些点 1 米后，这些点将从计划末尾掉落。

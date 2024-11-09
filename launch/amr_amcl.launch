@@ -7,15 +7,6 @@
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
         <!-- 话题重映射 -->
         <remap from="scan" to="/angle_filtered_scan"/>
-        <remap from="imu" to="/imu_filtered/data"/>  <!-- 重映射IMU话题到滤波后的数据 -->
-
-        <!-- IMU相关参数 -->
-        <param name="use_imu" value="true"/>
-        <param name="imu_frame_id" value="imu_link"/>
-        <param name="odom_model_type" value="diff-corrected"/>
-
-        <!-- TF转换超时设置，考虑IMU数据延迟 -->
-        <param name="transform_tolerance" value="0.5"/>
 
         <!-- 其他参数设置 -->
         <!-- <param name="gui_publish_rate" value="10.0"/> -->
