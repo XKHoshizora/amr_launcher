@@ -11,12 +11,18 @@ update_min_d: 0.2        # 最小更新距离，单位：米 (默认: 0.2) - 降
 update_min_a: 0.2        # 最小更新角度，单位：弧度 (默认: π/6) - 降低以适应小型机器人
 
 # 里程计模型参数
-odom_model_type: "diff"    # 里程计模型类型 (默认: "diff") - 适用于差速驱动
+# odom_model_type: "diff"    # 里程计模型类型 (默认: "diff") - 适用于差速驱动（无IMU）
+odom_model_type: "diff-corrected"  # IMU和里程计融合参数，使用IMU修正的差分驱动模型（使用IMU）
 odom_alpha1: 0.2           # 旋转运动引起的旋转误差 (默认: 0.2) - 保持默认值
 odom_alpha2: 0.2           # 平移运动引起的旋转误差 (默认: 0.2) - 保持默认值
 odom_alpha3: 0.2           # 平移运动引起的平移误差 (默认: 0.2) - 略微增加以反映轮式编码器误差
 odom_alpha4: 0.2           # 旋转运动引起的平移误差 (默认: 0.2) - 保持默认值
 odom_alpha5: 0.1           # 平移误差 (默认: 0.2) - 略微降低以反映较好的里程计性能
+
+# IMU配置
+use_imu: true                    # 启用IMU数据
+imu_topic: "/imu"  # 使用经过滤波的IMU数据话题
+imu_frame_id: "imu_link"         # IMU的坐标系
 
 # 激光扫描参数
 scan_topic: "/scan"  # 使用中值滤波后的激光雷达数据话题（默认: scan）
@@ -33,7 +39,7 @@ laser_likelihood_max_dist: 2.0  # 最大似然距离，单位：米 (默认: 2.0
 global_frame_id: "map"     # 全局坐标系 (默认: "map") - 保持默认值
 odom_frame_id: "odom"      # 里程计坐标系 (默认: "odom") - 保持默认值
 base_frame_id: "base_footprint" # 机器人基座坐标系 (默认: "base_link") - 保持默认值
-transform_tolerance: 2.0   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
+transform_tolerance: 0.5   # 变换容忍度，单位：秒 (默认: 0.1) - 增加以适应复杂环境
 
 # 恢复参数
 recovery_alpha_slow: 0.0   # 慢速恢复参数 (默认: 0.0) - 增加以改善长期定位稳定性

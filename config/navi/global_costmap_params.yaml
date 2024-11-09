@@ -1,12 +1,12 @@
+# global_costmap_params.yaml
+
 global_costmap:
     global_frame: map  # 全局代价地图的参考坐标系（默认值：map）
     robot_base_frame: base_link  # 机器人的基准坐标系（默认值：base_link）
 
     update_frequency: 2.0  # 地图更新频率 [Hz]（默认值：5.0）
     publish_frequency: 2.0  # 地图发布频率 [Hz]（默认值：0.0）
-    transform_tolerance: 2.0  # TF转换的容忍时间 [s]（默认值：0.3）
-
-    # static_map: true  # 是否使用静态地图（默认值：true），该参数已经弃用
+    transform_tolerance: 0.5  # TF转换的容忍时间 [s]（默认值：0.3）
 
     # 代价地图插件配置
     plugins:
