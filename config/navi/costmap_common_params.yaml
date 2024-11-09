@@ -32,7 +32,7 @@ base_lidar:
 imu_sensor: {
     sensor_frame: imu_link,
     data_type: IMU,
-    topic: /imu_filtered/data,
+    topic: /imu,
     marking: false,
     clearing: false
 }
