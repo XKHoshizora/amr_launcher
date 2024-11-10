@@ -2,17 +2,17 @@
 
     <!-- 基础配置 -->
     <!-- <arg name="com" default="/dev/ttyUSB0"/> -->
-    <arg name="com" default="/dev/om_controller" doc="控制器串口设备"/>
+    <arg name="com" default="/dev/om_controller"/>
     <arg name="topicID" default="1"/>
     <arg name="baudrate" default="230400"/>
-    <arg name="updateRate" default="20"/>
-    <arg name="firstGen" default="" doc="第一代设备ID列表"/>
-    <arg name="secondGen" default="1" doc="第二代设备ID列表，移除尾部逗号"/>
-    <arg name="globalID" default="1" doc="修改为1以匹配从站ID"/>
-    <arg name="axisNum" default="1"/>
+    <arg name="updateRate" default="20"/> <!-- 里程计数据的更新和发布频率,默认为20Hz。 -->
+    <arg name="firstGen" default="" doc="description for this ary"/>
+    <arg name="secondGen" default="1," doc="description for this ary"/>
+    <arg name="globalID" default="-1"/>
+    <arg name="axisNum" default="1" />
 
-    <!-- Modbus主节点 -->
-    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node" output="screen">
+    <!-- 主控节点 -->
+    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
         <param name="init_com" type="str" value="$(arg com)"/>
         <param name="init_topicID" type="str" value="$(arg topicID)"/>
         <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
