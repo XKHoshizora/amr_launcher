@@ -1,51 +1,56 @@
+<?xml version="1.0"?>
 <launch>
     <!-- Modbus设备参数 -->
     <arg name="com" default="/dev/om_controller" doc="控制器串口设备"/>
     <arg name="baudrate" default="230400" doc="串口波特率"/>
     <arg name="topicID" default="1" doc="话题ID"/>
 
-    <!-- Modbus设备配置 -->
+    <!-- Modbus设备配置 - 修改设备ID配置 -->
     <arg name="firstGen" default="" doc="第一代设备ID列表"/>
-    <arg name="secondGen" default="1," doc="第二代设备ID列表"/>
-    <arg name="globalID" default="-1" doc="全局ID"/>
+    <arg name="secondGen" default="1" doc="第二代设备ID列表，移除多余的逗号"/>
+    <arg name="globalID" default="1" doc="全局ID，改为1以匹配从站ID"/>
     <arg name="axisNum" default="1" doc="轴数量"/>
 
-    <!-- 通信参数 -->
-    <arg name="updateRate" default="50" doc="主循环更新频率(Hz)"/>
-    <arg name="odom_rate" default="20" doc="里程计更新频率(Hz)"/>
+    <!-- 通信参数 - 增加update_rate以确保稳定通信 -->
+    <arg name="updateRate" default="100" doc="主循环更新频率(Hz)"/>
+    <arg name="odom_rate" default="50" doc="提高里程计更新频率(Hz)"/>
     <arg name="imu_rate" default="100" doc="IMU更新频率(Hz)"/>
-    <arg name="cmd_timeout" default="0.1" doc="命令超时时间(s)"/>
+    <arg name="cmd_timeout" default="0.05" doc="降低命令超时时间(s)"/>
 
-    <!-- 坐标系配置 -->
+    <!-- 保持其他坐标系配置不变 -->
     <arg name="base_frame" default="base_footprint" doc="机器人基座坐标系"/>
     <arg name="odom_frame" default="odom" doc="里程计坐标系"/>
     <arg name="imu_frame" default="imu_link" doc="IMU坐标系"/>
 
-    <!-- 运动参数 -->
-    <arg name="max_linear_vel" default="2.0" doc="最大线速度(m/s)"/>
-    <arg name="max_angular_vel" default="3.14" doc="最大角速度(rad/s)"/>
-    <arg name="min_valid_distance" default="0.001" doc="最小有效位移(m)"/>
-    <arg name="min_valid_rotation" default="0.001" doc="最小有效转角(rad)"/>
+    <!-- 运动参数 - 调整速度限制 -->
+    <arg name="max_linear_vel" default="1.0" doc="降低最大线速度(m/s)"/>
+    <arg name="max_angular_vel" default="1.57" doc="降低最大角速度(rad/s)"/>
+    <arg name="min_valid_distance" default="0.0001" doc="降低最小有效位移(m)"/>
+    <arg name="min_valid_rotation" default="0.0001" doc="降低最小有效转角(rad)"/>
 
-    <!-- 数据滤波参数 -->
-    <arg name="odom_alpha" default="0.8" doc="里程计数据平滑因子"/>
-    <arg name="imu_alpha" default="0.8" doc="IMU数据平滑因子"/>
+    <!-- 数据滤波参数 - 调整平滑因子 -->
+    <arg name="odom_alpha" default="0.6" doc="降低里程计数据平滑因子"/>
+    <arg name="imu_alpha" default="0.6" doc="降低IMU数据平滑因子"/>
 
     <!-- Modbus Master Node : 主控节点 -->
     <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node" output="screen">
-        <param name="init_com" type="str" value="$(arg com)"/>
-        <param name="init_topicID" type="str" value="$(arg topicID)"/>
-        <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
-        <param name="init_update_rate" type="str" value="$(arg updateRate)"/>
-        <param name="first_gen" type="str" value="$(arg firstGen)"/>
-        <param name="second_gen" type="str" value="$(arg secondGen)"/>
-        <param name="global_id" type="str" value="$(arg globalID)"/>
-        <param name="axis_num" type="str" value="$(arg axisNum)"/>
+        <param name="init_com" type="string" value="$(arg com)"/>
+        <param name="init_topicID" type="string" value="$(arg topicID)"/>
+        <param name="init_baudrate" type="string" value="$(arg baudrate)"/>
+        <param name="init_update_rate" type="string" value="$(arg updateRate)"/>
+        <param name="first_gen" type="string" value="$(arg firstGen)"/>
+        <param name="second_gen" type="string" value="$(arg secondGen)"/>
+        <param name="global_id" type="string" value="$(arg globalID)"/>
+        <param name="axis_num" type="string" value="$(arg axisNum)"/>
+        <!-- 添加串口配置 -->
+        <param name="parity" type="string" value="N"/>
+        <param name="stop_bits" type="string" value="1"/>
+        <param name="data_bits" type="string" value="8"/>
     </node>
 
     <!-- AMR ROS Bridge节点 -->
     <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge"
-          output="screen" respawn="true" respawn_delay="5">
+          output="screen" respawn="true" respawn_delay="2">
         <!-- 话题重映射 -->
         <remap from="imu" to="/imu"/>
         <remap from="odom" to="/odom"/>
@@ -73,10 +78,14 @@
         <param name="imu_alpha" value="$(arg imu_alpha)"/>
 
         <!-- 诊断配置 -->
-        <param name="diagnostic_period" value="1.0"/>
-        <param name="diagnostic_updater/timeout" value="0.2"/>
+        <param name="diagnostic_period" value="0.5"/>  <!-- 降低诊断周期 -->
+        <param name="diagnostic_updater/timeout" value="0.1"/>  <!-- 降低超时时间 -->
 
         <!-- 调试选项 -->
-        <param name="debug_level" value="0"/>  <!-- 0:OFF, 1:INFO, 2:DEBUG -->
+        <param name="debug_level" value="1"/>  <!-- 开启INFO级别日志 -->
     </node>
+
+    <!-- 添加串口权限设置 -->
+    <node pkg="om_modbus_master" name="set_port_permission" type="set_port_permission.sh"
+          args="$(arg com)" output="screen"/>
 </launch>
