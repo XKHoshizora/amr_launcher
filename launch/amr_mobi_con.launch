@@ -30,7 +30,7 @@
     <!-- AMR ROS Bridge Node : 里程计和IMU数据的接收与发布 和 cmd_vel 接收与发送 -->
     <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge" output="screen">
         <!-- 话题重映射 -->
-        <remap from="imu/data" to="/imu/data" />
+        <remap from="imu/data" to="/imu" />
         <remap from="odom" to="/odom" />
         <remap from="cmd_vel" to="/cmd_vel" />
 

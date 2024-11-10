@@ -15,7 +15,7 @@
         <!-- 话题重映射 -->
         <remap from="scan" to="/angle_filtered_scan" />
         <remap from="odom" to="/odom" />
-        <remap from="imu" to="/imu/data" />
+        <remap from="imu" to="/imu_filtered" />
     </node>
 
     <!-- 启动 Cartographer 的 Occupancy Grid 地图服务 -->
