@@ -4,4 +4,5 @@
     <node name="hector_mapping" pkg="hector_mapping" type="hector_mapping" output="screen">
         <remap from="scan" to="/angle_filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
     </node>
+
 </launch>

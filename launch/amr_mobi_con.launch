@@ -9,7 +9,12 @@
     <arg name="globalID" default="-1"/>
     <arg name="axisNum" default="1" />
 
-    <!-- 主控节点 -->
+    <!-- Frame IDs -->
+    <arg name="base_frame" default="base_footprint"/>
+    <arg name="odom_frame" default="odom"/>
+    <arg name="imu_frame" default="imu_link"/>
+
+    <!-- Modbus Master Node : 主控节点 -->
     <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
         <param name="init_com" type="str" value="$(arg com)"/>
         <param name="init_topicID" type="str" value="$(arg topicID)"/>
@@ -21,9 +26,20 @@
         <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
 
-    <!-- 里程计接收与发布 和 cmd_vel 接收与发送 节点 -->
+    <!-- AMR ROS Bridge Node : 里程计和IMU数据的接收与发布 和 cmd_vel 接收与发送 -->
     <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge" output="screen">
-        <param name="modbus_device_rate" value="20.0"/>
-        <param name="update_rate" value="20.0"/>
+        <!-- 话题重映射 -->
+        <remap from="imu/data" to="/imu/data" />
+        <remap from="odom" to="/odom" />
+        <remap from="cmd_vel" to="/cmd_vel" />
+
+        <!-- 性能参数 -->
+        <param name="modbus_device_rate" value="$(arg updateRate)"/>  <!-- Modbus设备通信频率 -->
+        <param name="update_rate" value="$(arg updateRate)"/>         <!-- 节点更新频率 -->
+
+        <!-- TF配置 -->
+        <param name="base_frame" value="$(arg base_frame)"/>  <!-- 机器人基座坐标系 -->
+        <param name="odom_frame" value="$(arg odom_frame)"/>           <!-- 里程计坐标系 -->
+        <param name="imu_frame" value="$(arg imu_frame)"/>        <!-- IMU坐标系 -->
     </node>
 </launch>
