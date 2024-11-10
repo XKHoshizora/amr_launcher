@@ -17,7 +17,7 @@
     <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
 
     <!-- 启动 IMU 滤波器 -->
-    <include file="$(find amr_launcher)/launch/amr_imu_filter.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/amr_imu_filter.launch"/> -->
 
     <!-- Navigation -->
     <!-- Map Server -->
