@@ -1,20 +1,25 @@
 <launch>
     <!-- 基础参数配置 -->
-    <arg name="com" default="/dev/om_controller" />
+    <!-- <arg name="com" default="/dev/ttyUSB0"/> -->
+    <arg name="com" default="/dev/om_controller"/>
+    <arg name="topicID" default="1"/>
     <arg name="baudrate" default="230400"/>
-    <arg name="updateRate" default="20"/>
-    <arg name="secondGen" default="1"/>
-    <arg name="globalID" default="1"/>
+    <arg name="updateRate" default="20"/> <!-- 里程计数据的更新和发布频率,默认为20Hz。 -->
+    <arg name="firstGen" default="" doc="description for this ary"/>
+    <arg name="secondGen" default="1," doc="description for this ary"/>
+    <arg name="globalID" default="-1"/>
+    <arg name="axisNum" default="1" />
 
     <!-- Modbus主节点 -->
-    <node pkg="om_modbus_master" name="om_modbusRTU_1" type="om_modbusRTU_node" output="screen">
-        <param name="init_com" value="$(arg com)"/>
-        <param name="init_topicID" value="1"/>
-        <param name="init_baudrate" value="$(arg baudrate)"/>
-        <param name="init_update_rate" value="$(arg updateRate)"/>
-        <param name="second_gen" value="$(arg secondGen)"/>
-        <param name="global_id" value="$(arg globalID)"/>
-        <param name="axis_num" value="1"/>
+    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
+        <param name="init_com" type="str" value="$(arg com)"/>
+        <param name="init_topicID" type="str" value="$(arg topicID)"/>
+        <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
+        <param name="init_update_rate" type="str" value="$(arg updateRate)"/>
+        <param name="first_gen" type="str" value="$(arg firstGen)"/>
+        <param name="second_gen" type="str" value="$(arg secondGen)"/>
+        <param name="global_id" type="str" value="$(arg globalID)"/>
+        <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
 
     <!-- AMR ROS Bridge节点 -->
