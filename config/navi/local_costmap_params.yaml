@@ -48,7 +48,7 @@ obstacle_layer:
     }
 
 
-    track_unknown_space: true          # 追踪未知空间
+    track_unknown_space: false         # 追踪未知空间
     combination_method: 1               # 多个数据源的组合方法：0=最大值, 1=概率论
 
 # 膨胀图层配置
