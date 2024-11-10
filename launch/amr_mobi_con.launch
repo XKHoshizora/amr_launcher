@@ -11,7 +11,7 @@
     <arg name="axisNum" default="1" />
 
     <!-- Modbus主节点 -->
-    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
+    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen" respawn="true">
         <param name="init_com" type="str" value="$(arg com)"/>
         <param name="init_topicID" type="str" value="$(arg topicID)"/>
         <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
@@ -23,7 +23,7 @@
     </node>
 
     <!-- AMR ROS Bridge节点 -->
-    <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge" output="screen">
+    <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge" output="screen" respawn="true">
         <!-- 话题重映射 -->
         <remap from="imu" to="/imu"/>
         <remap from="odom" to="/odom"/>
