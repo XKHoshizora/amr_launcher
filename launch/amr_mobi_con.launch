@@ -1,91 +1,53 @@
-<?xml version="1.0"?>
 <launch>
-    <!-- Modbus设备参数 -->
+
+    <!-- 基础配置 -->
+    <!-- <arg name="com" default="/dev/ttyUSB0"/> -->
     <arg name="com" default="/dev/om_controller" doc="控制器串口设备"/>
-    <arg name="baudrate" default="230400" doc="串口波特率"/>
-    <arg name="topicID" default="1" doc="话题ID"/>
-
-    <!-- Modbus设备配置 - 修改设备ID配置 -->
+    <arg name="topicID" default="1"/>
+    <arg name="baudrate" default="230400"/>
+    <arg name="updateRate" default="20"/>
     <arg name="firstGen" default="" doc="第一代设备ID列表"/>
-    <arg name="secondGen" default="1" doc="第二代设备ID列表，移除多余的逗号"/>
-    <arg name="globalID" default="1" doc="全局ID，改为1以匹配从站ID"/>
-    <arg name="axisNum" default="1" doc="轴数量"/>
+    <arg name="secondGen" default="1" doc="第二代设备ID列表，移除尾部逗号"/>
+    <arg name="globalID" default="1" doc="修改为1以匹配从站ID"/>
+    <arg name="axisNum" default="1"/>
 
-    <!-- 通信参数 - 增加update_rate以确保稳定通信 -->
-    <arg name="updateRate" default="100" doc="主循环更新频率(Hz)"/>
-    <arg name="odom_rate" default="50" doc="提高里程计更新频率(Hz)"/>
-    <arg name="imu_rate" default="100" doc="IMU更新频率(Hz)"/>
-    <arg name="cmd_timeout" default="0.05" doc="降低命令超时时间(s)"/>
-
-    <!-- 保持其他坐标系配置不变 -->
-    <arg name="base_frame" default="base_footprint" doc="机器人基座坐标系"/>
-    <arg name="odom_frame" default="odom" doc="里程计坐标系"/>
-    <arg name="imu_frame" default="imu_link" doc="IMU坐标系"/>
-
-    <!-- 运动参数 - 调整速度限制 -->
-    <arg name="max_linear_vel" default="1.0" doc="降低最大线速度(m/s)"/>
-    <arg name="max_angular_vel" default="1.57" doc="降低最大角速度(rad/s)"/>
-    <arg name="min_valid_distance" default="0.0001" doc="降低最小有效位移(m)"/>
-    <arg name="min_valid_rotation" default="0.0001" doc="降低最小有效转角(rad)"/>
-
-    <!-- 数据滤波参数 - 调整平滑因子 -->
-    <arg name="odom_alpha" default="0.6" doc="降低里程计数据平滑因子"/>
-    <arg name="imu_alpha" default="0.6" doc="降低IMU数据平滑因子"/>
-
-    <!-- Modbus Master Node : 主控节点 -->
+    <!-- Modbus主节点 -->
     <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node" output="screen">
-        <param name="init_com" type="string" value="$(arg com)"/>
-        <param name="init_topicID" type="string" value="$(arg topicID)"/>
-        <param name="init_baudrate" type="string" value="$(arg baudrate)"/>
-        <param name="init_update_rate" type="string" value="$(arg updateRate)"/>
-        <param name="first_gen" type="string" value="$(arg firstGen)"/>
-        <param name="second_gen" type="string" value="$(arg secondGen)"/>
-        <param name="global_id" type="string" value="$(arg globalID)"/>
-        <param name="axis_num" type="string" value="$(arg axisNum)"/>
-        <!-- 添加串口配置 -->
-        <param name="parity" type="string" value="N"/>
-        <param name="stop_bits" type="string" value="1"/>
-        <param name="data_bits" type="string" value="8"/>
+        <param name="init_com" type="str" value="$(arg com)"/>
+        <param name="init_topicID" type="str" value="$(arg topicID)"/>
+        <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
+        <param name="init_update_rate" type="str" value="$(arg updateRate)"/>
+        <param name="first_gen" type="str" value="$(arg firstGen)"/>
+        <param name="second_gen" type="str" value="$(arg secondGen)"/>
+        <param name="global_id" type="str" value="$(arg globalID)"/>
+        <param name="axis_num" type="str" value="$(arg axisNum)"/>
     </node>
 
     <!-- AMR ROS Bridge节点 -->
-    <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge"
-          output="screen" respawn="true" respawn_delay="2">
+    <node name="amr_ros_bridge" pkg="om_modbus_master" type="amr_ros_bridge" output="screen">
         <!-- 话题重映射 -->
         <remap from="imu" to="/imu"/>
         <remap from="odom" to="/odom"/>
         <remap from="cmd_vel" to="/cmd_vel"/>
 
-        <!-- 通信参数 -->
-        <param name="update_rate" value="$(arg updateRate)"/>
-        <param name="odom_rate" value="$(arg odom_rate)"/>
-        <param name="imu_rate" value="$(arg imu_rate)"/>
-        <param name="cmd_timeout" value="$(arg cmd_timeout)"/>
+        <!-- 基本参数配置 -->
+        <param name="update_rate" value="20"/>
+        <param name="odom_rate" value="20"/>
+        <param name="imu_rate" value="20"/>
+        <param name="cmd_timeout" value="0.1"/>
 
         <!-- 坐标系配置 -->
-        <param name="base_frame" value="$(arg base_frame)"/>
-        <param name="odom_frame" value="$(arg odom_frame)"/>
-        <param name="imu_frame" value="$(arg imu_frame)"/>
+        <param name="base_frame" value="base_footprint"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="imu_frame" value="imu_link"/>
 
         <!-- 运动参数 -->
-        <param name="max_linear_vel" value="$(arg max_linear_vel)"/>
-        <param name="max_angular_vel" value="$(arg max_angular_vel)"/>
-        <param name="min_valid_distance" value="$(arg min_valid_distance)"/>
-        <param name="min_valid_rotation" value="$(arg min_valid_rotation)"/>
-
-        <!-- 数据处理参数 -->
-        <param name="odom_alpha" value="$(arg odom_alpha)"/>
-        <param name="imu_alpha" value="$(arg imu_alpha)"/>
-
-        <!-- 诊断配置 -->
-        <param name="diagnostic_period" value="0.5"/>  <!-- 降低诊断周期 -->
-        <param name="diagnostic_updater/timeout" value="0.1"/>  <!-- 降低超时时间 -->
-
-        <!-- 调试选项 -->
-        <param name="debug_level" value="1"/>  <!-- 开启INFO级别日志 -->
+        <param name="max_linear_vel" value="1.0"/>
+        <param name="max_angular_vel" value="1.57"/>
+        <param name="min_valid_distance" value="0.001"/>
+        <param name="min_valid_rotation" value="0.001"/>
+        <param name="odom_alpha" value="0.8"/>
+        <param name="imu_alpha" value="0.8"/>
     </node>
 
-    <!-- 添加串口权限设置 -->
-    <node pkg="om_modbus_master" name="set_port_permission" type="set_port_permission.sh"
-          args="$(arg com)" output="screen"/>
 </launch>
