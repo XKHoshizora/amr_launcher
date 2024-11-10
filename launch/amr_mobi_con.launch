@@ -30,7 +30,7 @@
         <remap from="cmd_vel" to="/cmd_vel"/>
 
         <!-- 基本参数配置 -->
-        <param name="update_rate" value="20.0"/>
+        <param name="update_rate" value="10.0"/>
         <param name="base_frame" value="base_footprint"/>
         <param name="odom_frame" value="odom"/>
         <param name="imu_frame" value="imu_link"/>
