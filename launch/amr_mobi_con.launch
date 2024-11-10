@@ -1,26 +1,20 @@
 <launch>
-
-    <!-- 基础配置 -->
-    <!-- <arg name="com" default="/dev/ttyUSB0"/> -->
-    <arg name="com" default="/dev/om_controller"/>
-    <arg name="topicID" default="1"/>
+    <!-- 基础参数配置 -->
+    <arg name="com" default="/dev/om_controller" />
     <arg name="baudrate" default="230400"/>
-    <arg name="updateRate" default="20"/> <!-- 里程计数据的更新和发布频率,默认为20Hz。 -->
-    <arg name="firstGen" default="" doc="description for this ary"/>
-    <arg name="secondGen" default="1," doc="description for this ary"/>
-    <arg name="globalID" default="-1"/>
-    <arg name="axisNum" default="1" />
+    <arg name="updateRate" default="20"/>
+    <arg name="secondGen" default="1"/>
+    <arg name="globalID" default="1"/>
 
-    <!-- 主控节点 -->
-    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
-        <param name="init_com" type="str" value="$(arg com)"/>
-        <param name="init_topicID" type="str" value="$(arg topicID)"/>
-        <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
-        <param name="init_update_rate" type="str" value="$(arg updateRate)"/>
-        <param name="first_gen" type="str" value="$(arg firstGen)"/>
-        <param name="second_gen" type="str" value="$(arg secondGen)"/>
-        <param name="global_id" type="str" value="$(arg globalID)"/>
-        <param name="axis_num" type="str" value="$(arg axisNum)"/>
+    <!-- Modbus主节点 -->
+    <node pkg="om_modbus_master" name="om_modbusRTU_1" type="om_modbusRTU_node" output="screen">
+        <param name="init_com" value="$(arg com)"/>
+        <param name="init_topicID" value="1"/>
+        <param name="init_baudrate" value="$(arg baudrate)"/>
+        <param name="init_update_rate" value="$(arg updateRate)"/>
+        <param name="second_gen" value="$(arg secondGen)"/>
+        <param name="global_id" value="$(arg globalID)"/>
+        <param name="axis_num" value="1"/>
     </node>
 
     <!-- AMR ROS Bridge节点 -->
@@ -31,23 +25,10 @@
         <remap from="cmd_vel" to="/cmd_vel"/>
 
         <!-- 基本参数配置 -->
-        <param name="update_rate" value="20"/>
-        <param name="odom_rate" value="20"/>
-        <param name="imu_rate" value="20"/>
-        <param name="cmd_timeout" value="0.1"/>
-
-        <!-- 坐标系配置 -->
+        <param name="update_rate" value="20.0"/>
         <param name="base_frame" value="base_footprint"/>
         <param name="odom_frame" value="odom"/>
         <param name="imu_frame" value="imu_link"/>
-
-        <!-- 运动参数 -->
-        <param name="max_linear_vel" value="1.0"/>
-        <param name="max_angular_vel" value="1.57"/>
-        <param name="min_valid_distance" value="0.001"/>
-        <param name="min_valid_rotation" value="0.001"/>
-        <param name="odom_alpha" value="0.8"/>
-        <param name="imu_alpha" value="0.8"/>
     </node>
 
 </launch>
