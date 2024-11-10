@@ -1,19 +1,17 @@
 <launch>
-
     <!-- Modbus设备参数 -->
-    <!-- <arg name="com" default="/dev/ttyUSB0"/> -->
     <arg name="com" default="/dev/om_controller" doc="控制器串口设备"/>
     <arg name="baudrate" default="230400" doc="串口波特率"/>
-    <arg name="topic_id" default="1" doc="话题ID"/>
+    <arg name="topicID" default="1" doc="话题ID"/>
 
     <!-- Modbus设备配置 -->
-    <arg name="first_gen" default="" doc="第一代设备ID列表"/>
-    <arg name="second_gen" default="1," doc="第二代设备ID列表"/>
-    <arg name="global_id" default="-1" doc="全局ID"/>
-    <arg name="axis_num" default="1" doc="轴数量"/>
+    <arg name="firstGen" default="" doc="第一代设备ID列表"/>
+    <arg name="secondGen" default="1," doc="第二代设备ID列表"/>
+    <arg name="globalID" default="-1" doc="全局ID"/>
+    <arg name="axisNum" default="1" doc="轴数量"/>
 
     <!-- 通信参数 -->
-    <arg name="update_rate" default="50" doc="主循环更新频率(Hz)"/>
+    <arg name="updateRate" default="50" doc="主循环更新频率(Hz)"/>
     <arg name="odom_rate" default="20" doc="里程计更新频率(Hz)"/>
     <arg name="imu_rate" default="100" doc="IMU更新频率(Hz)"/>
     <arg name="cmd_timeout" default="0.1" doc="命令超时时间(s)"/>
@@ -34,7 +32,7 @@
     <arg name="imu_alpha" default="0.8" doc="IMU数据平滑因子"/>
 
     <!-- Modbus Master Node : 主控节点 -->
-    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node"  output="screen">
+    <node pkg="om_modbus_master" name="om_modbusRTU_$(arg topicID)" type="om_modbusRTU_node" output="screen">
         <param name="init_com" type="str" value="$(arg com)"/>
         <param name="init_topicID" type="str" value="$(arg topicID)"/>
         <param name="init_baudrate" type="str" value="$(arg baudrate)"/>
@@ -54,7 +52,7 @@
         <remap from="cmd_vel" to="/cmd_vel"/>
 
         <!-- 通信参数 -->
-        <param name="update_rate" value="$(arg update_rate)"/>
+        <param name="update_rate" value="$(arg updateRate)"/>
         <param name="odom_rate" value="$(arg odom_rate)"/>
         <param name="imu_rate" value="$(arg imu_rate)"/>
         <param name="cmd_timeout" value="$(arg cmd_timeout)"/>
@@ -81,5 +79,4 @@
         <!-- 调试选项 -->
         <param name="debug_level" value="0"/>  <!-- 0:OFF, 1:INFO, 2:DEBUG -->
     </node>
-
 </launch>
