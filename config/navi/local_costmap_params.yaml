@@ -26,8 +26,8 @@ local_costmap:
 
     # 启用的图层插件
     plugins:
-        - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}  # 障碍物图层
-        - {name: inflation_layer, type: "costmap_2d::InflationLayer"}  # 膨胀图层
+        # - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}  # 障碍物图层
+        # - {name: inflation_layer, type: "costmap_2d::InflationLayer"}  # 膨胀图层
         # - {name: social_layer, type: "costmap_2d::SocialLayer"}  # 社交图层，动态处理人流等障碍
 
 obstacle_layer:
@@ -48,7 +48,7 @@ obstacle_layer:
     }
 
 
-    track_unknown_space: false         # 追踪未知空间
+    track_unknown_space: true         # 追踪未知空间
     combination_method: 1               # 多个数据源的组合方法：0=最大值, 1=概率论
 
 # 膨胀图层配置
