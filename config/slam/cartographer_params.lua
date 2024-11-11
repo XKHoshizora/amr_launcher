@@ -9,7 +9,9 @@ options = {
     map_builder = MAP_BUILDER,  -- 设置地图构建器配置
     trajectory_builder = TRAJECTORY_BUILDER,  -- 设置轨迹构建器配置
     map_frame = "map",  -- 全局地图的frame名称
-    tracking_frame = "imu_link",  -- 跟踪frame（IMU的frame），通常用于追踪机器人的运动
+    tracking_frame = "base_link",  -- 跟踪frame（IMU的frame），通常用于追踪机器人的运动
+                                -- 使用IMU时，设置为 imu_link，否则，设置为 base_link
+    use_odometry = true,  -- 是否使用里程计数据
     published_frame = "base_link",  -- 发布机器人的frame，用于位置发布
     odom_frame = "odom",  -- 里程计的frame名称
     provide_odom_frame = true,  -- 是否提供里程计frame
@@ -19,16 +21,16 @@ options = {
     use_landmarks = false,  -- 是否使用地标数据
     num_laser_scans = 1,  -- 使用的激光扫描数（此处配置一个RPLiDAR S2）
     num_multi_echo_laser_scans = 0,  -- 使用的多回波激光扫描数（RPLiDAR S2不支持）
-    num_subdivisions_per_laser_scan = 1,  -- 每个激光扫描的子扫描数（提高处理速度）
+    num_subdivisions_per_laser_scan = 2,  -- 每个激光扫描的子扫描数（提高处理速度）
     num_point_clouds = 0,  -- 使用的点云数据数（不使用3D点云）
 
-    lookup_transform_timeout_sec = 0.2,  -- 查询tf变换的超时时间
-    submap_publish_period_sec = 0.3,  -- 子图发布周期（提高地图更新频率）
-    pose_publish_period_sec = 5e-3,  -- 机器人位姿发布周期（实时性需求较高）
-    trajectory_publish_period_sec = 30e-3,  -- 轨迹发布周期（优化实时性和网络带宽）
+    lookup_transform_timeout_sec = 0.5,  -- 查询tf变换的超时时间
+    submap_publish_period_sec = 1.0,  -- 子图发布周期（提高地图更新频率）
+    pose_publish_period_sec = 0.05,  -- 机器人位姿发布周期（实时性需求较高）
+    trajectory_publish_period_sec = 0.1,  -- 轨迹发布周期（优化实时性和网络带宽）
 
     -- 传感器数据采样率配置
-    rangefinder_sampling_ratio = 0.5,  -- 激光雷达数据采样率，1.0表示使用所有数据
+    rangefinder_sampling_ratio = 0.8,  -- 激光雷达数据采样率，1.0表示使用所有数据
     odometry_sampling_ratio = 1.0,     -- 里程计数据采样率
     fixed_frame_pose_sampling_ratio = 1.0,  -- 固定帧位姿采样率
     imu_sampling_ratio = 1.0,          -- IMU数据采样率
@@ -46,9 +48,9 @@ TRAJECTORY_BUILDER_2D.max_range = 30.0  -- 最大检测距离40米（优化扫�
 
 TRAJECTORY_BUILDER_2D.missing_data_ray_length = 5.0  -- 在数据缺失的情况下假设的射线长度
 TRAJECTORY_BUILDER_2D.use_imu_data = false  -- 使用IMU数据提高精度
-TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 10  -- IMU重力时间常数，影响IMU数据的平滑程度
-TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 启用在线相关扫描匹配（适合动态环境）
-TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.05  -- 用于扫描数据的体素滤波器大小，降低数据量
+-- TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 10  -- IMU重力时间常数，影响IMU数据的平滑程度
+-- TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 启用在线相关扫描匹配（适合动态环境）
+TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.1  -- 用于扫描数据的体素滤波器大小，降低数据量
 
 -- 在线扫描匹配参数，用于提高位姿估计精度
 TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.1  -- 平移搜索窗口，单位为米
@@ -65,13 +67,13 @@ TRAJECTORY_BUILDER_2D.ceres_scan_matcher.ceres_solver_options.max_num_iterations
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.ceres_solver_options.num_threads = 1  -- 优化使用的线程数
 
 -- 运动过滤器配置，用于过滤不必要的扫描
-TRAJECTORY_BUILDER_2D.motion_filter.max_time_seconds = 5.0  -- 两次扫描之间的最大时间间隔
+TRAJECTORY_BUILDER_2D.motion_filter.max_time_seconds = 1.0  -- 两次扫描之间的最大时间间隔
 TRAJECTORY_BUILDER_2D.motion_filter.max_distance_meters = 0.2  -- 两次扫描之间的最大距离
 TRAJECTORY_BUILDER_2D.motion_filter.max_angle_radians = math.rad(1.0)  -- 两次扫描之间的最大角度
 
 -- 为工厂/仓库环境优化的参数
 TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_length = 0.5  -- 体素过滤器的最大长度，较小体素以保留细节
-TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.min_num_points = 150  -- 保留的最小点数，避免过度滤波
+TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.min_num_points = 100  -- 保留的最小点数，避免过度滤波
 TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_range = 50.0  -- 体素过滤器的最大作用范围
 
 -- 回环检测的体素过滤器配置
@@ -80,7 +82,7 @@ TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.min_num_points = 100  -
 TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.max_range = 50.0  -- 回环检测的最大范围
 
 -- 子图配置
-TRAJECTORY_BUILDER_2D.submaps.num_range_data = 70  -- 子图中包含的扫描数（适合大空间以获得稳定地图）
+TRAJECTORY_BUILDER_2D.submaps.num_range_data = 50  -- 子图中包含的扫描数（适合大空间以获得稳定地图）
                                 -- 如果发现生成的地图细节较多、重叠部分较复杂，可以适当减少此值（如 70），以增加子图生成速度。
 TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.resolution = 0.05  -- 子图栅格的分辨率，5厘米以平衡精度和性能
 TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.grid_type = "PROBABILITY_GRID"  -- 使用概率栅格地图
@@ -89,7 +91,7 @@ TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_in
 TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.miss_probability = 0.49  -- 未击中栅格的概率
 
 -- 回环检测参数
-POSE_GRAPH.optimize_every_n_nodes = 70  -- 每90个节点执行一次图优化，与子图的num_range_data一致
+POSE_GRAPH.optimize_every_n_nodes = 50  -- 每90个节点执行一次图优化，与子图的num_range_data一致
 POSE_GRAPH.constraint_builder.sampling_ratio = 0.3  -- 用于约束构建的扫描数据采样率
 POSE_GRAPH.constraint_builder.max_constraint_distance = 15.0  -- 最大约束距离，限制回环检测的范围
 POSE_GRAPH.constraint_builder.min_score = 0.65  -- 回环检测的最小匹配得分，值越高回环检测越严格
@@ -101,24 +103,24 @@ POSE_GRAPH.constraint_builder.loop_closure_rotation_weight = 1e5  -- 回环检�
 -- 位姿图优化器配置
 POSE_GRAPH.optimization_problem = {
     huber_scale = 1e2,  -- Huber损失函数的缩放因子，用于鲁棒优化
-    acceleration_weight = 1e3,  -- 加速度权重，影响轨迹的平滑程度
-    rotation_weight = 3e5,  -- 旋转权重，影响位姿图中的旋转校正
+    acceleration_weight = 1e2,  -- 加速度权重，影响轨迹的平滑程度
+    rotation_weight = 1e4,  -- 旋转权重，影响位姿图中的旋转校正
     local_slam_pose_translation_weight = 1e5,  -- 局部SLAM中平移权重
     local_slam_pose_rotation_weight = 1e5,  -- 局部SLAM中旋转权重
     odometry_translation_weight = 1e5,  -- 里程计平移权重
     odometry_rotation_weight = 1e3,  -- 里程计旋转权重
     fixed_frame_pose_translation_weight = 1e1,  -- 固定帧位姿平移权重
     fixed_frame_pose_rotation_weight = 1e2,  -- 固定帧位姿旋转权重
-    fixed_frame_pose_use_tolerant_loss = false,  -- 是否对固定帧位姿使用容忍损失函数
+    fixed_frame_pose_use_tolerant_loss = true,  -- 是否对固定帧位姿使用容忍损失函数
     fixed_frame_pose_tolerant_loss_param_a = 1,  -- 容忍损失函数参数a
     fixed_frame_pose_tolerant_loss_param_b = 1,  -- 容忍损失函数参数b
-    use_online_imu_extrinsics_in_3d = true,  -- 是否在3D中使用在线IMU外参
+    use_online_imu_extrinsics_in_3d = false,  -- 是否在3D中使用在线IMU外参
     fix_z_in_3d = true,  -- 是否在3D中固定Z轴，2D SLAM中通常设为true
     log_solver_summary = false,  -- 是否记录求解器的摘要信息
     ceres_solver_options = {  -- Ceres求解器的配置选项
         use_nonmonotonic_steps = false,  -- 是否使用非单调步长
-        max_num_iterations = 50,  -- 最大迭代次数
-        num_threads = 7,  -- 优化使用的线程数
+        max_num_iterations = 20,  -- 最大迭代次数
+        num_threads = 3,  -- 优化使用的线程数
     }
 }
 
