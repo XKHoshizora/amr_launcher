@@ -53,8 +53,8 @@ local_costmap:
     # 膨胀图层配置
     inflation_layer:
         enabled: true                       # 启用膨胀图层
-        inflation_radius: 0.1              # 膨胀半径，单位：米
-        cost_scaling_factor: 25.0           # 代价缩放因子
+        inflation_radius: 0.15              # 膨胀半径，单位：米
+        cost_scaling_factor: 30.0           # 代价缩放因子
 
     # 社交图层配置
     # social_layer:
