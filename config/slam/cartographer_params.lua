@@ -32,7 +32,7 @@ options = {
     odometry_sampling_ratio = 1.0,     -- 里程计数据采样率
     fixed_frame_pose_sampling_ratio = 1.0,  -- 固定帧位姿采样率
     imu_sampling_ratio = 1.0,          -- IMU数据采样率
-    landmarks_sampling_ratio = 1.0,     -- 地标数据采样率
+    landmarks_sampling_ratio = 1.0      -- 地标数据采样率
 }
 
 -- 2D SLAM配置
@@ -113,6 +113,7 @@ POSE_GRAPH.optimization_problem = {
     fixed_frame_pose_tolerant_loss_param_a = 1,  -- 容忍损失函数参数a
     fixed_frame_pose_tolerant_loss_param_b = 1,  -- 容忍损失函数参数b
     use_online_imu_extrinsics_in_3d = true,  -- 是否在3D中使用在线IMU外参
+    fix_z_in_3d = true,  -- 是否在3D中固定Z轴，2D SLAM中通常设为true
     log_solver_summary = false,  -- 是否记录求解器的摘要信息
     ceres_solver_options = {  -- Ceres求解器的配置选项
         use_nonmonotonic_steps = false,  -- 是否使用非单调步长
