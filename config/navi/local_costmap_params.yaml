@@ -13,7 +13,7 @@ local_costmap:
     # 地图类型配置
     static_map: false                    # 不使用静态地图（弃用）
     rolling_window: true                 # 使用跟随机器人移动的滚动窗口
-    # map_type: costmap                    # 地图类型：costmap或voxel（弃用）
+    map_type: costmap                    # 地图类型：costmap或voxel（弃用）
 
     # 地图大小和分辨率
     width: 5.0                          # 局部地图宽度，单位：米
