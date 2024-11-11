@@ -4,9 +4,9 @@ global_costmap:
     global_frame: map  # 全局代价地图的参考坐标系（默认值：map）
     robot_base_frame: base_link  # 机器人的基准坐标系（默认值：base_link）
 
-    update_frequency: 1.0  # 地图更新频率 [Hz]（默认值：5.0）
-    publish_frequency: 1.0  # 地图发布频率 [Hz]（默认值：0.0）
-    transform_tolerance: 0.5  # TF转换的容忍时间 [s]（默认值：0.3）
+    update_frequency: 2.0  # 地图更新频率 [Hz]（默认值：5.0）
+    publish_frequency: 2.0  # 地图发布频率 [Hz]（默认值：0.0）
+    transform_tolerance: 0.3  # TF转换的容忍时间 [s]（默认值：0.3）
 
     # 代价地图插件配置
     plugins:
@@ -24,7 +24,7 @@ global_costmap:
           type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 激进重置行为，用于彻底清除代价地图
 
     conservative_reset:
-        reset_distance: 0.334          # 保守重置距离调小为0.334米，更适合狭窄区域或细小障碍物的清除
+        reset_distance: 0.25          # 保守重置距离调小为0.25米，更适合狭窄区域或细小障碍物的清除
         layer_names: ["obstacle_layer"]  # 针对障碍物层进行重置
 
     aggressive_reset:
