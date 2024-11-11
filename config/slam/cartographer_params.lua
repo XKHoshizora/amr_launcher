@@ -11,7 +11,7 @@ options = {
     map_frame = "map",  -- 全局地图的frame名称
     tracking_frame = "imu_link",  -- 跟踪frame（IMU的frame），通常用于追踪机器人的运动
                                 -- 使用IMU时，设置为 imu_link，否则为 base_link
-    published_frame = "odom",  -- 发布的frame名称
+    published_frame = "base_link",  -- 发布的frame名称
     odom_frame = "odom",  -- 设置 odom 的frame名称
     provide_odom_frame = true,  -- 是否提供 odom frame
     publish_frame_projected_to_2d = true,  -- 是否将发布的frame投影到2D平面
@@ -31,6 +31,8 @@ options = {
     fixed_frame_pose_sampling_ratio = 1.0,  -- 固定frame位姿采样比例
     imu_sampling_ratio = 1.0,  -- IMU采样比例
     landmarks_sampling_ratio = 1.0  -- 地标采样比例
+    publish_to_tf = true,          -- 确保TF发布
+    use_pose_extrapolator = true   -- 使用位姿外推
 }
 
 -- 2D SLAM基础配置
