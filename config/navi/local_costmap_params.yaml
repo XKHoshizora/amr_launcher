@@ -16,8 +16,8 @@ local_costmap:
     # map_type: costmap                    # 地图类型：costmap或voxel（弃用）
 
     # 地图大小和分辨率
-    width: 3.0                          # 局部地图宽度，单位：米
-    height: 3.0                         # 局部地图高度，单位：米
+    width: 5.0                          # 局部地图宽度，单位：米
+    height: 5.5                         # 局部地图高度，单位：米
     resolution: 0.05                    # 地图分辨率，单位：米/像素
 
     # 代价值设置
