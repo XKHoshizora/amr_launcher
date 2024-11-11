@@ -51,7 +51,6 @@ TRAJECTORY_BUILDER_2D.use_imu_data = true  -- 使用IMU数据提高精度
 TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 10  -- IMU重力时间常数，影响IMU数据的平滑程度
 TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 启用在线相关扫描匹配（适合动态环境）
 TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.05  -- 用于扫描数据的体素滤波器大小，降低数据量
-TRAJECTORY_BUILDER_2D.num_odometry_states = 1
 
 -- 在线扫描匹配参数，用于提高位姿估计精度
 TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.05  -- 平移搜索窗口，单位为米
@@ -110,6 +109,7 @@ POSE_GRAPH.optimization_problem = {
     local_slam_pose_rotation_weight = 1e5,  -- 局部SLAM中旋转权重
     odometry_translation_weight = 1e5,  -- 里程计平移权重
     odometry_rotation_weight = 1e4,  -- 里程计旋转权重
+    num_odometry_states = 1,  -- 里程计状态数量，通常设置为1
     fixed_frame_pose_translation_weight = 1e1,  -- 固定帧位姿平移权重
     fixed_frame_pose_rotation_weight = 1e2,  -- 固定帧位姿旋转权重
     fixed_frame_pose_use_tolerant_loss = true,  -- 是否对固定帧位姿使用容忍损失函数
