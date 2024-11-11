@@ -41,6 +41,7 @@ options = {
 MAP_BUILDER.use_trajectory_builder_2d = true  -- 使用2D SLAM（适合工厂环境）
 MAP_BUILDER.num_background_threads = 4  -- 设置后台线程数；Orin Nano有8核，此处分配4核用于后台处理
                     -- 若负载测试表明处理器有富余性能且地图更新速度较慢，可以尝试提高至 5 或 6 核以提高实时性。
+MAP_BUILDER.num_odometry_states = 1  -- 设置里程计状态数（1表示仅使用当前状态）
 
 -- 设置RPLiDAR S2的测距范围
 TRAJECTORY_BUILDER_2D.min_range = 0.1   -- 最小检测距离0.05米，适当增大 min_range（如 0.1~0.3）可以过滤掉干扰数据
