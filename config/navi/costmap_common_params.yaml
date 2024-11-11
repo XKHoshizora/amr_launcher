@@ -1,8 +1,8 @@
 # costmap_common_params.yaml
 # 全局代价地图和局部代价地图的通用参数
 
-obstacle_range: 6.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
-raytrace_range: 6.5,  # 清除空间的最大范围 [m]（默认值：3.0）
+obstacle_range: 4.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
+raytrace_range: 4.5,  # 清除空间的最大范围 [m]（默认值：3.0）
 
 # 机器人物理参数
 footprint: [
