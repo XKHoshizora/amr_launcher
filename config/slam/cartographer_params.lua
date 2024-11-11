@@ -51,6 +51,7 @@ TRAJECTORY_BUILDER_2D.use_imu_data = true  -- 使用IMU数据提高精度
 TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 10  -- IMU重力时间常数，影响IMU数据的平滑程度
 TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 启用在线相关扫描匹配（适合动态环境）
 TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.05  -- 用于扫描数据的体素滤波器大小，降低数据量
+TRAJECTORY_BUILDER_2D.num_odometry_states = 1
 
 -- 在线扫描匹配参数，用于提高位姿估计精度
 TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.05  -- 平移搜索窗口，单位为米
@@ -60,8 +61,8 @@ TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.rotation_delta_cost_wei
 
 -- Ceres优化器配置，用于精确的扫描匹配
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.occupied_space_weight = 1.0  -- 占据空间的权重
-TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 2  -- 平移优化的权重
-TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 40  -- 旋转优化的权重
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 10  -- 平移优化的权重
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 30  -- 旋转优化的权重
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.ceres_solver_options.use_nonmonotonic_steps = false  -- 是否使用非单调步长
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.ceres_solver_options.max_num_iterations = 12  -- 最大迭代次数
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.ceres_solver_options.num_threads = 1  -- 优化使用的线程数
@@ -103,8 +104,8 @@ POSE_GRAPH.constraint_builder.loop_closure_rotation_weight = 1e5  -- 回环检�
 -- 位姿图优化器配置
 POSE_GRAPH.optimization_problem = {
     huber_scale = 1e2,  -- Huber损失函数的缩放因子，用于鲁棒优化
-    acceleration_weight = 1e2,  -- 加速度权重，影响轨迹的平滑程度
-    rotation_weight = 1e4,  -- 旋转权重，影响位姿图中的旋转校正
+    acceleration_weight = 1.0,  -- 加速度权重，影响轨迹的平滑程度
+    rotation_weight = 1.0,  -- 旋转权重，影响位姿图中的旋转校正
     local_slam_pose_translation_weight = 1e5,  -- 局部SLAM中平移权重
     local_slam_pose_rotation_weight = 1e5,  -- 局部SLAM中旋转权重
     odometry_translation_weight = 1e5,  -- 里程计平移权重

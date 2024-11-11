@@ -13,9 +13,9 @@
             -configuration_basename $(arg config_file)"
           output="screen">
         <!-- 话题重映射 -->
-        <remap from="scan" to="/angle_filtered_scan" />
-        <remap from="odom" to="/odom" />
-        <remap from="imu" to="/imu" />
+        <remap from="scan" to="/angle_filtered_scan"/>
+        <remap from="imu" to="/imu_filtered"/>
+        <remap from="odom" to="/odom"/>
     </node>
 
     <!-- 启动 Cartographer 的 Occupancy Grid 地图服务 -->
