@@ -34,6 +34,18 @@
         <param name="base_frame" value="base_footprint"/>
         <param name="odom_frame" value="odom"/>
         <param name="imu_frame" value="imu_link"/>
+
+        <!-- 新增速度限制参数 -->
+        <param name="max_linear_vel" value="2.0"/>    <!-- 最大线速度(m/s) -->
+        <param name="max_angular_vel" value="6.2"/>   <!-- 最大角速度(rad/s) -->
+
+        <!-- 新增超时保护参数 -->
+        <param name="cmd_timeout" value="0.2"/>       <!-- 速度指令超时时间(s) -->
+        <param name="odom_timeout" value="0.2"/>      <!-- 里程计数据超时时间(s) -->
+
+        <!-- 新增协方差参数 -->
+        <param name="pose_covariance" value="0.01"/>  <!-- 位姿协方差 -->
+        <param name="twist_covariance" value="0.01"/> <!-- 速度协方差 -->
     </node>
 
 </launch>
