@@ -1,4 +1,8 @@
 <launch>
+
+    <!-- 定义参数，设置默认值 -->
+    <arg name="remap_imu_raw" default="false" />
+
     <!-- IMU Filter Node -->
     <node pkg="amr_imu_filters" type="imu_filter" name="imu_filter" output="screen" respawn="true" respawn_delay="2.0">
         <!-- 基本参数 -->
@@ -26,4 +30,5 @@
         <!-- 重映射IMU话题 -->
         <remap from="imu" to="imu_raw" if="$(arg remap_imu_raw)"/>
     </node>
+
 </launch>
