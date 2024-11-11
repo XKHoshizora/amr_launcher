@@ -101,6 +101,7 @@ POSE_GRAPH.constraint_builder.loop_closure_translation_weight = 1.1e4  -- 回环
 POSE_GRAPH.constraint_builder.loop_closure_rotation_weight = 1e5  -- 回环检测中旋转部分的权重
 
 -- 位姿图优化器配置
+POSE_GRAPH.num_odometry_states = 1
 POSE_GRAPH.optimization_problem = {
     huber_scale = 1e2,  -- Huber损失函数的缩放因子，用于鲁棒优化
     acceleration_weight = 1.0,  -- 加速度权重，影响轨迹的平滑程度
@@ -109,7 +110,6 @@ POSE_GRAPH.optimization_problem = {
     local_slam_pose_rotation_weight = 1e5,  -- 局部SLAM中旋转权重
     odometry_translation_weight = 1e5,  -- 里程计平移权重
     odometry_rotation_weight = 1e4,  -- 里程计旋转权重
-    num_odometry_states = 1,  -- 里程计状态数量，通常设置为1
     fixed_frame_pose_translation_weight = 1e1,  -- 固定帧位姿平移权重
     fixed_frame_pose_rotation_weight = 1e2,  -- 固定帧位姿旋转权重
     fixed_frame_pose_use_tolerant_loss = true,  -- 是否对固定帧位姿使用容忍损失函数
