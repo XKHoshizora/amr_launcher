@@ -52,9 +52,6 @@ DWAPlannerROS:
     oscillation_reset_dist: 0.05  # 振荡重置距离，单位：m (默认: 0.05)
     oscillation_reset_angle: 0.2  # （ROS Wiki 未记录）振荡重置角度，单位：rad (默认: 0.2)
 
-    # 控制频率
-    controller_frequency: 10.0  # 控制器更新频率，单位：Hz (默认: 20.0)
-
     # 辅助调试选项
     publish_traj_pc : true      # （ROS Wiki 未记录）是否在 RViz 里发布轨迹
     publish_cost_grid: true     # 是否在 RViz 里发布代价网格
