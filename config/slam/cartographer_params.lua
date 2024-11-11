@@ -45,7 +45,7 @@ TRAJECTORY_BUILDER_2D.min_range = 0.05  -- 最小检测距离0.3米，适当增�
 TRAJECTORY_BUILDER_2D.max_range = 30.0  -- 最大检测距离40米（优化扫描大空间）
 
 TRAJECTORY_BUILDER_2D.missing_data_ray_length = 5.0  -- 在数据缺失的情况下假设的射线长度
-TRAJECTORY_BUILDER_2D.use_imu_data = true  -- 使用IMU数据提高精度
+TRAJECTORY_BUILDER_2D.use_imu_data = false  -- 使用IMU数据提高精度
 TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 10  -- IMU重力时间常数，影响IMU数据的平滑程度
 TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 启用在线相关扫描匹配（适合动态环境）
 TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.025  -- 用于扫描数据的体素滤波器大小，降低数据量
