@@ -7,8 +7,8 @@ local_costmap:
     transform_tolerance: 0.5             # TF转换的最大容忍时间，单位：秒
 
     # 更新参数
-    update_frequency: 5.0               # 代价地图更新频率，单位：Hz
-    publish_frequency: 5.0              # 代价地图发布频率，单位：Hz
+    update_frequency: 10.0               # 代价地图更新频率，单位：Hz
+    publish_frequency: 10.0              # 代价地图发布频率，单位：Hz
 
     # 地图类型配置
     # static_map: false                    # 不使用静态地图（弃用）
@@ -16,12 +16,12 @@ local_costmap:
     # map_type: costmap                    # 地图类型：costmap或voxel（弃用）
 
     # 地图大小和分辨率
-    width: 4.0                          # 局部地图宽度，单位：米
-    height: 4.0                         # 局部地图高度，单位：米
+    width: 5.0                          # 局部地图宽度，单位：米
+    height: 5.0                         # 局部地图高度，单位：米
     resolution: 0.05                    # 地图分辨率，单位：米/像素
 
     # 代价值设置
-    lethal_cost_threshold: 80           # 致命障碍物的代价阈值
+    lethal_cost_threshold: 100          # 致命障碍物的代价阈值
     unknown_cost_value: 255             # 未知区域的代价值
 
     # 启用的图层插件
@@ -42,7 +42,7 @@ local_costmap:
             clearing: true,                 # 使用数据清除障碍物
             min_obstacle_height: 0.0,       # 最小障碍物高度，单位：米
             max_obstacle_height: 2.0,       # 最大障碍物高度，单位：米
-            expected_update_rate: 5.0,      # 期望的更新频率，单位：Hz
+            expected_update_rate: 10.0,      # 期望的更新频率，单位：Hz
             obstacle_range: 5.0,            # 障碍物探测最大范围，单位：米
             raytrace_range: 5.5             # 射线追踪最大范围，单位：米
         }
@@ -53,8 +53,8 @@ local_costmap:
     # 膨胀图层配置
     inflation_layer:
         enabled: true                       # 启用膨胀图层
-        inflation_radius: 0.15               # 膨胀半径，单位：米
-        cost_scaling_factor: 5.0           # 代价缩放因子
+        inflation_radius: 0.15              # 膨胀半径，单位：米
+        cost_scaling_factor: 15.0           # 代价缩放因子
 
     # 社交图层配置
     # social_layer:

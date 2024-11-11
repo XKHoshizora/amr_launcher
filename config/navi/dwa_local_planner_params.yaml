@@ -15,7 +15,7 @@ DWAPlannerROS:
     min_vel_trans: 0.1   # 最小平移速度，保持小的最小速度以确保平滑启动，单位：m/s (默认: 0.1)
 
     # 角速度限制 - 考虑到实际运行安全，取最大值的50%
-    max_vel_theta: 2.0     # 最大旋转速度设为2.0 rad/s（满速6.28的约30%），单位：rad/s (默认: 1.0)
+    max_vel_theta: 3.0     # 最大旋转速度设为2.0 rad/s（满速6.28的约30%），单位：rad/s (默认: 1.0)
     min_vel_theta: 0.24    # 最小旋转速度，保持较小的最小角速度，单位：rad/s (默认: 0.4)
     acc_lim_theta: 6.2     # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
@@ -42,8 +42,8 @@ DWAPlannerROS:
     #     + occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
     path_distance_bias: 20.0  # 沿全局路径的偏向权重 (默认: 32.0)
     goal_distance_bias: 30.0  # 朝向目标点的偏向权重 (默认: 24.0)
-    occdist_scale: 0.01  # # 障碍物距离的缩放因子 (默认: 0.01)
-    forward_point_distance: 0.334  # 前向点距离，单位：m (默认: 0.325)
+    occdist_scale: 0.01   # 障碍物距离的缩放因子 (默认: 0.01)，降低障碍物代价的权重，让机器人更"大胆"
+    forward_point_distance: 0.325  # 前向点距离，单位：m (默认: 0.325)
     stop_time_buffer: 0.2  # 停止时间缓冲，单位：s (默认: 0.2)
     scaling_speed: 0.25  # 缩放速度，单位：m/s (默认: 0.25)
     max_scaling_factor: 0.2  # 最大缩放因子 (默认: 0.2)

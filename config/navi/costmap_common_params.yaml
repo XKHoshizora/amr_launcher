@@ -1,8 +1,8 @@
 # costmap_common_params.yaml
 # 全局代价地图和局部代价地图的通用参数
 
-obstacle_range: 3.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
-raytrace_range: 3.5,  # 清除空间的最大范围 [m]（默认值：3.0）
+obstacle_range: 5.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
+raytrace_range: 5.5,  # 清除空间的最大范围 [m]（默认值：3.0）
 
 # 机器人物理参数
 footprint: [
@@ -11,11 +11,12 @@ footprint: [
     [-0.334, -0.289], # 后右角
     [-0.334, 0.289]   # 后左角
 ]  # 默认值：[]（空数组，表示圆形机器人）
-footprint_padding: 0.03             # 机器人轮廓的额外膨胀量，单位：米
+footprint_padding: 0.02             # 机器人轮廓的额外膨胀量，单位：米
 
 # 膨胀层参数
-inflation_radius: 0.15,  # 障碍物膨胀半径 [m]（默认值：0.55）
-cost_scaling_factor: 5.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价
+inflation_radius: 0.15,     # 障碍物膨胀半径 [m]（默认值：0.55）
+cost_scaling_factor: 15.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价，使代价值衰减更快，这很关键！
+                            # 值越大，代价值衰减越快，机器人会更"大胆"地靠近障碍物
 
 # 传感器数据处理
 observation_sources: base_lidar  # 使用的传感器源（默认值：""）
