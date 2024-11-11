@@ -18,7 +18,7 @@ inflation_radius: 0.2,  # 障碍物膨胀半径 [m]（默认值：0.55）
 cost_scaling_factor: 10.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价
 
 # 传感器数据处理
-observation_sources: base_lidar imu_sensor  # 使用的传感器源（默认值：""）
+observation_sources: base_lidar  # 使用的传感器源（默认值：""）
 
 # 激光雷达传感器参数
 base_lidar:
@@ -27,12 +27,3 @@ base_lidar:
     topic: /scan  # 激光雷达数据的话题（默认值：""）
     marking: true  # 是否标记障碍物（默认值：true）
     clearing: true  # 是否清除空间（默认值：true）
-
-# IMU传感器参数
-imu_sensor: {
-    sensor_frame: imu_link,
-    data_type: IMU,
-    topic: /imu,
-    marking: false,
-    clearing: false
-}
