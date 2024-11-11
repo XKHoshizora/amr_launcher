@@ -102,7 +102,6 @@ POSE_GRAPH.constraint_builder.loop_closure_translation_weight = 1.1e4  -- 回环
 POSE_GRAPH.constraint_builder.loop_closure_rotation_weight = 1e5  -- 回环检测中旋转部分的权重
 
 -- 位姿图优化器配置
-POSE_GRAPH.num_odometry_states = 1
 POSE_GRAPH.optimization_problem = {
     huber_scale = 1e2,  -- Huber损失函数的缩放因子，用于鲁棒优化
     acceleration_weight = 1.0,  -- 加速度权重，影响轨迹的平滑程度
