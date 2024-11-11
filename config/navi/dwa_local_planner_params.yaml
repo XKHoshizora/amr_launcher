@@ -16,22 +16,22 @@ DWAPlannerROS:
 
     # 角速度限制 - 考虑到实际运行安全，取最大值的50%
     max_vel_theta: 3.0     # 最大旋转速度设为3.0 rad/s（满速6.28的约50%），单位：rad/s (默认: 1.0)
-    min_vel_theta: 0.2     # 最小旋转速度，保持较小的最小角速度，单位：rad/s (默认: 0.4)
-    acc_lim_theta: 3.2     # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
+    min_vel_theta: 0.24    # 最小旋转速度，保持较小的最小角速度，单位：rad/s (默认: 0.4)
+    acc_lim_theta: 6.2     # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 停止条件
-    theta_stopped_vel: 0.05      # （ROS Wiki 未记录）旋转停止的阈值
-    trans_stopped_vel: 0.05    # （ROS Wiki 未记录）平移停止的阈值
+    theta_stopped_vel: 0.01      # （ROS Wiki 未记录）旋转停止的阈值
+    trans_stopped_vel: 0.01    # （ROS Wiki 未记录）平移停止的阈值
 
     # 目标容差
-    yaw_goal_tolerance: 0.15     # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
-    xy_goal_tolerance: 0.15       # 到达目标点的XY平面容差，单位：m (默认: 0.1)
-    latch_xy_goal_tolerance: true  # 是否锁定XY目标容差 (默认: false)
+    yaw_goal_tolerance: 0.2         # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
+    xy_goal_tolerance: 0.15         # 到达目标点的XY平面容差，单位：m (默认: 0.1)
+    latch_xy_goal_tolerance: false  # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
-    sim_time: 1.5  # 前向模拟时间，单位：s (默认: 1.7)
+    sim_time: 1.7  # 前向模拟时间，单位：s (默认: 1.7)
     sim_granularity: 0.025  # 模拟的粒度，即速度变化轨迹模拟的步长，单位：m (默认: 0.025)
-    vx_samples: 12  # X方向速度采样点数 (默认: 3)
+    vx_samples: 20  # X方向速度采样点数 (默认: 3)
     vy_samples: 1   # Y方向速度采样点数 (默认: 10)
     vth_samples: 20  # 旋转速度采样点数 (默认: 20)
 
@@ -40,8 +40,8 @@ DWAPlannerROS:
     #     path_distance_bias * (distance to path from the endpoint of the trajectory in meters)
     #     + goal_distance_bias * (distance to local goal from the endpoint of the trajectory in meters)
     #     + occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
-    path_distance_bias: 32.0  # 沿全局路径的偏向权重 (默认: 32.0)
-    goal_distance_bias: 24.0  # 朝向目标点的偏向权重 (默认: 24.0)
+    path_distance_bias: 30.0  # 沿全局路径的偏向权重 (默认: 32.0)
+    goal_distance_bias: 20.0  # 朝向目标点的偏向权重 (默认: 24.0)
     occdist_scale: 0.02  # # 障碍物距离的缩放因子 (默认: 0.01)
     forward_point_distance: 0.334  # 前向点距离，单位：m (默认: 0.325)
     stop_time_buffer: 0.2  # 停止时间缓冲，单位：s (默认: 0.2)
