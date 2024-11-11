@@ -30,48 +30,51 @@ local_costmap:
         - {name: inflation_layer, type: "costmap_2d::InflationLayer"}  # 膨胀图层
         # - {name: social_layer, type: "costmap_2d::SocialLayer"}  # 社交图层，动态处理人流等障碍
 
-obstacle_layer:
-    enabled: true                       # 启用障碍物图层
-    observation_sources: laser_scan_sensor  # 使用激光雷达数据作为障碍物源
-    # 激光雷达配置
-    laser_scan_sensor: {
-        sensor_frame: laser,            # 传感器坐标系
-        data_type: LaserScan,          # 数据类型
-        topic: /scan,                   # 订阅的话题
-        marking: true,                  # 使用数据标记障碍物
-        clearing: true,                 # 使用数据清除障碍物
-        min_obstacle_height: 0.0,       # 最小障碍物高度，单位：米
-        max_obstacle_height: 2.0,       # 最大障碍物高度，单位：米
-        expected_update_rate: 10.0,     # 期望的更新频率，单位：Hz
-        obstacle_range: 3.5,            # 障碍物探测最大范围，单位：米
-        raytrace_range: 4.0            # 射线追踪最大范围，单位：米
-    }
+    obstacle_layer:
+        enabled: true                       # 启用障碍物图层
+        observation_sources: laser_scan_sensor  # 使用激光雷达数据作为障碍物源
+        # 激光雷达配置
+        laser_scan_sensor: {
+            sensor_frame: laser,            # 传感器坐标系
+            data_type: LaserScan,          # 数据类型
+            topic: /scan,                   # 订阅的话题
+            marking: true,                  # 使用数据标记障碍物
+            clearing: true,                 # 使用数据清除障碍物
+            min_obstacle_height: 0.0,       # 最小障碍物高度，单位：米
+            max_obstacle_height: 2.0,       # 最大障碍物高度，单位：米
+            expected_update_rate: 10.0,     # 期望的更新频率，单位：Hz
+            obstacle_range: 5.0,            # 障碍物探测最大范围，单位：米
+            raytrace_range: 5.5            # 射线追踪最大范围，单位：米
+        }
+        track_unknown_space: true  # 是否追踪和记录未知空间
+        combination_method: 1  # 当有多个传感器数据源时，如何组合它们的观测结果
+        # (0 = Maximum: 取所有传感器观测到的最大代价值，1 = Probability: 使用概率论方法组合多个传感器的数据)
 
-# 膨胀图层配置
-inflation_layer:
-    enabled: true                       # 启用膨胀图层
-    inflation_radius: 0.3               # 膨胀半径，单位：米
-    cost_scaling_factor: 10.0           # 代价缩放因子
+    # 膨胀图层配置
+    inflation_layer:
+        enabled: true                       # 启用膨胀图层
+        inflation_radius: 0.2               # 膨胀半径，单位：米
+        cost_scaling_factor: 10.0           # 代价缩放因子
 
-# 社交图层配置
-# social_layer:
-#     enabled: true                       # 启用社交图层
-#     people_topic: "/people"             # 人员检测话题
+    # 社交图层配置
+    # social_layer:
+    #     enabled: true                       # 启用社交图层
+    #     people_topic: "/people"             # 人员检测话题
 
-#     # 社交距离参数
-#     min_dist_approach: 0.3              # 最小接近距离，单位：米
-#     intimate_zone_width: 0.45           # 私密区域宽度，单位：米
-#     personal_zone_width: 1.2            # 个人区域宽度，单位：米
-#     social_zone_width: 2.8              # 社交区域宽度，单位：米
+    #     # 社交距离参数
+    #     min_dist_approach: 0.3              # 最小接近距离，单位：米
+    #     intimate_zone_width: 0.45           # 私密区域宽度，单位：米
+    #     personal_zone_width: 1.2            # 个人区域宽度，单位：米
+    #     social_zone_width: 2.8              # 社交区域宽度，单位：米
 
-#     # 代价计算参数
-#     cutoff_radius: 3.5                  # 截止半径，单位：米
-#     amplitude: 255.0                    # 最大代价值
-#     use_velocity: false                 # 是否使用速度信息
-#     velocity_scale: 1.0                 # 速度缩放因子
+    #     # 代价计算参数
+    #     cutoff_radius: 3.5                  # 截止半径，单位：米
+    #     amplitude: 255.0                    # 最大代价值
+    #     use_velocity: false                 # 是否使用速度信息
+    #     velocity_scale: 1.0                 # 速度缩放因子
 
-#     # 更新参数
-#     update_frequency: 10.0              # 更新频率，单位：Hz
-#     decay_time: 0.5                     # 数据衰减时间，单位：秒
-#     people_keep_time: 1.0               # 人员数据保持时间，单位：秒
-#     mark_people_through_obstacles: false # 是否穿过障碍物标记人员
+    #     # 更新参数
+    #     update_frequency: 10.0              # 更新频率，单位：Hz
+    #     decay_time: 0.5                     # 数据衰减时间，单位：秒
+    #     people_keep_time: 1.0               # 人员数据保持时间，单位：秒
+    #     mark_people_through_obstacles: false # 是否穿过障碍物标记人员
