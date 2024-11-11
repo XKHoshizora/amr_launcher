@@ -28,7 +28,7 @@ options = {
     trajectory_publish_period_sec = 30e-3,  -- 轨迹发布周期（优化实时性和网络带宽）
 
     -- 传感器数据采样率配置
-    rangefinder_sampling_ratio = 1.0,  -- 激光雷达数据采样率，1.0表示使用所有数据
+    rangefinder_sampling_ratio = 0.5,  -- 激光雷达数据采样率，1.0表示使用所有数据
     odometry_sampling_ratio = 1.0,     -- 里程计数据采样率
     fixed_frame_pose_sampling_ratio = 1.0,  -- 固定帧位姿采样率
     imu_sampling_ratio = 1.0,          -- IMU数据采样率
@@ -48,7 +48,7 @@ TRAJECTORY_BUILDER_2D.missing_data_ray_length = 5.0  -- 在数据缺失的情况
 TRAJECTORY_BUILDER_2D.use_imu_data = false  -- 使用IMU数据提高精度
 TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 10  -- IMU重力时间常数，影响IMU数据的平滑程度
 TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true  -- 启用在线相关扫描匹配（适合动态环境）
-TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.025  -- 用于扫描数据的体素滤波器大小，降低数据量
+TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.05  -- 用于扫描数据的体素滤波器大小，降低数据量
 
 -- 在线扫描匹配参数，用于提高位姿估计精度
 TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.1  -- 平移搜索窗口，单位为米
@@ -71,7 +71,7 @@ TRAJECTORY_BUILDER_2D.motion_filter.max_angle_radians = math.rad(1.0)  -- 两次
 
 -- 为工厂/仓库环境优化的参数
 TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_length = 0.5  -- 体素过滤器的最大长度，较小体素以保留细节
-TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.min_num_points = 200  -- 保留的最小点数，避免过度滤波
+TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.min_num_points = 150  -- 保留的最小点数，避免过度滤波
 TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_range = 50.0  -- 体素过滤器的最大作用范围
 
 -- 回环检测的体素过滤器配置
@@ -80,7 +80,7 @@ TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.min_num_points = 100  -
 TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.max_range = 50.0  -- 回环检测的最大范围
 
 -- 子图配置
-TRAJECTORY_BUILDER_2D.submaps.num_range_data = 90  -- 子图中包含的扫描数（适合大空间以获得稳定地图）
+TRAJECTORY_BUILDER_2D.submaps.num_range_data = 70  -- 子图中包含的扫描数（适合大空间以获得稳定地图）
                                 -- 如果发现生成的地图细节较多、重叠部分较复杂，可以适当减少此值（如 70），以增加子图生成速度。
 TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.resolution = 0.05  -- 子图栅格的分辨率，5厘米以平衡精度和性能
 TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.grid_type = "PROBABILITY_GRID"  -- 使用概率栅格地图
@@ -89,7 +89,7 @@ TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_in
 TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.miss_probability = 0.49  -- 未击中栅格的概率
 
 -- 回环检测参数
-POSE_GRAPH.optimize_every_n_nodes = 90  -- 每90个节点执行一次图优化，与子图的num_range_data一致
+POSE_GRAPH.optimize_every_n_nodes = 70  -- 每90个节点执行一次图优化，与子图的num_range_data一致
 POSE_GRAPH.constraint_builder.sampling_ratio = 0.3  -- 用于约束构建的扫描数据采样率
 POSE_GRAPH.constraint_builder.max_constraint_distance = 15.0  -- 最大约束距离，限制回环检测的范围
 POSE_GRAPH.constraint_builder.min_score = 0.65  -- 回环检测的最小匹配得分，值越高回环检测越严格
