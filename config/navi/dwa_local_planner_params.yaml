@@ -44,7 +44,7 @@ DWAPlannerROS:
     goal_distance_bias: 30.0  # 朝向目标点的偏向权重 (默认: 24.0)
     occdist_scale: 0.02   # 障碍物距离的缩放因子 (默认: 0.01)，降低障碍物代价的权重，让机器人更"大胆"
     forward_point_distance: 0.325  # 前向点距离，单位：m (默认: 0.325)
-    stop_time_buffer: 0.2  # 停止时间缓冲，单位：s (默认: 0.2)
+    stop_time_buffer: 0.3  # 停止时间缓冲，单位：s (默认: 0.2)
     scaling_speed: 0.25  # 缩放速度，单位：m/s (默认: 0.25)
     max_scaling_factor: 0.2  # 最大缩放因子 (默认: 0.2)
 

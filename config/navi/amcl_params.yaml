@@ -48,7 +48,7 @@ initial_cov_yy: 0.25       # Y 方向初始协方差 (默认: 0.25) - 保持默�
 initial_cov_aa: 0.068      # 角度初始协方差 (默认: 0.068) - 保持默认值
 
 # 其他参数
-gui_publish_rate: 50       # GUI 发布率，单位：Hz (默认: -1.0) - 设置适当值以减少计算负担
+gui_publish_rate: 30       # GUI 发布率，单位：Hz (默认: -1.0) - 设置适当值以减少计算负担
 save_pose_rate: 0.5        # 保存姿态的频率，单位：Hz (默认: 0.5) - 保持默认值
 use_map_topic: false       # 是否使用地图话题 (默认: false) - 保持默认值
 first_map_only: false      # 是否只使用第一次接收到的地图 (默认: false) - 保持默认值
