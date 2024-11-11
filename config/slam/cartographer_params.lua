@@ -6,26 +6,33 @@ include "map_builder.lua"  -- 引入地图构建模块
 include "trajectory_builder.lua"  -- 引入轨迹构建模块
 
 options = {
-  map_builder = MAP_BUILDER,  -- 设置地图构建器配置
-  trajectory_builder = TRAJECTORY_BUILDER,  -- 设置轨迹构建器配置
-  map_frame = "map",  -- 全局地图的frame名称
-  tracking_frame = "imu_link",  -- 跟踪frame（IMU的frame），通常用于追踪机器人的运动
-  published_frame = "base_link",  -- 发布机器人的frame，用于位置发布
-  odom_frame = "odom",  -- 里程计的frame名称
-  provide_odom_frame = true,  -- 是否提供里程计frame
-  publish_frame_projected_to_2d = true,  -- 是否将frame发布到2D平面
-  use_odometry = true,  -- 是否使用里程计数据
-  use_nav_sat = false,  -- 是否使用GPS数据
-  use_landmarks = false,  -- 是否使用地标数据
-  num_laser_scans = 1,  -- 使用的激光扫描数（此处配置一个RPLiDAR S2）
-  num_multi_echo_laser_scans = 0,  -- 使用的多回波激光扫描数（RPLiDAR S2不支持）
-  num_subdivisions_per_laser_scan = 1,  -- 每个激光扫描的子扫描数（提高处理速度）
-  num_point_clouds = 0,  -- 使用的点云数据数（不使用3D点云）
+    map_builder = MAP_BUILDER,  -- 设置地图构建器配置
+    trajectory_builder = TRAJECTORY_BUILDER,  -- 设置轨迹构建器配置
+    map_frame = "map",  -- 全局地图的frame名称
+    tracking_frame = "imu_link",  -- 跟踪frame（IMU的frame），通常用于追踪机器人的运动
+    published_frame = "base_link",  -- 发布机器人的frame，用于位置发布
+    odom_frame = "odom",  -- 里程计的frame名称
+    provide_odom_frame = true,  -- 是否提供里程计frame
+    publish_frame_projected_to_2d = true,  -- 是否将frame发布到2D平面
+    use_odometry = true,  -- 是否使用里程计数据
+    use_nav_sat = false,  -- 是否使用GPS数据
+    use_landmarks = false,  -- 是否使用地标数据
+    num_laser_scans = 1,  -- 使用的激光扫描数（此处配置一个RPLiDAR S2）
+    num_multi_echo_laser_scans = 0,  -- 使用的多回波激光扫描数（RPLiDAR S2不支持）
+    num_subdivisions_per_laser_scan = 1,  -- 每个激光扫描的子扫描数（提高处理速度）
+    num_point_clouds = 0,  -- 使用的点云数据数（不使用3D点云）
 
-  lookup_transform_timeout_sec = 0.2,  -- 查询tf变换的超时时间
-  submap_publish_period_sec = 0.3,  -- 子图发布周期（提高地图更新频率）
-  pose_publish_period_sec = 5e-3,  -- 机器人位姿发布周期（实时性需求较高）
-  trajectory_publish_period_sec = 30e-3,  -- 轨迹发布周期（优化实时性和网络带宽）
+    lookup_transform_timeout_sec = 0.2,  -- 查询tf变换的超时时间
+    submap_publish_period_sec = 0.3,  -- 子图发布周期（提高地图更新频率）
+    pose_publish_period_sec = 5e-3,  -- 机器人位姿发布周期（实时性需求较高）
+    trajectory_publish_period_sec = 30e-3,  -- 轨迹发布周期（优化实时性和网络带宽）
+
+    -- 传感器数据采样率配置
+    rangefinder_sampling_ratio = 1.0,  -- 激光雷达数据采样率，1.0表示使用所有数据
+    odometry_sampling_ratio = 1.0,     -- 里程计数据采样率
+    fixed_frame_pose_sampling_ratio = 1.0,  -- 固定帧位姿采样率
+    imu_sampling_ratio = 1.0,          -- IMU数据采样率
+    landmarks_sampling_ratio = 1.0,     -- 地标数据采样率
 }
 
 -- 2D SLAM配置
