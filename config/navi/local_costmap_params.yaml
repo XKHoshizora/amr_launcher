@@ -43,8 +43,8 @@ local_costmap:
             min_obstacle_height: 0.0,       # 最小障碍物高度，单位：米
             max_obstacle_height: 2.0,       # 最大障碍物高度，单位：米
             expected_update_rate: 5.0,      # 期望的更新频率，单位：Hz
-            obstacle_range: 3.0,            # 障碍物探测最大范围，单位：米
-            raytrace_range: 3.5             # 射线追踪最大范围，单位：米
+            obstacle_range: 5.0,            # 障碍物探测最大范围，单位：米
+            raytrace_range: 5.5             # 射线追踪最大范围，单位：米
         }
         track_unknown_space: true  # 是否追踪和记录未知空间
         combination_method: 1  # 当有多个传感器数据源时，如何组合它们的观测结果
