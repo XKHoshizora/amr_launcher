@@ -2,36 +2,36 @@
     <!-- 使用实际的时间 -->
     <param name="/use_sim_time" value="false" />
 
-    <!-- 载入机器人模型 -->
-    <include file="$(find amr_launcher)/launch/amr_description.launch"/>
+    <!-- 载入机器人模型并发布 TF -->
+    <include file="$(find amr_launcher)/launch/robot/amr_description.launch"/>
 
     <!-- RPLiDAR -->
-    <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_rplidar_s2.launch"/>
 
     <!-- 启动激光雷达滤波器 -->
-    <include file="$(find amr_launcher)/launch/amr_laser_filters.launch"/>
+    <include file="$(find amr_launcher)/launch/sensor_data/amr_laser_filters.launch"/>
 
-    <!-- om_modbusRTU_node & om_ros_node -->
-    <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
+    <!-- om_modbusRTU_node & amr_ros_bridge -->
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_mobi_con.launch"/>
 
     <!-- 启动 IMU 滤波器 -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_imu_filter.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
 
     <!-- SLAM -->
     <!-- GMapping -->
-    <include file="$(find amr_launcher)/launch/amr_slam_gmapping.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/slam/amr_slam_gmapping.launch"/> -->
     <!-- Hector -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_slam_hector.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/slam/amr_slam_hector.launch"/> -->
     <!-- Cartographer -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_slam_cartographer.launch"/> -->
+    <include file="$(find amr_launcher)/launch/slam/amr_slam_cartographer.launch"/>
 
     <!-- Controller -->
-    <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>
 
     <!-- RViz -->
     <!-- RViz 配置文件路径 -->
     <arg name="base_config" value="$(find amr_launcher)/config/rviz/slam.rviz" />
     <arg name="cartographer_config" value="$(find amr_launcher)/config/rviz/cartographer_slam.rviz" />
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg base_config)" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg cartographer_config)" />
 
 </launch>

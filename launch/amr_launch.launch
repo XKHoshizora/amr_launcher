@@ -3,41 +3,41 @@
     <param name="/use_sim_time" value="false" />
 
     <!-- 载入机器人模型 -->
-    <include file="$(find amr_launcher)/launch/amr_description.launch"/>
+    <include file="$(find amr_launcher)/launch/robot/amr_description.launch"/>
 
     <!-- Gazebo -->
 
     <!-- RPLiDAR -->
-    <include file="$(find amr_launcher)/launch/amr_rplidar_s2.launch"/>
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_rplidar_s2.launch"/>
 
     <!-- 启动激光雷达滤波器 -->
-    <include file="$(find amr_launcher)/launch/amr_laser_filters.launch"/>
+    <include file="$(find amr_launcher)/launch/sensor_data/amr_laser_filters.launch"/>
 
-    <!-- om_modbusRTU_node & om_ros_node -->
-    <include file="$(find amr_launcher)/launch/amr_mobi_con.launch"/>
+    <!-- om_modbusRTU_node & amr_ros_bridge -->
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_mobi_con.launch"/>
 
     <!-- 启动 IMU 滤波器 -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_imu_filter.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
 
     <!-- Navigation -->
     <!-- Map Server -->
-    <include file="$(find amr_launcher)/launch/amr_map_server.launch"/>
+    <include file="$(find amr_launcher)/launch/navigation/amr_map_server.launch"/>
     <!-- AMCL or lidar_loc-->
-    <include file="$(find amr_launcher)/launch/amr_amcl.launch"/>
-    <!-- <include file="$(find amr_launcher)/launch/amr_lidar_loc.launch"/> -->
+    <include file="$(find amr_launcher)/launch/navigation/amr_amcl.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/navigation/amr_lidar_loc.launch"/> -->
     <!-- move_base -->
-    <include file="$(find amr_launcher)/launch/amr_move_base.launch"/>
+    <include file="$(find amr_launcher)/launch/navigation/amr_move_base.launch"/>
 
     <!-- 人员跟踪 -->
-    <!-- <include file="$(find amr_launcher)/launch/amr_people_tracking.launch"/> -->
+    <!-- <include file="$(find amr_launcher)/launch/navigation/amr_people_tracking.launch"/> -->
 
     <!-- Controller -->
-    <include file="$(find amr_launcher)/launch/amr_controller.launch"/>
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>
 
     <!-- RViz -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/wp_navi.rviz" />
 
     <!-- 多航点导航支持 -->
-    <include file="$(find amr_launcher)/launch/amr_waypoint.launch"/>
+    <include file="$(find amr_launcher)/launch/navigation/amr_waypoint.launch"/>
 
 </launch>
