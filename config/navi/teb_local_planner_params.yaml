@@ -33,8 +33,8 @@ TebLocalPlannerROS:
     ]
 
   # 到达目标点的判断容差
-  xy_goal_tolerance: 0.2
-  yaw_goal_tolerance: 0.1
+  xy_goal_tolerance: 0.15        # 减小位置容差，提高定位精度
+  yaw_goal_tolerance: 0.2       # 增大角度容差，降低到达后的角度调整需求
 
   # 障碍物相关
   min_obstacle_dist: 0.1 # 与障碍物的最小间距

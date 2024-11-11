@@ -15,17 +15,17 @@ DWAPlannerROS:
     min_vel_trans: 0.1   # 最小平移速度，保持小的最小速度以确保平滑启动，单位：m/s (默认: 0.1)
 
     # 角速度限制 - 考虑到实际运行安全，取最大值的50%
-    max_vel_theta: 3.0     # 最大旋转速度设为2.0 rad/s（满速6.28的约30%），单位：rad/s (默认: 1.0)
+    max_vel_theta: 2.0     # 最大旋转速度设为2.0 rad/s（满速6.28的约30%），单位：rad/s (默认: 1.0)
     min_vel_theta: 0.24    # 最小旋转速度，保持较小的最小角速度，单位：rad/s (默认: 0.4)
-    acc_lim_theta: 6.2     # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
+    acc_lim_theta: 5.0     # 旋转加速度限制，单位：rad/s^2 (默认: 3.2)
 
     # 停止条件
     theta_stopped_vel: 0.01      # （ROS Wiki 未记录）旋转停止的阈值
     trans_stopped_vel: 0.01    # （ROS Wiki 未记录）平移停止的阈值
 
     # 目标容差
-    yaw_goal_tolerance: 0.2         # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
     xy_goal_tolerance: 0.15         # 到达目标点的XY平面容差，单位：m (默认: 0.1)
+    yaw_goal_tolerance: 0.2         # 到达目标点的偏航角容差，单位：rad (默认: 0.1)
     latch_xy_goal_tolerance: true   # 是否锁定XY目标容差 (默认: false)
 
     # 前向模拟
