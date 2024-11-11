@@ -1,0 +1,40 @@
+<launch>
+    <!-- 使用实际的时间 -->
+    <param name="/use_sim_time" value="false" />
+
+    <!-- 第一批：必须优先启动的基础组件 -->
+    <!-- 载入机器人模型并发布 TF -->
+    <include file="$(find amr_launcher)/launch/robot/amr_description.launch"/>
+
+    <!-- IMU驱动和滤波器 -->
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_mobi_con.launch"/>
+    <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/>
+
+    <!-- 添加IMU就绪检查节点 -->
+    <node name="imu_ready_check" pkg="your_package_name" type="imu_ready_check" output="screen">
+        <param name="timeout" value="5.0" />  <!-- 最多等待5秒 -->
+        <param name="required_msgs" value="100" />  <!-- 收到100条消息认为初始化完成 -->
+    </node>
+
+    <!-- 第二批：在IMU就绪后启动的组件 -->
+    <group>
+        <!-- 等待IMU就绪信号后启动 -->
+        <remap from="/start_trigger" to="/imu_ready"/>
+
+        <!-- RPLiDAR -->
+        <include file="$(find amr_launcher)/launch/hard_bridge/amr_rplidar_s2.launch"/>
+        <!-- 激光雷达滤波器 -->
+        <include file="$(find amr_launcher)/launch/sensor_data/amr_laser_filters.launch"/>
+
+        <!-- Cartographer -->
+        <include file="$(find amr_launcher)/launch/slam/amr_slam_cartographer.launch"/>
+
+        <!-- Controller -->
+        <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>
+    </group>
+
+    <!-- RViz (可以立即启动，会自动等待数据) -->
+    <arg name="cartographer_config" value="$(find amr_launcher)/config/rviz/cartographer_slam.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg cartographer_config)" />
+
+</launch>

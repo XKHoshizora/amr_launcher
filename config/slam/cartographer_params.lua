@@ -13,7 +13,7 @@ options = {
                                 -- 使用IMU时，设置为 imu_link，否则为 base_link
     published_frame = "odom",  -- 发布的frame名称
     odom_frame = "odom",  -- 设置 odom 的frame名称
-    provide_odom_frame = false,  -- 是否提供 odom frame
+    provide_odom_frame = true,  -- 是否提供 odom frame
     publish_frame_projected_to_2d = true,  -- 是否将发布的frame投影到2D平面
     use_odometry = true,  -- 是否使用里程计数据
     use_nav_sat = false,  -- 是否使用导航卫星数据（如GPS）
