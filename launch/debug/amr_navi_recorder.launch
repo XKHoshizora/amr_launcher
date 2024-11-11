@@ -7,7 +7,7 @@
     <!-- 记录模式 -->
     <group if="$(eval mode == 'record')">
         <!-- 启动导航 -->
-        <include file="$(find amr_launcher)/launch/amr_launch.launch" />
+        <include file="$(find amr_launcher)/launch/amr_launch_navi.launch" />
 
         <!-- 记录 bag 文件，保存数据到指定路径 -->
         <node pkg="rosbag" type="record" name="navi_record" args="-O $(find amr_launcher)/data/navi_record.bag /scan /median_filtered_scan /angle_filtered_scan /filtered_scan /odom /tf /move_base/TrajectoryPlannerROS/global_plan /move_base/TrajectoryPlannerROS/local_plan /cmd_vel" />
