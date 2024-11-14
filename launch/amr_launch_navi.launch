@@ -2,10 +2,11 @@
     <!-- 使用实际的时间 -->
     <param name="/use_sim_time" value="false" />
 
-    <!-- 载入机器人模型 -->
+    <!-- 载入机器人模型并发布 TF -->
     <include file="$(find amr_launcher)/launch/robot/amr_description.launch"/>
 
     <!-- Gazebo -->
+    <!-- TODO: 创建虚拟环境 -->
 
     <!-- RPLiDAR -->
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_rplidar_s2.launch"/>

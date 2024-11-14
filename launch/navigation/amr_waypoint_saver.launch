@@ -5,6 +5,7 @@
     <arg name="waypoint_file" value="$(find amr_launcher)/waypoint/waypoint.xml"/>
 
     <!-- 航点保存 -->
-    <node pkg="waterplus_map_tools" type="wp_saver" name="amr_waypoint_saver" args="-f $(arg waypoint_file)" output="screen"/>
+    <!-- <node pkg="waterplus_map_tools" type="wp_saver" name="amr_waypoint_saver" args="-f $(arg waypoint_file)" output="screen"/> -->
+    <node pkg="amr_map_tools" type="amr_wp_saver" name="amr_waypoint_saver" args="-f $(arg waypoint_file)" output="screen"/>
 
 </launch>
