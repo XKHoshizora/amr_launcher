@@ -18,7 +18,7 @@
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_mobi_con.launch"/>
 
     <!-- 启动 IMU 滤波器 -->
-    <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
 
     <!-- SLAM -->
     <!-- GMapping -->
