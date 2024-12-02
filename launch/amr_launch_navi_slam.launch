@@ -18,6 +18,7 @@
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_mobi_con.launch"/>
 
     <!-- 启动 IMU 滤波器 -->
+    <!-- TODO: 创建 IMU 滤波器 -->
     <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
 
     <!-- SLAM (使用 GMapping) -->
@@ -27,8 +28,15 @@
     <!-- move_base -->
     <include file="$(find amr_launcher)/launch/navigation/amr_move_base.launch"/>
 
+    <!-- 人员跟踪 -->
+    <!-- TODO: 添加人员跟踪节点 -->
+    <!-- <include file="$(find amr_launcher)/launch/navigation/amr_people_tracking.launch"/> -->
+
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>
+
+    <!-- 发送初始位姿时清除代价地图 -->
+    <include file="$(find amr_launcher)/launch/map/amr_costmap_cleaner.launch"/>
 
     <!-- RViz -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/slam.rviz" />
@@ -38,5 +46,8 @@
 
     <!-- 地图禁区插件 -->
     <!-- TODO: 实现地图禁区插件 -->
+
+    <!-- 布局变更对应 -->
+    <!-- TODO: 实现对不同布局的自适应 -->
 
 </launch>

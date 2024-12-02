@@ -1,0 +1,6 @@
+<launch>
+
+    <!-- 发送初始位姿时清除代价地图 -->
+    <node pkg="amr_map" type="costmap_cleaner" name="costmap_cleaner" output="screen"/>
+
+</launch>
