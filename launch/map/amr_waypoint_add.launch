@@ -10,6 +10,6 @@
 
   <!-- Map tools  -->
   <!-- <node pkg="waterplus_map_tools" type="wp_edit_node" name="wp_edit_node" output="screen" /> -->
-  <node pkg="amr_map_tools" type="amr_wp_edit_node" name="amr_wp_edit_node" output="screen" />
+  <node pkg="amr_waypoint_tools" type="amr_wp_edit_node" name="amr_wp_edit_node" output="screen" />
 
 </launch>
