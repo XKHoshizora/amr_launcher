@@ -26,16 +26,45 @@ oscillation_timeout: 6.0   # double，默认值：0.0
 oscillation_distance: 0.2   # double，默认值：0.5
 
 # 与move_base一起使用的恢复行为插件列表
-# recovery_behaviors: # list，默认：[{名称：conservative_reset，类型：clear_costmap_recovery/ClearCostmapRecovery}，{名称：rotate_recovery，类型：rotate_recovery/RotateRecovery}，{名称：aggressive_reset，类型：clear_costmap_recovery/ClearCostmapRecovery}]
+recovery_behaviors: # list，默认：[{名称：conservative_reset，类型：clear_costmap_recovery/ClearCostmapRecovery}，{名称：rotate_recovery，类型：rotate_recovery/RotateRecovery}，{名称：aggressive_reset，类型：clear_costmap_recovery/ClearCostmapRecovery}]
+    - name: 'conservative_reset'
+      type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 保守重置行为，清除代价地图
+    - name: 'rotate_recovery'
+      type: 'rotate_recovery/RotateRecovery'               # 旋转恢复行为，机器人原地旋转以摆脱困境
+    - name: 'aggressive_reset'
+      type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 激进重置行为，用于彻底清除代价地图
 
-# 距离机器人的距离（以米为单位），当尝试清除地图中的空间时，超过此距离的障碍物将从代价地图中清除。
-# conservative_reset_dist: # double，默认值：3.0，此参数仅在对move_base使用默认恢复行为时使用
+# 保守重置行为的参数
+conservative_reset:
+    reset_distance: 0.5              # 保守重置距离调小为0.25米，更适合狭窄区域或细小障碍物的清除
+    layer_names: ["obstacle_layer"]  # 对障碍物层进行重置
+    affected_maps: ["local"]         # 只清除局部代价地图
+
+# 旋转恢复行为的参数
+rotate_recovery:
+    sim_granularity: 0.017    # 旋转恢复行为的仿真分辨率
+    frequency: 20.0           # 旋转恢复行为的频率
+    max_rotational_vel: 1.8   # 旋转恢复行为的最大旋转速度
+    min_rotational_vel: 0.24  # 旋转恢复行为的最小旋转速度
+    yaw_goal_tolerance: 0.1   # 旋转恢复行为的角度容差
+
+# 激进重置行为的参数
+aggressive_reset:
+    reset_distance: 5.0                 # 激进重置时完全清除代价地图的障碍物层
+    layer_names: ["obstacle_layer"]     # 对障碍物层进行重置
+    affected_maps: ["local", "global"]  # 同时清除局部和全局代价地图
+
+# 判断机器人是否被困住的检查范围（以米为单位），当尝试清除地图中的空间时，超过此距离的障碍物将从代价地图中清除。
+conservative_reset_dist: 5.0  # double，默认值：3.0，在尝试其他恢复行为之前，机器人会检查的距离范围
 
 # 是否启用move_base恢复行为来尝试清除空间
-# recovery_behavior_enabled: # bool，默认值：true
+recovery_behavior_enabled: true  # bool，默认值：true
 
 # 确定机器人在尝试清理空间时是否尝试原地旋转
-# clearing_rotation_allowed: # bool，默认值：true，此参数仅在使用默认恢复行为时使用，这意味着用户未将recovery_behaviors参数设置为任何自定义内容
+clearing_rotation_allowed: true  # bool，默认值：true，此参数仅在使用默认恢复行为时使用，这意味着用户未将recovery_behaviors参数设置为任何自定义内容
 
 # 执行恢复行为之前允许计划重试的次数值 -1.0 表示无限次重试
-# max_planning_retries: # int32_t，默认值： -1
+max_planning_retries: 5  # int32_t，默认值： -1
+
+# 执行恢复行为之前允许振荡的时间（以秒为单位） 0.0 表示无限超时
+recovery_timeout: 5.0

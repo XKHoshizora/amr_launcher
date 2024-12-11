@@ -32,7 +32,6 @@
 
     <!-- 人员跟踪 -->
     <!-- TODO: 添加人员跟踪节点 -->
-    <!-- <include file="$(find amr_launcher)/launch/navigation/amr_people_tracking.launch"/> -->
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>
@@ -47,7 +46,7 @@
     <include file="$(find amr_launcher)/launch/navigation/amr_waypoint.launch"/>
 
     <!-- 地图禁区插件 -->
-    <!-- TODO: 实现地图禁区插件 -->
+    <!-- TODO: 代价地图配置文件中设置了禁区插件后将自动加载 -->
 
     <!-- 布局变更对应 -->
     <!-- TODO: 实现对不同布局的自适应 -->

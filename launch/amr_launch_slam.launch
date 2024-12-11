@@ -19,7 +19,6 @@
 
     <!-- 启动 IMU 滤波器 -->
     <!-- TODO: 创建 IMU 滤波器 -->
-    <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
 
     <!-- SLAM -->
     <!-- GMapping -->

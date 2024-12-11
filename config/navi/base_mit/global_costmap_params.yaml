@@ -1,4 +1,5 @@
 # global_costmap_params.yaml
+# 全局代价地图参数
 
 global_costmap:
     global_frame: map  # 全局代价地图的参考坐标系（默认值：map）
@@ -8,32 +9,13 @@ global_costmap:
     publish_frequency: 1.0  # 地图发布频率 [Hz]（默认值：0.0）
     transform_tolerance: 0.5  # TF转换的容忍时间 [s]（默认值：0.3）
 
-    resolution: 0.05  # 设置合适的分辨率
-    # width: 40.0  # 设置适当的地图宽度
-    # height: 40.0 # 设置适当的地图高度
+    # 全局代价地图边界设定
+    # width: 10.0
+    # height: 10.0
 
     # 代价地图插件配置
     plugins:
         - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
         - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
+        - {name: restricted_areas, type: "prohibition_areas_layer::ProhibitionAreasLayer"} # 禁区图层，用于处理禁区
         - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 膨胀图层，用于增加障碍物的安全边界
-
-    recovery_behavior_enabled: true
-    clearing_rotation_allowed: true
-
-    # 恢复行为配置
-    recovery_behaviors:
-        - name: 'conservative_reset'
-          type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 保守重置行为，清除代价地图
-        - name: 'rotate_recovery'
-          type: 'rotate_recovery/RotateRecovery'               # 旋转恢复行为，机器人原地旋转以摆脱困境
-        - name: 'aggressive_reset'
-          type: 'clear_costmap_recovery/ClearCostmapRecovery'  # 激进重置行为，用于彻底清除代价地图
-
-    conservative_reset:
-        reset_distance: 0.5             # 保守重置距离调小为0.25米，更适合狭窄区域或细小障碍物的清除
-        layer_names: ["obstacle_layer"]  # 针对障碍物层进行重置
-
-    aggressive_reset:
-        reset_distance: 1.0          # 激进重置时完全清除代价地图的障碍物层
-        layer_names: ["obstacle_layer"]

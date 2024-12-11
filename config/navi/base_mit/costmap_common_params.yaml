@@ -1,30 +1,78 @@
 # costmap_common_params.yaml
 # 全局代价地图和局部代价地图的通用参数
 
-obstacle_range: 4.0,  # 考虑障碍物的最大范围 [m]（默认值：2.5）
-raytrace_range: 4.5,  # 清除空间的最大范围 [m]（默认值：3.0）
-
 # 机器人物理参数
+# robot_radius: 0.0  # 机器人半径，单位：米，适用于圆形机器人。如果机器人不是圆形，请设置footprint参数。
 footprint: [
     [0.334, 0.289],   # 前左角
     [0.334, -0.289],  # 前右角
     [-0.334, -0.289], # 后右角
     [-0.334, 0.289]   # 后左角
 ]  # 默认值：[]（空数组，表示圆形机器人）
-footprint_padding: 0.03             # 机器人轮廓的额外膨胀量，单位：米
+footprint_padding: 0.01  # 机器人轮廓的额外膨胀量，单位：米
 
-# 膨胀层参数
-inflation_radius: 0.2,     # 障碍物膨胀半径 [m]（默认值：0.55）
-cost_scaling_factor: 20.0,  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价，使代价值衰减更快，这很关键！
-                            # 值越大，代价值衰减越快，机器人会更"大胆"地靠近障碍物
+# 地图分辨率
+resolution: 0.05  # 设置合适的地图分辨率，单位：米/像素
 
-# 传感器数据处理
-observation_sources: base_lidar  # 使用的传感器源（默认值：""）
+# 代价值设置
+lethal_cost_threshold: 100          # 致命障碍物的代价阈值
 
-# 激光雷达传感器参数
-base_lidar:
-    sensor_frame: laser  # 激光雷达的坐标系（默认值：""）
-    data_type: LaserScan  # 数据类型（默认值：LaserScan）
-    topic: /scan  # 激光雷达数据的话题（默认值：""）
-    marking: true  # 是否标记障碍物（默认值：true）
-    clearing: true  # 是否清除空间（默认值：true）
+# 禁止对未知区域进行规划（根据需要开启/关闭）
+unknown_cost_value: 255             # 未知区域的代价值
+# 当为true时，代价地图中未知区域被视为可通行
+allow_unknown: true
+
+# 代价地图图层插件参数
+# 静态图层参数
+static_layer:
+    enabled: true
+
+# 障碍物图层参数
+obstacle_layer:
+    enabled: true                       # 启用障碍物图层
+    # 使用的传感器源
+    observation_sources: laser_scan_sensor  # 使用激光雷达数据作为障碍物源（默认值：""）
+
+    # 激光雷达配置
+    laser_scan_sensor: {
+        sensor_frame: laser,            # 传感器坐标系（默认值：""）
+        data_type: LaserScan,           # 数据类型（默认值：LaserScan）
+        topic: /scan,                   # 激光雷达数据的话题（默认值：""）
+        marking: true,                  # 是否标记障碍物（默认值：true）
+        clearing: true,                 # 是否清除空间（默认值：true）
+        min_obstacle_height: 0.0,       # 最小障碍物高度，单位：米
+        max_obstacle_height: 2.0,       # 最大障碍物高度，单位：米
+        expected_update_rate: 5.0,      # 期望的更新频率，单位：Hz
+        obstacle_range: 6.0,            # 障碍物探测最大范围，单位：米（默认值：2.5）
+        raytrace_range: 6.5             # 射线追踪最大范围，单位：米（默认值：3.0）
+    }
+
+    # 点云传感器配置示例（如果需要）
+    # point_cloud_sensor: {
+    #   sensor_frame: camera_link
+    #   data_type: PointCloud2
+    #   topic: /camera/depth/points
+    #   marking: true
+    #   clearing: true
+    #   min_obstacle_height: 0.0
+    #   max_obstacle_height: 2.0
+    #   obstacle_range: 2.5
+    #   raytrace_range: 3.0
+    # }
+
+    track_unknown_space: true  # 是否追踪和记录未知空间
+    combination_method: 1  # 当有多个传感器数据源时，如何组合它们的观测结果
+    # (0 = Maximum: 取所有传感器观测到的最大代价值，1 = Probability: 使用概率论方法组合多个传感器的数据)
+
+# 禁区图层参数
+restricted_areas:
+    enabled: true  # 是否启用禁区层
+    fill_polygons: true  # 是否填充禁区
+    data_file: "$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml"  # 禁区数据文件路径
+
+# 膨胀图层参数
+inflation_layer:
+    enabled: true              # 启用膨胀图层
+    inflation_radius: 0.2      # 障碍物膨胀半径 [m]（默认值：0.55）
+    cost_scaling_factor: 20.0  # 用于计算膨胀区域代价的指数衰减因子（默认值：10.0），增大会降低代价，使代价值衰减更快，这很关键！
+                               # 值越大，代价值衰减越快，机器人会更"大胆"地靠近障碍物
