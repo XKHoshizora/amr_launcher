@@ -1,6 +1,6 @@
 <launch>
     <!-- 地图文件保存路径 -->
-    <arg name="filename" default="$(find amr_launcher)/map/carto_map.pbstream"/>
+    <arg name="filename" default="$(find amr_launcher)/maps/carto_map.pbstream"/>
 
     <!-- 保存 Cartographer 地图为 pbstream 文件 -->
     <node name="save_map" pkg="rosservice" type="rosservice"

@@ -1,4 +1,4 @@
-<Waterplus>
+<AMRWaypoints>
     <Waypoint>
         <Name>1</Name>
         <Pos_x>7.29252</Pos_x>
@@ -79,4 +79,4 @@
         <Ori_z>0.0165779</Ori_z>
         <Ori_w>0.999863</Ori_w>
     </Waypoint>
-</Waterplus>
+</AMRWaypoints>
