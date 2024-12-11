@@ -68,7 +68,6 @@ obstacle_layer:
 restricted_areas:
     enabled: true  # 是否启用禁区层
     fill_polygons: true  # 是否填充禁区
-    data_file: "$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml"  # 禁区数据文件路径
 
 # 膨胀图层参数
 inflation_layer:
