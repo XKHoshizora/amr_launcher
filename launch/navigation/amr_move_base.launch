@@ -1,8 +1,5 @@
 <launch>
 
-    <!-- 导入 move_base 参数文件 -->
-    <rosparam file="$(find amr_launcher)/config/navi/move_base_params.yaml" command="load"/>
-
     <!-- 已被限制角度的激光雷达数据 -->
     <arg name="scan_topic" default="/angle_filtered_scan"/>
     <!-- 限制角度且被压缩过的激光雷达数据 -->
@@ -13,6 +10,10 @@
 
     <!-- move_base -->
     <node name="move_base" pkg="move_base" type="move_base" output="screen">
+        <!-- 导入 move_base 参数文件 -->
+        <rosparam file="$(find amr_launcher)/config/navi/move_base_params.yaml" command="load"/>
+
+        <!-- 导入代价地图参数文件 -->
         <rosparam file="$(find amr_launcher)/config/navi/costmap_common_params.yaml" command="load" ns="global_costmap"/>
         <rosparam file="$(find amr_launcher)/config/navi/costmap_common_params.yaml" command="load" ns="local_costmap"/>
         <rosparam file="$(find amr_launcher)/config/navi/global_costmap_params.yaml" command="load"/>
