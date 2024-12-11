@@ -38,7 +38,12 @@
     <include file="$(find amr_launcher)/launch/map/amr_costmap_cleaner.launch"/>
 
     <!-- RViz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/slam.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/slam.rviz">
+        <!-- 禁区文件自动保存路径 -->
+        <param name="prohibition_areas_path" value="$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml"/>
+        <!-- 覆盖或追加模式 -->
+        <param name="append_mode" value="true"/>
+    </node>
 
     <!-- 多航点导航支持 -->
     <include file="$(find amr_launcher)/launch/navigation/amr_waypoint.launch"/>
