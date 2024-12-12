@@ -13,7 +13,7 @@ global_costmap:
     # width: 10.0
     # height: 10.0
 
-    # 代价地图插件配置
+    # 全局代价地图插件配置
     plugins:
         - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 静态图层，负责处理全局静态地图
         - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"} # 障碍物图层，负责动态障碍物检测
