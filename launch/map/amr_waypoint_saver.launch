@@ -3,7 +3,7 @@
 
     <!-- 航点保存 -->
     <!-- <node pkg="waterplus_map_tools" type="wp_saver" name="amr_waypoint_saver" args="-f $(arg waypoint_file)" output="screen"/> -->
-    <node pkg="amr_waypoint_tools" type="waypoint_saver" name="amr_waypoint_saver" output="screen"/>
+    <node pkg="amr_waypoint_tools" type="waypoint_saver" name="amr_waypoint_saver" output="screen">
         <!-- 设置保存文件的路径 -->
         <param name="save_file_path" value="$(find amr_launcher)/waypoints/waypoints.xml"/>
     </node>
