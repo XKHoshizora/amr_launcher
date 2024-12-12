@@ -19,8 +19,8 @@
         <rosparam file="$(find amr_launcher)/config/navi/global_costmap_params.yaml" command="load"/>
         <rosparam file="$(find amr_launcher)/config/navi/local_costmap_params.yaml" command="load"/>
 
-        <!-- 导入禁区数据文件 -->
-        <rosparam command="load" file="$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml" ns="/move_base/global_costmap/restricted_areas/prohibition_areas"/>
+        <!-- 导入禁区数据文件（也可在代价地图配置中设置） -->
+        <!-- <param name="global_costmap/restricted_areas/data_file" value="$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml" /> -->
 
         <!-- <remap> 用于话题、服务和动作的重映射 -->
         <remap from="scan" to="$(arg scan_topic)"/>
