@@ -38,7 +38,7 @@
     <include file="$(find amr_launcher)/launch/map/amr_costmap_cleaner.launch"/>
 
     <!-- RViz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/slam.rviz">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amr_launcher)/config/rviz/navi.rviz">
         <!-- 禁区文件自动保存路径 -->
         <param name="prohibition_areas_path" value="$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml"/>
         <!-- 覆盖或追加模式 -->

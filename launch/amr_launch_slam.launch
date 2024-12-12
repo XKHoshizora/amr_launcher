@@ -34,7 +34,7 @@
     <!-- RViz -->
     <!-- RViz 配置文件路径 -->
     <arg name="base_config" value="$(find amr_launcher)/config/rviz/slam.rviz" />
-    <arg name="cartographer_config" value="$(find amr_launcher)/config/rviz/cartographer_slam.rviz" />
+    <!-- <arg name="cartographer_config" value="$(find amr_launcher)/config/rviz/cartographer_slam.rviz" /> -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg base_config)" />
 
 </launch>
