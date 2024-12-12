@@ -197,16 +197,6 @@ Visualization Manager:
       Enabled: true
       Name: GlobalCostMap
       Topic: /move_base/global_costmap/costmap
-      Topic Properties:
-        Color:
-          Lethal Cost: 255; 0; 0          # 致命障碍物 (代价值 = 254)
-          Inscribed Cost: 255; 0; 100     # 内切障碍物 (代价值 = 253)
-          Possibly Circumscribed: 255; 0; 160  # 外切障碍物 (代价值 = 252)
-          Inflation High: 0; 255; 255      # 高膨胀代价 (代价值 > 200)
-          Inflation Medium: 100; 255; 255  # 中膨胀代价 (代价值 > 150)
-          Inflation Low: 180; 255; 255     # 低膨胀代价 (代价值 > 100)
-          Free Space: 255; 255; 255        # 自由空间 (代价值 = 0)
-          Unknown: 128; 128; 128           # 未知区域 (-1)
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -217,16 +207,6 @@ Visualization Manager:
       Enabled: true
       Name: LocalCostMap
       Topic: /move_base/local_costmap/costmap
-      Topic Properties:
-        Color:
-          Lethal Cost: 255; 0; 0          # 致命障碍物
-          Inscribed Cost: 255; 100; 0     # 内切障碍物
-          Possibly Circumscribed: 255; 160; 0  # 外切障碍物
-          Inflation High: 255; 170; 0      # 高膨胀代价 (橙色)
-          Inflation Medium: 255; 200; 100  # 中膨胀代价 (浅橙)
-          Inflation Low: 255; 230; 150     # 低膨胀代价 (米黄)
-          Free Space: 255; 255; 255        # 自由空间
-          Unknown: 128; 128; 128           # 未知区域
       Unreliable: false
       Use Timestamp: false
       Value: true
