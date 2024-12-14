@@ -1,82 +1,62 @@
 <AMRWaypoints>
     <Waypoint>
         <Name>1</Name>
-        <Pos_x>7.29252</Pos_x>
-        <Pos_y>15.5867</Pos_y>
-        <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>-0.70692</Ori_z>
-        <Ori_w>0.707294</Ori_w>
+        <Pos_x>-0.307004</Pos_x>
+        <Pos_y>-0.410165</Pos_y>
+        <Pos_z>1.96695e-06</Pos_z>
+        <Ori_x>-3.24488e-08</Ori_x>
+        <Ori_y>3.13517e-08</Ori_y>
+        <Ori_z>0.00278578</Ori_z>
+        <Ori_w>0.999996</Ori_w>
     </Waypoint>
     <Waypoint>
         <Name>2</Name>
-        <Pos_x>7.36743</Pos_x>
-        <Pos_y>7.83874</Pos_y>
-        <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>0.999851</Ori_z>
-        <Ori_w>-0.0172557</Ori_w>
+        <Pos_x>-0.942032</Pos_x>
+        <Pos_y>15.8832</Pos_y>
+        <Pos_z>7.45058e-09</Pos_z>
+        <Ori_x>-8.3191e-10</Ori_x>
+        <Ori_y>4.21241e-08</Ori_y>
+        <Ori_z>0.716186</Ori_z>
+        <Ori_w>0.69791</Ori_w>
     </Waypoint>
     <Waypoint>
         <Name>3</Name>
-        <Pos_x>7.49338</Pos_x>
-        <Pos_y>-0.293032</Pos_y>
-        <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>0.014743</Ori_z>
-        <Ori_w>0.999891</Ori_w>
+        <Pos_x>8.45652</Pos_x>
+        <Pos_y>2.2126</Pos_y>
+        <Pos_z>-7.45058e-09</Pos_z>
+        <Ori_x>-5.7922e-08</Ori_x>
+        <Ori_y>-5.42596e-09</Ori_y>
+        <Ori_z>0.999985</Ori_z>
+        <Ori_w>0.00542763</Ori_w>
     </Waypoint>
     <Waypoint>
         <Name>4</Name>
-        <Pos_x>16.4204</Pos_x>
-        <Pos_y>0.0439721</Pos_y>
+        <Pos_x>-2.61467</Pos_x>
+        <Pos_y>37.4456</Pos_y>
         <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>0.999853</Ori_z>
-        <Ori_w>0.017126</Ori_w>
+        <Ori_x>6.90729e-10</Ori_x>
+        <Ori_y>4.05471e-08</Ori_y>
+        <Ori_z>0.718135</Ori_z>
+        <Ori_w>0.695904</Ori_w>
     </Waypoint>
     <Waypoint>
         <Name>5</Name>
-        <Pos_x>9.75442</Pos_x>
-        <Pos_y>-1.38882</Pos_y>
+        <Pos_x>2.47793</Pos_x>
+        <Pos_y>0.301627</Pos_y>
         <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>0.999982</Ori_z>
-        <Ori_w>0.00603513</Ori_w>
+        <Ori_x>-2.31794e-11</Ori_x>
+        <Ori_y>-9.72756e-10</Ori_y>
+        <Ori_z>0.999964</Ori_z>
+        <Ori_w>-0.00856105</Ori_w>
     </Waypoint>
     <Waypoint>
         <Name>6</Name>
-        <Pos_x>7.62645</Pos_x>
-        <Pos_y>-8.97042</Pos_y>
-        <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>0.724419</Ori_z>
-        <Ori_w>0.68936</Ori_w>
-    </Waypoint>
-    <Waypoint>
-        <Name>7</Name>
-        <Pos_x>6.23045</Pos_x>
-        <Pos_y>35.629</Pos_y>
-        <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>-0.701275</Ori_z>
-        <Ori_w>0.712891</Ori_w>
-    </Waypoint>
-    <Waypoint>
-        <Name>8</Name>
-        <Pos_x>7.39366</Pos_x>
-        <Pos_y>-1.78328</Pos_y>
-        <Pos_z>0</Pos_z>
-        <Ori_x>0</Ori_x>
-        <Ori_y>0</Ori_y>
-        <Ori_z>0.0165779</Ori_z>
-        <Ori_w>0.999863</Ori_w>
+        <Pos_x>0.0758357</Pos_x>
+        <Pos_y>-6.96369</Pos_y>
+        <Pos_z>-6.48201e-07</Pos_z>
+        <Ori_x>-4.08962e-08</Ori_x>
+        <Ori_y>-4.3228e-08</Ori_y>
+        <Ori_z>0.700119</Ori_z>
+        <Ori_w>-0.714026</Ori_w>
     </Waypoint>
 </AMRWaypoints>
