@@ -1,0 +1,36 @@
+<launch>
+    <param name="/use_sim_time" value="false" />
+
+    <!-- 设置配置文件路径 -->
+    <arg name="config_dir" value="$(find amr_launcher)/config/navi" />
+    <arg name="config_file" value="navi_cartographer_params.lua" />
+
+    <!-- 添加地图文件路径 -->
+    <arg name="load_state_filename" value="$(find amr_launcher)/maps/carto_map.pbstream" />
+
+    <!-- 加载已保存的地图 -->
+    <node name="cartographer_load_state" pkg="cartographer_ros"
+          type="cartographer_load_state" args="
+          -load_state_filename $(arg load_state_filename)
+          -configuration_directory $(arg config_dir)
+          -configuration_basename $(arg config_file)"
+          output="screen" />
+
+    <!-- Cartographer节点 -->
+    <node name="cartographer_node" pkg="cartographer_ros"
+          type="cartographer_node" args="
+          -configuration_directory $(arg config_dir)
+          -configuration_basename $(arg config_file)
+          -load_state_filename $(arg load_state_filename)"
+          output="screen">
+        <remap from="scan" to="/angle_filtered_scan"/>
+        <remap from="odom" to="/odom"/>
+    </node>
+
+    <!-- Occupancy Grid地图服务 -->
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+          type="cartographer_occupancy_grid_node" output="screen">
+        <param name="resolution" value="0.05"/>
+        <param name="publish_period_sec" value="0.5"/>
+    </node>
+</launch>

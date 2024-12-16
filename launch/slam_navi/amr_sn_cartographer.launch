@@ -1,0 +1,57 @@
+<launch>
+    <!-- 使用实际的时间 -->
+    <param name="/use_sim_time" value="false" />
+
+    <!-- 载入机器人模型并发布 TF -->
+    <include file="$(find amr_launcher)/launch/robot/amr_description.launch"/>
+
+    <!-- Gazebo -->
+    <!-- TODO: 创建虚拟环境 -->
+
+    <!-- RPLiDAR -->
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_rplidar_s2.launch"/>
+
+    <!-- 启动激光雷达滤波器 -->
+    <include file="$(find amr_launcher)/launch/sensor_data/amr_laser_filters.launch"/>
+
+    <!-- om_modbusRTU_node & amr_ros_bridge -->
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_mobi_con.launch"/>
+
+    <!-- 启动 IMU 滤波器 -->
+    <!-- TODO: 创建 IMU 滤波器 -->
+    <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
+
+    <!-- SLAM (使用 GMapping) -->
+    <include file="$(find amr_launcher)/launch/navigation/amr_navi_gmapping.launch"/>
+
+    <!-- Navigation -->
+    <!-- move_base -->
+    <include file="$(find amr_launcher)/launch/navigation/amr_move_base.launch"/>
+
+    <!-- 人员跟踪 -->
+    <!-- TODO: 添加人员跟踪节点 -->
+
+    <!-- Controller -->
+    <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>
+
+    <!-- 发送初始位姿时清除代价地图 -->
+    <include file="$(find amr_launcher)/launch/map/amr_costmap_cleaner.launch"/>
+
+    <!-- RViz -->
+    <arg name="cartographer_config" value="$(find amr_launcher)/config/rviz/cartographer_slam.rviz" />
+        <!-- 禁区文件自动保存路径 -->
+        <param name="prohibition_areas_path" value="$(find amr_launcher)/prohibition_areas/prohibition_areas.yaml"/>
+        <!-- 覆盖或追加模式 -->
+        <param name="append_mode" value="true"/>
+    </node>
+
+    <!-- 多航点导航支持 -->
+    <include file="$(find amr_launcher)/launch/navigation/amr_waypoint.launch"/>
+
+    <!-- 地图禁区插件 -->
+    <!-- TODO: 代价地图配置文件中设置了禁区插件后将自动加载 -->
+
+    <!-- 布局变更对应 -->
+    <!-- TODO: 实现对不同布局的自适应 -->
+
+</launch>

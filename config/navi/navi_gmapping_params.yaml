@@ -1,0 +1,54 @@
+slam_gmapping:
+    # 坐标系参数
+    map_frame: "map"
+    odom_frame: "odom"
+    base_frame: "base_link"
+
+    # 激光雷达参数 - 优化实时性能
+    maxUrange: 12.0            # 减小最大可用范围以提高实时性
+    maxRange: 15.0             # 限制最大范围提高性能
+    sigma: 0.05
+    lskip: 1                   # 跳过部分激光点减少计算量
+
+    # 地图更新参数 - 提高更新频率
+    map_update_interval: 1.0    # 更频繁的地图更新
+    throttle_scans: 1
+    delta: 0.05                # 地图分辨率
+
+    # 粒子滤波器参数 - 平衡精度和性能
+    particles: 30              # 减少粒子数提高实时性
+    resampleThreshold: 0.5
+
+    # 扫描匹配参数 - 优化实时性能
+    lstep: 0.05
+    astep: 0.05
+    iterations: 3              # 减少迭代次数
+    kernelSize: 1
+
+    # 更新条件 - 更频繁的更新
+    linearUpdate: 0.2          # 更小的线性更新阈值
+    angularUpdate: 0.2         # 更小的角度更新阈值
+    temporalUpdate: 1.0        # 启用时间更新
+
+    # 机器人运动噪声
+    srr: 0.1
+    srt: 0.2
+    str: 0.1
+    stt: 0.2
+
+    # 优化采样参数
+    llsamplerange: 0.01
+    llsamplestep: 0.01
+    lasamplerange: 0.005
+    lasamplestep: 0.005
+
+    # 地图范围
+    xmin: -30.0
+    ymin: -30.0
+    xmax: 30.0
+    ymax: 30.0
+
+    # 额外的实时性优化
+    minimumScore: 50.0         # 降低匹配阈值
+    occ_thresh: 0.25           # 占据栅格阈值
+    maxTreeDepth: 12           # 限制四叉树深度

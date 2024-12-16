@@ -1,0 +1,31 @@
+<launch>
+
+    <!--
+                    Gmapping SLAM 需求列表
+        1. 激光雷达坐标系(header.frame_id，通常为 laser) → base_link
+        2. base_link → odom
+        3. 订阅 /scan 话题
+    -->
+
+    <!-- 导入 GMapping 参数文件 -->
+    <rosparam file="$(find amr_launcher)/config/navi/navi_gmapping_params.yaml" command="load"/>
+
+    <!-- Gmapping SLAM -->
+    <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
+        <!-- 参数配置 -->
+        <!-- <param name="maxRange" value="30.0"/> -->
+
+        <!-- <remap> 用于话题、服务和动作的重映射 -->
+        <remap from="scan" to="/filtered_scan"/> <!-- 使用过滤后的激光雷达数据 -->
+
+        <!-- <rosparam> 用于覆盖 YAML 中的内容来设置节点的内部参数 -->
+        <!-- <rosparam param="/slam_gmapping/maxRange" value="30.0"/> -->
+    </node>
+
+    <!-- 加载已有地图作为参考 -->
+    <node name="map_server" pkg="map_server" type="map_server"
+          args="$(find amr_launcher)/maps/amr_map.yaml">
+        <param name="frame_id" value="map"/>
+    </node>
+
+</launch>

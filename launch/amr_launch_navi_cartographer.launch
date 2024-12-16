@@ -21,8 +21,8 @@
     <!-- TODO: 创建 IMU 滤波器 -->
     <!-- <include file="$(find amr_launcher)/launch/sensor_data/amr_imu_filter.launch"/> -->
 
-    <!-- SLAM (使用 GMapping) -->
-    <include file="$(find amr_launcher)/launch/slam/amr_slam_gmapping.launch"/>
+    <!-- SLAM (使用 Cartographer 代替 AMCL) -->
+    <include file="$(find amr_launcher)/launch/navigation/amr_navi_cartographer.launch"/>
 
     <!-- Navigation -->
     <!-- move_base -->
