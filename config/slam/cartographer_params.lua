@@ -28,6 +28,7 @@ options = {
   publish_frame_projected_to_2d = false,
   use_pose_extrapolator = true,
   use_odometry = false,
+  use_imu = false,
   use_nav_sat = false,
   use_landmarks = false,
   num_laser_scans = 0,
@@ -44,6 +45,8 @@ options = {
   imu_sampling_ratio = 1.,
   landmarks_sampling_ratio = 1.,
 }
+
+TRAJECTORY_BUILDER.use_imu_data = false
 
 -- 2D SLAM和后台线程设置
 MAP_BUILDER.use_trajectory_builder_2d = true
