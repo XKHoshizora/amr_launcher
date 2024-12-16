@@ -65,7 +65,7 @@ options = {
   rangefinder_sampling_ratio = 1.0,        -- 激光雷达数据采样率
   odometry_sampling_ratio = 1.0,          -- 里程计数据采样率
   fixed_frame_pose_sampling_ratio = 1.0,  -- 固定帧位姿采样率（未使用）
-  imu_sampling_ratio = 1.0,               -- IMU 数据采样率（未使用）
+  imu_sampling_ratio = 0.0,               -- IMU 数据采样率（未使用）
   landmarks_sampling_ratio = 1.0,         -- 地标数据采样率（未使用）
 }
 
@@ -76,6 +76,8 @@ MAP_BUILDER.use_trajectory_builder_2d = true
 TRAJECTORY_BUILDER_2D = {
   -- 激光帧累计数量，用于构建轨迹，提高匹配质量。根据您的环境建议设置为 10
   num_accumulated_range_data = 10,
+
+  use_imu_data = false  -- 明确禁用 IMU 数据
 
   -- 激光雷达的有效测量范围，需根据 RPLiDAR S2 的性能调整
   min_range = 0.05,                         -- 最小测量距离（小于此值的测量将被忽略）
