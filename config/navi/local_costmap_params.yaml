@@ -8,8 +8,8 @@ local_costmap:
     transform_tolerance: 0.5             # TF转换的最大容忍时间，单位：秒
 
     # 更新参数
-    update_frequency: 10.0               # 代价地图更新频率，单位：Hz
-    publish_frequency: 10.0              # 代价地图发布频率，单位：Hz
+    update_frequency: 5.0               # 代价地图更新频率，单位：Hz
+    publish_frequency: 5.0              # 代价地图发布频率，单位：Hz
 
     # 地图窗口配置
     rolling_window: true                 # 使用跟随机器人移动的滚动窗口
