@@ -30,9 +30,9 @@ options = {
   use_odometry = false,
   use_nav_sat = false,
   use_landmarks = false,
-  num_laser_scans = 0,
-  num_multi_echo_laser_scans = 1,
-  num_subdivisions_per_laser_scan = 10,
+  num_laser_scans = 1,
+  num_multi_echo_laser_scans = 0,
+  num_subdivisions_per_laser_scan = 1,
   num_point_clouds = 0,
   lookup_transform_timeout_sec = 0.2,
   submap_publish_period_sec = 0.3,
@@ -41,7 +41,7 @@ options = {
   rangefinder_sampling_ratio = 1.,
   odometry_sampling_ratio = 1.,
   fixed_frame_pose_sampling_ratio = 1.,
-  imu_sampling_ratio = 0.,
+  imu_sampling_ratio = 1.,
   landmarks_sampling_ratio = 1.,
 }
 
@@ -55,6 +55,16 @@ MAP_BUILDER.num_background_threads = 4  -- 推荐的后台线程数，可根据�
 TRAJECTORY_BUILDER_2D.min_range = 0.05  -- RPLiDAR S2的最小测距
 TRAJECTORY_BUILDER_2D.max_range = 25.0  -- RPLiDAR S2的最大测距
 TRAJECTORY_BUILDER_2D.submaps.num_range_data = 90  -- 每个子地图的最大扫描数目
+
+-- 针对RPLiDAR的优化配置
+TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.1
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.angular_search_window = math.rad(20.)
+
+-- 调整扫描匹配器参数
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.occupied_space_weight = 1.0
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 10.
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 40.
 
 POSE_GRAPH.optimization_problem.huber_scale = 1e1  -- 控制优化鲁棒性，减少异常值的影响
 
