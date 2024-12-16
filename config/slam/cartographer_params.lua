@@ -23,6 +23,7 @@ options = {
   },
   publish_to_tf = true,             -- 是否通过tf发布坐标变换
   tf_publication_period_sec = 0.05, -- tf发布周期
+  lookup_transform_timeout_sec = 0.5, -- 查找坐标变换超时时间
   submap_publish_period_sec = 0.3,  -- 子图发布周期
   pose_publish_period_sec = 0.05,   -- 位姿发布周期
   trajectory_publish_period_sec = 0.05, -- 轨迹发布周期
