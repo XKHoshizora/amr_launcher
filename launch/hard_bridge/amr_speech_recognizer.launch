@@ -14,7 +14,7 @@
         <param name="show_terminal" value="false"/>
 
         <!-- 配置语音识别类型 Options: google, vosk, whisper-->
-        <param name="recognizer_type" value="vosk"/>
+        <param name="recognizer_type" value="google"/>
         <!-- 语言类型 Options: en-US, ja-JP, zh-CN -->
         <param name="language" value="ja-JP"/>
 
