@@ -22,11 +22,11 @@
 
     <!-- SLAM -->
     <!-- GMapping -->
-    <include file="$(find amr_launcher)/launch/slam/amr_slam_gmapping.launch"/>
+    <!-- <include file="$(find amr_launcher)/launch/slam/amr_slam_gmapping.launch"/> -->
     <!-- Hector -->
     <!-- <include file="$(find amr_launcher)/launch/slam/amr_slam_hector.launch"/> -->
     <!-- Cartographer -->
-    <!-- <include file="$(find amr_launcher)/launch/slam/amr_slam_cartographer.launch"/> -->
+    <include file="$(find amr_launcher)/launch/slam/amr_slam_cartographer.launch"/>
 
     <!-- Controller -->
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_controller.launch"/>

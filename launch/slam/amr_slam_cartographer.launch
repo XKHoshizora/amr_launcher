@@ -14,7 +14,7 @@
           output="screen">
         <!-- 话题重映射 -->
         <remap from="scan" to="/angle_filtered_scan"/>
-        <remap from="imu" to="/imu_filtered"/>
+        <remap from="imu" to="/imu"/>
         <remap from="odom" to="/odom"/>
     </node>
 
