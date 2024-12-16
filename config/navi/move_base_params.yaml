@@ -5,10 +5,10 @@ base_global_planner: "global_planner/GlobalPlanner"       # str，默认值：�
 base_local_planner: "dwa_local_planner/DWAPlannerROS"     # str，默认值："base_local_planner/TrajectoryPlannerROS"
 
 # 运行全局规划循环的速率（以 Hz 为单位）如果频率设置为 0.0，则全局规划器仅在收到新目标或本地规划器报告其路径受阻时运行
-planner_frequency: 2.0      # double，默认值：0.0
+planner_frequency: 5.0      # double，默认值：0.0
 
 # 在执行空间清理操作之前，规划器将等待多长时间（以秒为单位)来尝试找到有效计划
-planner_patience: 1.0       # double，默认值：5.0
+planner_patience: 0.5       # double，默认值：5.0
 
 # 运行控制回路并向基站发送速度命令的速率（以赫兹为单位）
 controller_frequency: 20.0   # double，默认值：20.0
@@ -20,7 +20,7 @@ controller_patience: 1.0    # double，默认值：15.0
 shutdown_costmaps: false    # bool，默认值：false
 
 # 在执行恢复行为之前允许振荡的时间（以秒为单位） 0.0 表示无限超时
-oscillation_timeout: 6.0   # double，默认值：0.0
+oscillation_timeout: 3.0   # double，默认值：0.0
 
 # 机器人必须移动多远（以米为单位）才被认为不会振荡移动这么远会重置计时器，直到计数到oscillation_timeout
 oscillation_distance: 0.2   # double，默认值：0.5
@@ -64,7 +64,7 @@ recovery_behavior_enabled: true  # bool，默认值：true
 clearing_rotation_allowed: true  # bool，默认值：true，此参数仅在使用默认恢复行为时使用，这意味着用户未将recovery_behaviors参数设置为任何自定义内容
 
 # 执行恢复行为之前允许计划重试的次数值 -1.0 表示无限次重试
-max_planning_retries: 5  # int32_t，默认值： -1
+max_planning_retries: 3  # int32_t，默认值： -1
 
 # 执行恢复行为之前允许振荡的时间（以秒为单位） 0.0 表示无限超时
 recovery_timeout: 5.0
