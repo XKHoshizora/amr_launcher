@@ -23,7 +23,7 @@ options = {
 
     -- 坐标系配置
     map_frame = "map",  -- 地图坐标系
-    tracking_frame = "base_link",  -- 使用IMU数据时设置为"imu_link"
+    -- tracking_frame = "base_link",  -- 不使用IMU数据时设置为"base_link"
     tracking_frame = "imu_link",  -- 使用IMU数据时设置为"imu_link"
     published_frame = "odom",  -- 发布的里程计坐标系
     odom_frame = "odom",  -- 发布的里程计坐标系
@@ -31,7 +31,7 @@ options = {
 
     -- 传感器使能配置
     use_odometry = true,  -- 使用里程计数据
-    use_imu_data = true  -- 启用IMU数据
+    use_imu_data = true,  -- 启用IMU数据
     use_nav_sat = false,  -- 使用GPS数据
     use_landmarks = false,  -- 使用地标数据
 
