@@ -14,7 +14,7 @@ planner_patience: 0.5       # double，默认值：5.0
 controller_frequency: 20.0   # double，默认值：20.0
 
 # 在执行空间清理操作之前，控制器未收到有效控制将等待的时间（秒)
-controller_patience: 1.0    # double，默认值：15.0
+controller_patience: 3.0    # double，默认值：15.0
 
 # 确定当move_base处于非活动状态时是否关闭节点的 costmaps
 shutdown_costmaps: false    # bool，默认值：false
@@ -55,7 +55,7 @@ aggressive_reset:
     affected_maps: ["local", "global"]  # 同时清除局部和全局代价地图
 
 # 判断机器人是否被困住的检查范围（以米为单位），当尝试清除地图中的空间时，超过此距离的障碍物将从代价地图中清除。
-conservative_reset_dist: 5.0  # double，默认值：3.0，在尝试其他恢复行为之前，机器人会检查的距离范围
+conservative_reset_dist: 3.0  # double，默认值：3.0，在尝试其他恢复行为之前，机器人会检查的距离范围
 
 # 是否启用move_base恢复行为来尝试清除空间
 recovery_behavior_enabled: true  # bool，默认值：true
