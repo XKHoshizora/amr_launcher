@@ -21,7 +21,7 @@ options = {
   map_builder = MAP_BUILDER,
   trajectory_builder = TRAJECTORY_BUILDER,
   map_frame = "map",
-  tracking_frame = "base_link",
+  tracking_frame = "imu_link",
   published_frame = "base_link",
   odom_frame = "odom",
   provide_odom_frame = true,
@@ -46,7 +46,7 @@ options = {
   landmarks_sampling_ratio = 1.,
 }
 
-TRAJECTORY_BUILDER.use_imu_data = false
+-- TRAJECTORY_BUILDER_2D.use_imu_data = false
 
 -- 2D SLAM和后台线程设置
 MAP_BUILDER.use_trajectory_builder_2d = true
