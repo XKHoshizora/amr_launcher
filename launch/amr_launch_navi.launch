@@ -53,6 +53,9 @@
     <!-- 语音导航支持 -->
     <include file="$(find amr_launcher)/launch/hard_bridge/amr_audio_ros_bridge.launch"/>
 
+    <!-- 方向指示器 -->
+    <include file="$(find amr_launcher)/launch/navigation/amr_direction_indicator.launch"/>
+
     <!-- 地图禁区插件 -->
     <!-- TODO: 代价地图配置文件中设置了禁区插件后将自动加载 -->
 

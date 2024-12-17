@@ -1,0 +1,7 @@
+<launch>
+    <!-- 加载配置文件参数 -->
+    <rosparam command="load" file="$(find direction_indicator)/config/direction_indicator_params.yaml" />
+
+    <!-- 启动方向指示器节点 -->
+    <node pkg="direction_indicator" type="direction_indicator_node" name="direction_indicator" output="screen" />
+</launch>
