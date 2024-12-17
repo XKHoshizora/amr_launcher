@@ -19,7 +19,7 @@
         <!-- 配置语音识别类型 Options: google, vosk, whisper-->
         <param name="recognizer_type" value="google"/>
         <!-- 语言类型 Options: en-US, ja-JP, zh-CN -->
-        <param name="language" value="en-US"/>
+        <param name="language" value="ja-JP"/>
 
         <!-- Vosk 特定配置 -->
         <param name="model_path" value="$(arg model_path)"/>
