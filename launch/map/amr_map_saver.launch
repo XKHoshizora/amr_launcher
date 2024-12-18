@@ -1,6 +1,6 @@
 <launch>
     <!-- 保存地图文件 -->
-    <arg name="filename" value="$(find amr_launcher)/maps/amr_map.yaml" />
+    <arg name="filename" value="$(find amr_launcher)/maps/amr_map" />
     <node name="map_saver" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
 </launch>
 
